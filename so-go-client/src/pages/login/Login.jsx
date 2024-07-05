@@ -1,4 +1,4 @@
-import styles from 'css/Login.module.css'
+import styles from 'css/login/Login.module.css'
 import classNames from 'classnames';
 
 export default function Login () {

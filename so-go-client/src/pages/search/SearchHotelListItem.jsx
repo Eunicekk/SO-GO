@@ -1,6 +1,6 @@
-import styles from 'css/search/SearchRestaurantList.module.css';
+import styles from 'css/search/SearchHotelList.module.css';
 
-export default function SearchRestaurantListItem({isFocus}) {
+export default function SearchHotelListItem({isFocus}) {
   return (
     <li className={`${styles.restaurant} ${isFocus ? styles.special : ''}`}>
       <div className={styles.thumbnail}>

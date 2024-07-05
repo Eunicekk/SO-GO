@@ -1,4 +1,4 @@
-import styles from 'css/SearchPlaceList.module.css'
+import styles from 'css/search/SearchPlaceList.module.css';
 
 export default function SearchPlaceListItem() {
   return (

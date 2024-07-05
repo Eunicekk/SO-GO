@@ -1,3 +1,56 @@
-img {
-    width: 200px;
+@media all and (max-width: 479px) {
+    /* 로그인 전체 */
+    #login {
+        margin-top: 140px;
+        text-align: center;
+    }
+
+    /* 로그인 상단 - 로고 및 텍스트 */
+    .line {
+        width: 28px;
+        border-top: 3px solid black;
+        margin: 40px auto;
+    }
+
+    .text {
+        font-size: 21px;
+        font-weight: 600;
+    }
+    
+    .logo {
+        width: 180px;
+    }
+
+    /* 로그인 하단 - 버튼 */
+    #buttons {
+        display: flex;
+        flex-direction: column;
+        width: 280px;
+        margin: 80px auto 0;
+    }
+
+    .icon {
+        width: 30px;
+        margin-right: 4px;
+    }
+
+    .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 40px;
+        border: none;
+        padding: 8px 0;
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+
+    .kakao {
+        background-color: rgb(252, 232, 77);
+    }
+
+    .naver {
+        background-color: rgb(99, 195, 61);
+        color: white;
+    }
 }

@@ -1,10 +1,11 @@
 import css from 'css/common/TheHeader.module.css';
+import SearchButton from 'assets/SearchButton.png';
 
 export function SearchInput() {
     return (
         <div id="searchinput" className={css.searchinput}>
             <input type="text" placeholder='가고 싶은 장소를 입력해주세요' />
-            <img src="img/SearchButton.png" alt="button"/>
+            <img src={SearchButton} alt="button"/>
         </div>
     )
 }

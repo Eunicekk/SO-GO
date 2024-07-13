@@ -1,9 +1,9 @@
-import SearchHotelList from "pages/search/SearchHotelList";
+import PlaceDetail from "@/pages/place/PlaceDetail";
 
 function App() {
   return (
     <div className="App">
-      <SearchHotelList />
+      <PlaceDetail />
     </div>
   );
 }

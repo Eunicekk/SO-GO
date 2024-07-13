@@ -1,5 +1,5 @@
 import styles from 'css/search/SearchHotelList.module.css';
-import SearchHotelListItem from './SearchHotelListItem';
+import SearchHotelListItem from 'components/SearchHotelListItem';
 
 export default function SearchHotelList() {
   return (

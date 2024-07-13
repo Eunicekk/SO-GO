@@ -1,22 +1,22 @@
 @media all and (max-width: 479px) {
     /* 추천 맛집 전체 */
-    #restaurantList {
+    #hotelList {
         padding: 0 24px;
     }
 
-    #restaurantTitle {
+    #hotelTitle {
         display: flex;
         align-items: center;
         justify-content: space-between;
         margin-bottom: 20px;
     }
 
-    #restaurantTitle h1 {
+    #hotelTitle h1 {
         font-size: 18px;
         font-weight: 700;
     }
 
-    #restaurantTitle button {
+    #hotelTitle button {
         border: 1px solid black;
         border-radius: 18px;
         padding: 4px 14px;
@@ -27,14 +27,14 @@
     }
 
     /* 좌우 스크롤 임시 css - 라이브러리 적용 필요 */
-    #restaurantList ul {
+    #hotelList ul {
         display: flex;
         column-gap: 20px;
         margin-bottom: 20px;
     }
 
     /* 추천 맛집 개별 상세 */
-    .restaurant {
+    .hotel {
         width: 182px;
         border: 1px solid #aaa;
         border-radius: 16px;
@@ -84,16 +84,7 @@
 
     .detail {
         width: 150px;
-        height: 39px;
         font-size: 14px;
         color: #666;
-        line-height: 1.4;
-        white-space: normal;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        word-wrap: break-word;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
     }
 }

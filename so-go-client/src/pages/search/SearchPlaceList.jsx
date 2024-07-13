@@ -1,5 +1,5 @@
 import styles from 'css/search/SearchPlaceList.module.css';
-import SearchPlaceListItem from './SearchPlaceListItem';
+import SearchPlaceListItem from 'components/SearchPlaceListItem';
 
 export default function SearchPlaceList() {
   return (

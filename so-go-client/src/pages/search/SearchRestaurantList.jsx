@@ -1,5 +1,5 @@
 import styles from 'css/search/SearchRestaurantList.module.css';
-import SearchRestaurantListItem from './SearchRestaurantListItem';
+import SearchRestaurantListItem from 'components/SearchRestaurantListItem';
 
 export default function SearchRestaurantList() {
   return (

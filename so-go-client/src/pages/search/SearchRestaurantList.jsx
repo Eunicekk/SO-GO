@@ -1,10 +1,10 @@
-import styles from 'css/search/SearchRestaurantList.module.css';
-import SearchRestaurantListItem from 'components/SearchRestaurantListItem';
+import '@/css/search/SearchRestaurantList.css';
+import SearchRestaurantListItem from '@/components/SearchRestaurantListItem';
 
 export default function SearchRestaurantList() {
   return (
-    <div id={styles.restaurantList}>
-      <div id={styles.restaurantTitle}>
+    <div id='restaurantList'>
+      <div id='restaurantTitle'>
         <h1>해운대 추천 맛집</h1>
         <button>전체 보기</button>
       </div>

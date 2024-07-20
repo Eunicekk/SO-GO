@@ -1,14 +1,14 @@
-import styles from 'css/search/SearchRestaurantList.module.css';
+import '@/css/search/SearchRestaurantList.css';
 
 export default function SearchRestaurantListItem({isFocus}) {
   return (
-    <li className={`${styles.restaurant} ${isFocus ? styles.special : ''}`}>
-      <div className={styles.thumbnail}>
-        <img src="https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=78f5f015-9c93-4b6d-81e8-fce482d8d1c0" alt="맛집 이미지" />
+    <li className={`restaurant ${isFocus ? 'special' : ''}`}>
+      <div className='thumbnail'>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk1-hB_18obeDp2eY9wMtdYR1jqIuHn_lAOQ&s" alt="맛집 이미지" />
       </div>
-      <div className={styles.content}>
-        <p className={styles.name}>해목</p>
-        <p className={styles.score}>
+      <div className='content'>
+        <p className='name'>해목</p>
+        <p className='score'>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
             <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
           </svg>
@@ -26,7 +26,7 @@ export default function SearchRestaurantListItem({isFocus}) {
           </svg>
           <span>3.5</span>
         </p>
-        <p className={styles.detail}>#장어덮밥 #해산물덮밥 #연어덮밥 #오차즈케 #부산맛집 #</p>
+        <p className='detail'>#장어덮밥 #해산물덮밥 #연어덮밥 #오차즈케 #부산맛집 #</p>
       </div>
     </li>
   );

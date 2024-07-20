@@ -1,10 +1,11 @@
-import PlaceDetail from "@/pages/place/PlaceDetail";
+import SearchRestaurantList from "@/pages/search/SearchRestaurantList";
 
 function App() {
   return (
     <div className="App">
-      <PlaceDetail />
+      <SearchRestaurantList/>
     </div>
+
   );
 }
 

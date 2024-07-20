@@ -1,25 +1,23 @@
 import { Route, Routes } from "react-router-dom";
 
+import Layout from '@/pages/common/Layout';
 import MainPage from '@/pages/main/MainPage';
 
-import Header from '@/pages/common/TheHeader'
-import Menu from '@/pages/common/Menu'
-import ReviewWrite from "./pages/review/ReviewWrite";
+import ReviewWrite from "@/pages/review/ReviewWrite";
 import Map from '@/pages/map/Map'
-import MyInfo from "./pages/mypage/MyInfo";
-
+import MyInfo from "@/pages/mypage/MyInfo";
+import PlaceDetail from "@/pages/place/PlaceDetail";
 
 function App() {
   return (
     <div className="App">
-      <Header />
       <Routes>
-      <Route path="/" element={<MainPage/>}/>
-      <Route path="/create" element={<ReviewWrite/>}/>
-      <Route path="/map" element={<Map/>}/>
-      <Route path="/my-page" element={<MyInfo />} />
+        <Route path="/" element={<Layout><MainPage /></Layout>} />
+        <Route path="/create" element={<Layout><ReviewWrite /></Layout>} />
+        <Route path="/map" element={<Layout><Map /></Layout>} />
+        <Route path="/my-page" element={<Layout><MyInfo /></Layout>} />
+        <Route path="/detail" element={<Layout><PlaceDetail /></Layout>} />
       </Routes>
-      <Menu />
     </div>
 
   );

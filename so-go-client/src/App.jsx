@@ -1,10 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 
-import Layout from '@/pages/common/Layout';
-import MainPage from '@/pages/main/MainPage';
+import Layout from "@/pages/common/Layout";
+import MainPage from "@/pages/main/MainPage";
+import TabMenu from "./pages/main/TabMenu";
 
 import ReviewWrite from "@/pages/review/ReviewWrite";
-import Map from '@/pages/map/Map'
+import Map from "@/pages/map/Map";
 import MyInfo from "@/pages/mypage/MyInfo";
 import PlaceDetail from "@/pages/place/PlaceDetail";
 
@@ -12,14 +13,49 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Layout><MainPage /></Layout>} />
-        <Route path="/create" element={<Layout><ReviewWrite /></Layout>} />
-        <Route path="/map" element={<Layout><Map /></Layout>} />
-        <Route path="/my-page" element={<Layout><MyInfo /></Layout>} />
-        <Route path="/detail" element={<Layout><PlaceDetail /></Layout>} />
+        <Route
+          path="/"
+          element={
+            <Layout>
+              <MainPage />
+            </Layout>
+          }
+        />
+        <Route path="/menu" element={<TabMenu />} />
+        <Route
+          path="/create"
+          element={
+            <Layout>
+              <ReviewWrite />
+            </Layout>
+          }
+        />
+        <Route
+          path="/map"
+          element={
+            <Layout>
+              <Map />
+            </Layout>
+          }
+        />
+        <Route
+          path="/my-page"
+          element={
+            <Layout>
+              <MyInfo />
+            </Layout>
+          }
+        />
+        <Route
+          path="/detail"
+          element={
+            <Layout>
+              <PlaceDetail />
+            </Layout>
+          }
+        />
       </Routes>
     </div>
-
   );
 }
 

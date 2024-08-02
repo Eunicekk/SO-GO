@@ -1,0 +1,44 @@
+@media all and (max-width: 479px) {
+    /* 전체 */
+    #placeDetail {
+        overflow: hidden;
+    }
+
+    /* 이미지 리스트 영역 */
+    #imageCount {
+        background-color: white;
+        border: 2px solid black;
+        border-radius: 20px;
+        font-size: 14px;
+        text-align: center;
+        padding: 6px;
+        width: 50px;
+        position: absolute;
+        top: 16px; right: 16px;
+    }
+    
+    #imageWrap {
+        width: 100%;
+        min-height: 100vw;
+        overflow: hidden;
+    }
+
+    #placeDetail ul {
+        display: flex;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* PlaceImage 컴포넌트 css */
+    #placeDetail li {
+        flex: 0 0 100%;
+        width: 100%;
+        height: 100vw;
+    }
+
+    #placeDetail li img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}

@@ -1,5 +1,5 @@
 import '@/css/place/PlaceDetail.css';
-import PlaceImage from '@/components/PlaceImage';
+import PlaceImage from '@/components/place/PlaceImage';
 
 export default function PlaceDetail() {
   return (

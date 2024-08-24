@@ -6,9 +6,7 @@ export default function Layout(props) {
   return (
     <div>
       <Header />
-      <main id='layout'>
-        {props.children}
-      </main>
+      <main id="layout">{props.children}</main>
       <Menu />
     </div>
   );

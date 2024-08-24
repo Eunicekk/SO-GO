@@ -1,11 +1,12 @@
 @media all and (max-width: 479px) {
     /* 전체 */
-    #placeDetail {
+    #place-detail {
         overflow: hidden;
+        position: relative;
     }
 
     /* 이미지 리스트 영역 */
-    #imageCount {
+    #image-count {
         background-color: white;
         border: 2px solid black;
         border-radius: 20px;
@@ -15,28 +16,47 @@
         width: 50px;
         position: absolute;
         top: 16px; right: 16px;
+        z-index: 1;
+        letter-spacing: -1px;
     }
     
-    #imageWrap {
+    #place-image {
         width: 100%;
         min-height: 100vw;
         overflow: hidden;
     }
 
-    #placeDetail ul {
-        display: flex;
+    #place-image .image-wrap img {
         width: 100%;
-        height: 100%;
+        min-height: 100vw;
+        max-height: 100vw;
+        object-fit: cover;
+    }
+
+    /* 좋아요 버튼 고정 & 즉시 위로 가는 버튼 */
+    #like-button {
+        position: fixed;
+        bottom: 160px; right: 10px;
+    }
+
+    .heart {
+        position: absolute;
+        top: 14px; left: 14px;
+    }
+
+    #up-button {
+        position: fixed;
+        bottom: 100px; right: 10px;
     }
 
     /* PlaceImage 컴포넌트 css */
-    #placeDetail li {
+    #place-detail li {
         flex: 0 0 100%;
         width: 100%;
         height: 100vw;
     }
 
-    #placeDetail li img {
+    #place-detail li img {
         width: 100%;
         height: 100%;
         object-fit: cover;

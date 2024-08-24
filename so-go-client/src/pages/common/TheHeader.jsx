@@ -3,7 +3,7 @@ import Logo from "@/assets/logo.png";
 import SearchInput from "@/components/SearchInput";
 import { Link } from "react-router-dom";
 
-export default function Header() {
+function Header() {
   return (
     <div id="header" className="header">
       <div className="menu">
@@ -30,3 +30,5 @@ export default function Header() {
     </div>
   );
 }
+
+export default Header;

@@ -26,6 +26,7 @@ function App() {
               </Layout>
             }
           />
+          <Route path="/login" element={<Login />} />
           <Route path="/menu" element={<TabMenu />} />
           <Route
             path="/create"
@@ -52,10 +53,18 @@ function App() {
             }
           />
           <Route
-            path="/detail"
+            path="/place/:placeId"
             element={
               <Layout>
                 <PlaceDetail />
+              </Layout>
+            }
+          />
+          <Route
+            path="/search"
+            element={
+              <Layout>
+                <SearchResultList />
               </Layout>
             }
           />

@@ -1,90 +1,86 @@
-@media all and (max-width: 479px) {
-    /* 추천 맛집 전체 */
-    #hotelList {
-        padding: 0 24px;
-    }
+@media all and (max-width: 480px) {
+  #hotel-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 24px;
+    margin-bottom: 0;
+  }
 
-    #hotelTitle {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 20px;
-    }
+  #hotel-title h1 {
+    font-size: 20px;
+    font-weight: 700;
+  }
 
-    #hotelTitle h1 {
-        font-size: 18px;
-        font-weight: 700;
-    }
+  #hotel-title button {
+    border: 1px solid black;
+    border-radius: 18px;
+    padding: 4px 14px;
+    background-color: #836fff;
+    color: white;
+    font-size: 14px;
+    font-weight: 300;
+  }
 
-    #hotelTitle button {
-        border: 1px solid black;
-        border-radius: 18px;
-        padding: 4px 14px;
-        background-color: #836FFF;
-        color: white;
-        font-size: 14px;
-        font-weight: 300;
-    }
+  #hotel-list .hotel-content {
+    padding: 24px;
+    padding-right: 8px;
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
 
-    /* 좌우 스크롤 임시 css - 라이브러리 적용 필요 */
-    #hotelList ul {
-        display: flex;
-        column-gap: 20px;
-        margin-bottom: 20px;
-    }
+  #hotel-list #hotel-item {
+    width: 200px;
+    border: 1px solid #aaa;
+    border-radius: 16px;
+    padding: 16px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 8px 0 rgba(174, 174, 174, 0.5);
+    background-color: white;
+    margin-right: 16px;
+  }
 
-    /* 추천 맛집 개별 상세 */
-    .hotel {
-        width: 182px;
-        border: 1px solid #aaa;
-        border-radius: 16px;
-        padding: 16px;
-        box-sizing: border-box;
-        box-shadow: 4px 4px 8px 0 rgba(174, 174, 174, 0.5);
-        background-color: white;
-    }
+  #hotel-list .thumbnail img {
+    width: 166px;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 1;
+    margin-bottom: 8px;
+  }
 
-    .special {
-        border: 1px solid black !important;
-    }
+  #hotel-list .name {
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: 600;
 
-    .thumbnail {
-        width: 150px;
-        height: 150px;
-        overflow: hidden;
-        position: relative;
-        margin-bottom: 8px;
-    }
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
-    .thumbnail img {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        min-width: 150px;
-        max-height: 150px;
-        object-fit: cover;
-    }
+  #hotel-list .score {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
 
-    .name {
-        font-weight: 700;
-        margin-bottom: 6px;
-    }
+  #hotel-list .score svg {
+    margin-right: 2px;
+  }
 
-    .score {
-        margin-bottom: 6px;
-        display: flex;
-        align-items: flex-end;
-        font-size: 14px;
-    }
+  #hotel-list .score span {
+    margin-left: 4px;
+  }
 
-    .score span {
-        margin-left: 4px;
-    }
+  #hotel-list .detail {
+    font-size: 14px;
+    color: #666;
 
-    .detail {
-        width: 150px;
-        font-size: 14px;
-        color: #666;
-    }
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }

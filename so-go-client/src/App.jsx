@@ -4,10 +4,12 @@ import Layout from "@/pages/common/Layout";
 import MainPage from "@/pages/main/MainPage";
 import TabMenu from "./pages/main/TabMenu";
 
+import Login from "@/pages/login/Login";
 import ReviewWrite from "@/pages/review/ReviewWrite";
 import Map from "@/pages/map/Map";
 import MyInfo from "@/pages/mypage/MyInfo";
 import PlaceDetail from "@/pages/place/PlaceDetail";
+import SearchResultList from "./pages/search/SearchResultList";
 
 import "./App.css";
 
@@ -24,6 +26,7 @@ function App() {
               </Layout>
             }
           />
+          <Route path="/login" element={<Login />} />
           <Route path="/menu" element={<TabMenu />} />
           <Route
             path="/create"
@@ -50,10 +53,18 @@ function App() {
             }
           />
           <Route
-            path="/detail"
+            path="/place/:placeId"
             element={
               <Layout>
                 <PlaceDetail />
+              </Layout>
+            }
+          />
+          <Route
+            path="/search"
+            element={
+              <Layout>
+                <SearchResultList />
               </Layout>
             }
           />

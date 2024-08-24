@@ -21,6 +21,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden; /* 내부 스크롤 방지 */
+  background-color: white;
 }
 
 .route-wrapper {

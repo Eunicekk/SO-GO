@@ -1,6 +1,6 @@
-import React from "react";
-import Header from "@/pages/common/TheHeader";
-import Menu from "@/pages/common/Menu";
+import React from 'react';
+import Header from '@/pages/common/TheHeader';
+import Menu from '@/pages/common/TheMenu';
 
 export default function Layout(props) {
   return (

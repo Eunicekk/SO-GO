@@ -1,5 +1,5 @@
 import '@/css/place/PlaceDetail.css';
-import { MapPin, Clock, Phone, Globe } from 'phosphor-react';
+import { PencilLine, MapPin, Clock, Phone, Globe } from 'phosphor-react';
 
 export default function PlaceDescription() {
   return (
@@ -7,7 +7,8 @@ export default function PlaceDescription() {
       <div className="title-section">
         <div className="title">해목 해운대점</div>
         <div className="ask-modify">
-
+          <PencilLine size={16} color="#949494" weight="fill" />
+          수정 문의
         </div>
       </div>
       <div className="title-description">

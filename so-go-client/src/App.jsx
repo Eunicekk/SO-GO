@@ -19,7 +19,7 @@ function App() {
         <Route path="/create" element={<Layout><ReviewWrite /></Layout>} />
         <Route path="/map" element={<Layout><Map /></Layout>} />
         <Route path="/my-page" element={<Layout><MyInfo /></Layout>} />
-        <Route path="/detail" element={<Layout><PlaceDetail /></Layout>} />
+        <Route path="/place/:placeId" element={<Layout><PlaceDetail /></Layout>} />
         <Route path="/search" element={<Layout><SearchResultList /></Layout>} />
       </Routes>
     </div>

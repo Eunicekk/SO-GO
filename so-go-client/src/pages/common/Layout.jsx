@@ -1,4 +1,3 @@
-import '@/css/common/Layout.css';
 import React from 'react';
 import Header from '@/pages/common/TheHeader';
 import Menu from '@/pages/common/TheMenu';

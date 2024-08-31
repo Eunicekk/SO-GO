@@ -1,0 +1,52 @@
+.upload-foam {
+  display: flex;
+  justify-content: center;
+  border: 3px dashed black;
+  margin: 0 30px;
+  padding: 30px;
+  border-radius: 50px;
+}
+
+.upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.upload-input {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.uploaded-image {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+/*별점*/
+.star-rating {
+  display: flex;
+  justify-content: center;
+}
+
+.star {
+  font-size: 2rem;
+  color: lightgray;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+input[type="radio"] {
+  display: none; /* 라디오 버튼 숨기기 */
+}
+
+input[type="radio"]:checked ~ label {
+  color: gold;
+}

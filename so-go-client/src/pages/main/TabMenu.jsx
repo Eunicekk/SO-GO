@@ -21,7 +21,7 @@ export default function TabMenu() {
         <TabMenuUserInfo />
 
         <div className="font-size-selector">
-          <div onClick={() => navigate("/")}>
+          <div onClick={() => navigate(-1)}>
             <XCircle size={24} color="red" weight="fill" />
           </div>
           <h3 className="title">내가 원하는 글자 크기</h3>

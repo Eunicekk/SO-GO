@@ -1,0 +1,23 @@
+.report-item {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.report-item:hover {
+  background-color: #f5f5f5;
+}
+
+.delete-review,
+.modify-review,
+.delete-review,
+.report-comment {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.delete-review:hover,
+.modify-review:hover,
+.delete-review:hover,
+.report-comment:hover {
+  background-color: #f5f5f5;
+}

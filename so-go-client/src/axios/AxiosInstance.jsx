@@ -14,7 +14,7 @@ const axiosInstance = axios.create({
 // 요청 인터셉터 설정
 axiosInstance.interceptors.request.use(
   (config) => {
-    const { userUuid, role } = useAuthStore.getState();
+    const { accessToken, userUuid, role } = useAuthStore.getState();
 
     if (accessToken) config.headers["Authorization"] = `${accessToken}`;
     if (userUuid) config.headers["userUuid"] = userUuid;

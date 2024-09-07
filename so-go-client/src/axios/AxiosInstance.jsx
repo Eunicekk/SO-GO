@@ -3,11 +3,11 @@ import Cookies from "js-cookie";
 import { getTokenInfo } from "./get-decoding";
 import useAuthStore from "../store/UseAuthStore";
 
-const LOCAL_URL = ``;
+const LOCAL_URL = `http://localhost:8080/api`;
 
 const axiosInstance = axios.create({
   baseURL: LOCAL_URL,
-  timeout: 3000,
+  timeout: 5000,
   withCredentials: true,
 })
 

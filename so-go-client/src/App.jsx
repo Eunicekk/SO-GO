@@ -11,7 +11,7 @@ import ReviewDetail from "./pages/review/ReviewDetail";
 
 import Map from "@/pages/map/Map";
 
-import MyInfo from "@/pages/mypage/MyInfo";
+import MyPage from "@/pages/myPage/MyPage";
 
 import PlaceDetail from "@/pages/place/PlaceDetail";
 import SearchResultList from "./pages/search/SearchResultList";
@@ -63,7 +63,7 @@ function App() {
             path="/my-page"
             element={
               <Layout>
-                <MyInfo />
+                <MyPage />
               </Layout>
             }
           />

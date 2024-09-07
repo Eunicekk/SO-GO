@@ -68,7 +68,7 @@ function App() {
             }
           />
           <Route
-            path="/place/:placeId"
+            path="/place"
             element={
               <Layout>
                 <PlaceDetail />

@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import axiosInstance from "./axiosInstance";
+import axiosInstance from "./AxiosInstance";
 import { getTokenInfo } from "./get-decoding";
 
 // 로그인 시 토큰 발급

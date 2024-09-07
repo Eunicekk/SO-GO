@@ -8,7 +8,7 @@ import useAuthStore from '../../store/UseAuthStore';
 export default function Login () {
   const navigate = useNavigate();
   const setTokens = useAuthStore((state) => state.setTokens);
-  const URL = `localhost`;
+  const URL = "localhost:8080";
 
   // 카카오 로그인
   const kakaoLogin = () => {
@@ -31,12 +31,12 @@ export default function Login () {
       </div>
 
       <div id='buttons'>
-        <button className='button kakao'>
-          <img src={icon_kakao} onClick={kakaoLogin} alt="kakao" className='icon' />
+        <button className='button kakao' onClick={kakaoLogin}>
+          <img src={icon_kakao} alt="kakao" className='icon' />
           카카오 로그인
         </button>
-        <button className='button naver'>
-          <img src={icon_naver} onClick={naverLogin} alt="naver" className='icon' />
+        <button className='button naver' onClick={naverLogin}>
+          <img src={icon_naver} alt="naver" className='icon' />
           네이버 로그인
         </button>
       </div>

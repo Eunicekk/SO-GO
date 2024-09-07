@@ -1,9 +1,96 @@
-function Map() {
+import { useEffect, useState } from "react";
+import { Map, MapMarker } from "react-kakao-maps-sdk";
+import { MapPin } from "phosphor-react";
+import SearchButton from "@/assets/SearchButton.png";
+
+import "@/css/map/Map.css";
+
+function MyMap() {
+  const [map, setMap] = useState();
+  const [keyword, setKeyword] = useState("");
+  const [submittedKeyword, setSubmittedKeyword] = useState(""); // 제출된 키워드를 저장하는 상태 추가
+  const [currentPosition, setCurrentPosition] = useState({
+    lat: 37.566826,
+    lng: 126.9786567,
+  }); // 기본 위치는 서울 시청으로 설정
+
+  // 사용자의 현재 위치를 가져오는 함수
+  useEffect(() => {
+    handleMyLocation();
+  }, []);
+
+  //내 위치로 이동
+  const handleMyLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const newPosition = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          setCurrentPosition(newPosition);
+
+          // 지도 객체가 설정된 경우, 지도 중심을 업데이트
+          if (map) {
+            map.setCenter(
+              new kakao.maps.LatLng(newPosition.lat, newPosition.lng)
+            );
+          }
+        },
+        (error) => {
+          console.error("Error occurred while fetching location:", error);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  };
+
+  //키워드 검색
+  const handleSearch = (event) => {
+    event.preventDefault();
+    if (keyword) {
+      setSubmittedKeyword(keyword);
+    }
+  };
+
+  // 키워드 인풋에서 엔터 키를 눌렀을 때 검색 실행
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSearch(event);
+    }
+  };
+
   return (
-    <>
-      <h1>카카오맵 뜨는곳</h1>
-    </>
+    <div className="my-map-like">
+      <form className="searchbar" onSubmit={handleSearch}>
+        <input
+          type="text"
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+          placeholder="검색할 장소를 입력하세요"
+          onKeyUp={handleKeyPress} // 엔터 키 이벤트 핸들러 연결
+        />
+        <img onClick={handleSearch} src={SearchButton} alt="button" />
+      </form>
+
+      <div className="map-container">
+        <Map
+          center={currentPosition}
+          style={{
+            width: "100%",
+            height: "100%",
+          }}
+          level={3}
+          onCreate={setMap}
+        />
+
+        <button className="my-location" onClick={handleMyLocation}>
+          <MapPin size={32} />
+        </button>
+      </div>
+    </div>
   );
 }
 
-export default Map;
+export default MyMap;

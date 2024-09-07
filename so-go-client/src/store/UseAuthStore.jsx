@@ -4,17 +4,18 @@ import { persist } from "zustand/middleware";
 const useAuthStore = create(
   persist(
     (set) => ({
+      accessToken: null,
       userUuid: null,
       role: null,
-      setTokens: (userUuid, role) => set({ userUuid, role }),
+      setTokens: (accessToken, userUuid, role) => set({ accessToken, userUuid, role }),
       clearTokens: () => {
-        set({ userUuid: null, role: null });
-        localStorage.removeItem('auth-storage');
+        set({ accessToken: null, userUuid: null, role: null });
+        sessionStorage.removeItem('auth-storage');
       },
     }),
     {
       name: 'auth-storage',
-      getStorage: () => localStorage,
+      getStorage: () => sessionStorage,
     }
   )
 );

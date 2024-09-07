@@ -42,6 +42,10 @@ body {
   flex-grow: 1;
 }
 
+#layout::-webkit-scrollbar {
+  display: none;
+}
+
 /* 반응형을 위해 추가된 미디어 쿼리 */
 @media (max-width: 480px) {
   .App {

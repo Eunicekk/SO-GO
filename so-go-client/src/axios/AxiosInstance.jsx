@@ -50,6 +50,7 @@ axios.interceptors.response.use(
           const tokenInfo = getTokenInfo(newAccessToken);
 
           useAuthStore.getState().setTokens(
+            newAccessToken,
             tokenInfo.userUuid,
             tokenInfo.role
           );

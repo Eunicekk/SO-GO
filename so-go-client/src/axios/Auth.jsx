@@ -23,7 +23,7 @@ const login = async (navigate, setTokens) => {
           axiosInstance.defaults.headers.common["role"] = tokenInfo.role;
         }
 
-        setTokens(tokenInfo.userUuid, tokenInfo.role);
+        setTokens(accessToken, tokenInfo.userUuid, tokenInfo.role);
         axiosInstance.defaults.headers.common["_retry"] = true;
 
         navigate("/");

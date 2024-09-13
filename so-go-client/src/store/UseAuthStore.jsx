@@ -9,11 +9,11 @@ const useAuthStore = create(
       setTokens: (userUuid, role) => set({ userUuid, role }),
       clearTokens: () => {
         set({ userUuid: null, role: null });
-        localStorage.removeItem('auth-storage');
+        localStorage.removeItem("auth-storage");
       },
     }),
     {
-      name: 'auth-storage',
+      name: "auth-storage",
       getStorage: () => localStorage,
     }
   )

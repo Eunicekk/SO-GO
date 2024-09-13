@@ -3,6 +3,8 @@ import { ImageSquare } from "phosphor-react";
 import { useEffect, useRef, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 
+import axiosInstance from "@/axios/AxiosInstance";
+
 function ReviewWrite() {
   const [selectedImageUrl, setSelectedImageUrl] = useState(null);
   const [selectedImageFile, setSelectedImageFile] = useState(null);
@@ -21,12 +23,30 @@ function ReviewWrite() {
   const [keyword, setKeyword] = useState("");
   const [submittedKeyword, setSubmittedKeyword] = useState(""); // 제출된 키워드를 저장하는 상태 추가
 
-  // 유효성 상태 관리용 state
-  const [validationErrors, setValidationErrors] = useState({
-    place: false,
-    image: false,
-    rating: false,
-    reviewText: false,
+  const [placeInfo, setPlaceInfo] = useState({
+    placeName: "",
+    placeDescription: "",
+    lat: null,
+    lng: null,
+  });
+
+  const [placeUUID, setPlaceUUID] = useState(null); // placeUUID를 저장하는 상태 추가
+  const authStorage = sessionStorage.getItem("auth-storage");
+
+  //유저 UUID 찾기
+  let userUUID = null;
+
+  if (authStorage) {
+    const parsedStorage = JSON.parse(authStorage); // Parse the JSON string
+    userUUID = parsedStorage.userUuid; // Access the userUuid
+  }
+
+  const [review, setReview] = useState({
+    content: "",
+    img: "",
+    score: null,
+    userUuid: userUUID,
+    placeUuid: placeUUID,
   });
 
   useEffect(() => {
@@ -38,7 +58,7 @@ function ReviewWrite() {
         const bounds = new kakao.maps.LatLngBounds();
         let markers = [];
 
-        for (var i = 0; i < data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
           markers.push({
             position: {
               lat: data[i].y,
@@ -47,6 +67,7 @@ function ReviewWrite() {
             content: data[i].place_name,
             address: data[i].road_address_name || data[i].address_name, // 주소 정보 추가
           });
+
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
         }
         setMarkers(markers);
@@ -89,6 +110,14 @@ function ReviewWrite() {
           });
 
           setInfo(marker);
+
+          // placeInfo 상태 업데이트
+          setPlaceInfo({
+            placeName: marker.content,
+            placeDescription: address,
+            lat: marker.position.lat,
+            lng: marker.position.lng,
+          });
         }
       }
     );
@@ -105,6 +134,14 @@ function ReviewWrite() {
       address: marker.address,
       coords: { lat: marker.position.lat, lng: marker.position.lng },
     });
+
+    // placeInfo 상태 업데이트
+    setPlaceInfo({
+      placeName: marker.content,
+      placeDescription: marker.address,
+      lat: marker.position.lat,
+      lng: marker.position.lng,
+    });
   };
 
   //이미지 업로드
@@ -112,7 +149,14 @@ function ReviewWrite() {
     const file = event.target.files[0];
     if (file) {
       setSelectedImageFile(file);
-      setSelectedImageUrl(URL.createObjectURL(file));
+      const imageUrl = URL.createObjectURL(file);
+      setSelectedImageUrl(imageUrl);
+
+      // 리뷰 객체에 이미지 URL 저장
+      setReview((prevReview) => ({
+        ...prevReview,
+        img: imageUrl,
+      }));
     }
   };
 
@@ -121,6 +165,15 @@ function ReviewWrite() {
     if (fileInputRef.current) {
       fileInputRef.current.click(); // input 요소 클릭 트리거
     }
+  };
+
+  //리뷰내용 담기
+  const handleContentChange = (event) => {
+    const { value } = event.target;
+    setReview((prevReview) => ({
+      ...prevReview,
+      content: value,
+    }));
   };
 
   // 별점 클릭 이벤트 처리
@@ -133,22 +186,69 @@ function ReviewWrite() {
         star.style.color = "lightgray";
       }
     });
+
+    // 리뷰 객체의 점수 업데이트
+    setReview((prevReview) => ({
+      ...prevReview,
+      score: index + 1,
+    }));
   };
 
-  //리뷰등록
-  const submitReview = () => {
-    if (validateInputs()) {
-      const placeInfo = {
-        place: selectedPlace,
-        image: selectedImageFile,
-        rating,
-        reviewText,
+  //PlaveUUID받아오기
+  // placeInfo가 변경될 때마다 placeUUID를 가져오는 useEffect
+  useEffect(() => {
+    if (placeInfo.placeName && placeInfo.placeDescription) {
+      const fetchPlaceUUID = async () => {
+        try {
+          const response = await axiosInstance.post(
+            `/places/search`,
+            placeInfo,
+            {
+              timeout: 5000,
+            }
+          );
+          setPlaceUUID(response.data); // 응답에서 placeUUID 설정
+
+          setReview((prevReview) => ({
+            ...prevReview,
+            placeUuid: response.data,
+          }));
+        } catch (err) {
+          console.error(err);
+        }
       };
 
-      //여기에서 axios 연결
+      fetchPlaceUUID();
+    }
+  }, [placeInfo]);
+
+  //리뷰등록
+  const submitReview = async () => {
+    if (validateInputs()) {
+      try {
+        const response = await axiosInstance.post("/reviews", review, {
+          timeout: 5000,
+        });
+        console.log("Review submitted successfully:", response.data);
+        alert("리뷰가 성공적으로 등록되었습니다.");
+      } catch (error) {
+        console.error("Error submitting review:", error);
+        alert("리뷰 등록 중 오류가 발생했습니다.");
+      }
     } else {
       alert("모든 항목을 작성해주세요");
     }
+  };
+
+  //유효성 검사 폼
+  const validateInputs = () => {
+    return (
+      review.content &&
+      review.img &&
+      review.score > 0 &&
+      review.userUuid &&
+      review.placeUuid
+    );
   };
 
   return (
@@ -300,7 +400,10 @@ function ReviewWrite() {
           </div>
         </div>
         <div>
-          <textarea placeholder="방문한 장소가 어땠는지 자랑해주세요!" />
+          <textarea
+            placeholder="방문한 장소가 어땠는지 자랑해주세요!"
+            onChange={handleContentChange}
+          />
         </div>
         <div>
           <button>취소</button>

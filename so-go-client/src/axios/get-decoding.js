@@ -12,6 +12,6 @@ const getTokenInfo = (token) => {
     console.error("Error decoding token:", error);
     return { userTsid: null, userRole: null };
   }
-}
+};
 
 export { getTokenInfo };

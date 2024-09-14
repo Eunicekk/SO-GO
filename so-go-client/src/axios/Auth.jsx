@@ -3,7 +3,7 @@ import axiosInstance from "./AxiosInstance";
 import { getTokenInfo } from "./get-decoding";
 
 // 로그인 시 토큰 발급
-const login = async (navigate, setTokens) => {
+export const login = async (navigate, setTokens) => {
 	const refreshToken = Cookies.get("refresh");
 
 	const reissue = async () => {
@@ -15,7 +15,7 @@ const login = async (navigate, setTokens) => {
 					{ headers: { "Content-Type": "application/json" } },
 				);
 
-				const accessToken = response.headers.Authorization;
+				const accessToken = response.headers.authorization;
 				const tokenInfo = getTokenInfo(accessToken);
 
 				if (tokenInfo.userUuid && tokenInfo.role) {
@@ -28,9 +28,11 @@ const login = async (navigate, setTokens) => {
 
 				navigate("/");
 			} catch (error) {
+				console.error("Reissue Error: " + error.message);
 				navigate("/login");
 			}
 		} else {
+			console.error("No Refresh Token");
 			navigate("/login");
 		}
 	};
@@ -39,9 +41,7 @@ const login = async (navigate, setTokens) => {
 };
 
 // 로그아웃
-const logout = async (userUuid) => {
+export const logout = async (userUuid) => {
 	const response = await axiosInstance.post(`/users/${userUuid}/logout`);
 	return response.data;
 };
-
-export default { login, logout };

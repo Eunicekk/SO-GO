@@ -16,7 +16,7 @@ axiosInstance.interceptors.request.use(
 	(config) => {
 		const { accessToken, userUuid, role } = useAuthStore.getState();
 
-		if (accessToken) config.headers["Authorization"] = `${accessToken}`;
+		if (accessToken) config.headers["authorization"] = `${accessToken}`;
 		if (userUuid) config.headers["userUuid"] = userUuid;
 		if (role) config.headers["role"] = role;
 
@@ -46,12 +46,12 @@ axios.interceptors.response.use(
 						{ headers: { "Content-Type": "application/json" } },
 					);
 
-					const newAccessToken = reissue.headers.Authorization;
+					const newAccessToken = reissue.headers.authorization;
 					const tokenInfo = getTokenInfo(newAccessToken);
 
 					useAuthStore.getState().setTokens(newAccessToken, tokenInfo.userUuid, tokenInfo.role);
 
-					originalRequest.headers["Authorization"] = newAccessToken;
+					originalRequest.headers["authorization"] = newAccessToken;
 					originalRequest.headers["userUuid"] = tokenInfo.userUuid;
 					originalRequest.headers["role"] = tokenInfo.role;
 

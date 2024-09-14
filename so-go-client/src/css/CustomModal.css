@@ -1,0 +1,27 @@
+#modal .modal-box {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	width: calc(100% - 56px);
+	border: none;
+	padding: 0 24px;
+	border-radius: 8px;
+}
+
+#modal .modal-title {
+	text-align: center;
+	font-size: 24px;
+	font-weight: 700;
+	margin: 24px 0 16px;
+}
+
+#modal .textarea {
+	margin-top: 20px;
+}
+
+#modal .modal-button {
+	width: 100%;
+	margin: 20px auto 24px;
+}

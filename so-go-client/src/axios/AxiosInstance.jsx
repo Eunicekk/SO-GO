@@ -49,7 +49,7 @@ axios.interceptors.response.use(
 					const newAccessToken = reissue.headers.Authorization;
 					const tokenInfo = getTokenInfo(newAccessToken);
 
-					useAuthStore.getState().setTokens(tokenInfo.userUuid, tokenInfo.role);
+					useAuthStore.getState().setTokens(newAccessToken, tokenInfo.userUuid, tokenInfo.role);
 
 					originalRequest.headers["Authorization"] = newAccessToken;
 					originalRequest.headers["userUuid"] = tokenInfo.userUuid;

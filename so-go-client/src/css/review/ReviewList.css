@@ -1,0 +1,18 @@
+.main-reviewlist {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	gap: 12px;
+	padding: 24px;
+}
+
+.review-none {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 200px; /* 부모 요소 높이 */
+	width: 100%;
+	grid-column: 1 / -1; /* 전체 그리드 영역을 차지 */
+	text-align: center; /* 텍스트를 중앙 정렬 */
+	font-size: 18px;
+	font-weight: 700;
+}

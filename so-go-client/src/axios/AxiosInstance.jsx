@@ -3,7 +3,8 @@ import Cookies from "js-cookie";
 import { getTokenInfo } from "./get-decoding";
 import useAuthStore from "../store/UseAuthStore";
 
-const LOCAL_URL = `http://localhost:8080/api`;
+const LOCAL_URL = `http://172.20.10.10:8080/api`;
+const SERVER = `http://3.36.72.205:8080/api`;
 
 const axiosInstance = axios.create({
 	baseURL: LOCAL_URL,
@@ -16,7 +17,7 @@ axiosInstance.interceptors.request.use(
 	(config) => {
 		const { accessToken, userUuid, role } = useAuthStore.getState();
 
-		if (accessToken) config.headers["Authorization"] = `${accessToken}`;
+		if (accessToken) config.headers["authorization"] = `${accessToken}`;
 		if (userUuid) config.headers["userUuid"] = userUuid;
 		if (role) config.headers["role"] = role;
 
@@ -46,12 +47,12 @@ axios.interceptors.response.use(
 						{ headers: { "Content-Type": "application/json" } },
 					);
 
-					const newAccessToken = reissue.headers.Authorization;
+					const newAccessToken = reissue.headers.authorization;
 					const tokenInfo = getTokenInfo(newAccessToken);
 
 					useAuthStore.getState().setTokens(newAccessToken, tokenInfo.userUuid, tokenInfo.role);
 
-					originalRequest.headers["Authorization"] = newAccessToken;
+					originalRequest.headers["authorization"] = newAccessToken;
 					originalRequest.headers["userUuid"] = tokenInfo.userUuid;
 					originalRequest.headers["role"] = tokenInfo.role;
 

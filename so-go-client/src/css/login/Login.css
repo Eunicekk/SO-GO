@@ -1,0 +1,55 @@
+/* 로그인 전체 */
+#login {
+	margin-top: 16vh;
+	text-align: center;
+}
+
+/* 로그인 상단 - 로고 및 텍스트 */
+#login hr {
+	width: 28px;
+	border-top: 3px solid black;
+	margin: 4vh auto;
+}
+
+#login .text {
+	font-size: 21px;
+	font-weight: 600;
+}
+
+#login .logo {
+	width: 180px;
+}
+
+/* 로그인 하단 - 버튼 */
+#buttons {
+	display: flex;
+	flex-direction: column;
+	width: 280px;
+	margin: 32vh auto 0;
+}
+
+#buttons .icon {
+	width: 24px;
+	margin-right: 4px;
+}
+
+#buttons .button {
+	height: 48px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 40px;
+	border: none;
+	padding: 8px 0;
+	margin-bottom: 10px;
+	font-size: 16px;
+}
+
+#buttons .kakao {
+	background-color: rgb(252, 232, 77);
+}
+
+#buttons .naver {
+	background-color: rgb(99, 195, 61);
+	color: white;
+}

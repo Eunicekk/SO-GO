@@ -1,0 +1,256 @@
+/* 전체 */
+#place-detail {
+	overflow: hidden;
+	position: relative;
+}
+
+/* 이미지 리스트 영역 */
+#image-count {
+	background-color: white;
+	border: 2px solid black;
+	border-radius: 20px;
+	font-size: 12px;
+	text-align: center;
+	padding: 6px;
+	width: 56px;
+	position: absolute;
+	top: 24px;
+	right: 16px;
+	z-index: 1;
+	letter-spacing: -1px;
+}
+
+#place-image {
+	width: 100%;
+	aspect-ratio: 1;
+	overflow: hidden;
+}
+
+#place-image .image-wrap img {
+	width: 100%;
+	min-height: 100vw;
+	max-height: 100vw;
+	object-fit: cover;
+}
+
+/* 장소 정보 */
+#place-description {
+	margin: 24px;
+}
+
+#place-description .title-section {
+	display: flex;
+	justify-content: space-between;
+	align-items: start;
+}
+
+#place-description .title-section .title {
+	font-size: 24px;
+	font-weight: 600;
+	margin-bottom: 8px;
+}
+
+#place-description .title-section .ask-modify {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	color: #949494;
+	gap: 2px;
+}
+
+#place-description .title-description {
+	font-size: 14px;
+	color: #666;
+	margin-bottom: 16px;
+}
+
+#place-description .info-section .address,
+#place-description .info-section .phone-number,
+#place-description .info-section .web-link {
+	display: flex;
+	align-items: center;
+	margin-bottom: 12px;
+}
+
+#place-description .info-section .running-time {
+	display: flex;
+	align-items: flex-start;
+	margin-bottom: 8px;
+}
+
+#place-description .info-section .time-text {
+	line-height: 1.2;
+}
+
+#place-description .info-section svg {
+	margin-right: 4px;
+}
+
+/* 지도 */
+#place-description .map-section {
+	margin: 24px 0 32px;
+	border: 1px solid black;
+	border-radius: 16px;
+	box-shadow: 0px 0px 16px 0px rgba(174, 174, 174, 0.5);
+}
+
+/* 장소 편의성 유무 */
+#place-comfort {
+	margin: 0 24px 32px;
+	padding: 16px 16px 24px;
+	border: 1px solid black;
+	border-radius: 16px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: start;
+	column-gap: calc((100% - (64px * 4)) / 3);
+	row-gap: 8px;
+}
+
+#place-comfort .text {
+	font-size: 12px;
+	text-align: center;
+}
+
+#place-comfort svg {
+	width: 32px;
+	height: 48px;
+}
+
+.parking-true,
+.parking-false,
+.wheelchair-true,
+.wheelchair-false,
+.smoke-true,
+.smoke-false,
+.pet-true,
+.pet-false,
+.toilet-true,
+.toilet-false,
+.elevator-true,
+.elevator-false,
+.cook-true,
+.cook-false {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	width: 64px;
+	position: relative;
+}
+
+#place-comfort .ban {
+	position: absolute;
+	top: 0px;
+	width: 110%;
+	color: rgb(200, 27, 8);
+}
+
+/* 장소 리뷰 */
+#place-review {
+	margin: 0 24px;
+}
+
+#place-review .title {
+	font-size: 24px;
+	font-weight: 600;
+	margin-bottom: 12px;
+}
+
+#place-review .review-info {
+	display: flex;
+	margin-bottom: 24px;
+}
+
+#place-review .score,
+#place-review .count {
+	display: flex;
+	justify-content: center;
+	margin-right: 8px;
+}
+
+#place-review svg {
+	margin-right: 4px;
+}
+
+#place-review .review-collection {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	row-gap: 8px;
+}
+
+#place-review .review-image {
+	border-radius: 4px;
+	width: calc(100% / 2 - 4px);
+}
+
+#place-review button {
+	display: block;
+	margin: 24px auto;
+	padding: 12px 16px;
+	background-color: white;
+	border-radius: 8px;
+	border: 1px solid black;
+}
+
+/* 좋아요 버튼 고정 & 즉시 위로 가는 버튼 */
+#like-button {
+	position: fixed;
+	bottom: 156px;
+	right: calc((100vw - 480px) / 2 + 10px);
+	z-index: 100;
+}
+
+#like-button .heart {
+	position: absolute;
+	top: 14px;
+	left: 14px;
+}
+
+#up-button {
+	position: fixed;
+	bottom: 100px;
+	right: calc((100vw - 480px) / 2 + 10px);
+	z-index: 100;
+}
+
+#up-button .arrow {
+	position: absolute;
+	top: 14px;
+	left: 14px;
+}
+
+@media (max-width: 480px) {
+	#like-button,
+	#up-button {
+		right: 10px;
+	}
+}
+
+/* 갭 */
+.gap {
+	height: 10px;
+	margin: 32px 0;
+	background-color: #d9d9d9;
+}
+
+/* 확인 모달 */
+#check-modal .check-modal-box {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	width: calc(100% - 56px);
+	border: none;
+	padding: 32px 24px;
+	border-radius: 8px;
+	text-align: center;
+}
+
+#check-modal .check-modal-button {
+	width: 80%;
+	margin-top: 24px;
+	background-color: #836fff;
+}

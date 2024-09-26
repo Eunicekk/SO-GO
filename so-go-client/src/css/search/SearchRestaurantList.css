@@ -1,0 +1,86 @@
+@media all and (max-width: 480px) {
+  #restaurant-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 24px;
+    margin-bottom: 0;
+  }
+
+  #restaurant-title h1 {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  #restaurant-title button {
+    border: 1px solid black;
+    border-radius: 18px;
+    padding: 4px 14px;
+    background-color: #836fff;
+    color: white;
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  #restaurant-list .restaurant-content {
+    padding: 24px;
+    padding-right: 8px;
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  #restaurant-list #restaurant-item {
+    width: 200px;
+    border: 1px solid #aaa;
+    border-radius: 16px;
+    padding: 16px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 8px 0 rgba(174, 174, 174, 0.5);
+    background-color: white;
+    margin-right: 16px;
+  }
+
+  #restaurant-list .thumbnail img {
+    width: 166px;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 1;
+    margin-bottom: 8px;
+  }
+
+  #restaurant-list .name {
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: 600;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #restaurant-list .score {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  #restaurant-list .score svg {
+    margin-right: 2px;
+  }
+
+  #restaurant-list .score span {
+    margin-left: 4px;
+  }
+
+  #restaurant-list .detail {
+    font-size: 14px;
+    color: #666;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

@@ -28,12 +28,12 @@ export const login = async (navigate, setTokens) => {
 
 				navigate("/");
 			} catch (error) {
-				console.error("Reissue Error: " + error.message);
 				navigate("/login");
+				console.error("Reissue Error: " + error.message);
 			}
 		} else {
-			console.error("No Refresh Token");
 			navigate("/login");
+			console.error("No Refresh Token");
 		}
 	};
 

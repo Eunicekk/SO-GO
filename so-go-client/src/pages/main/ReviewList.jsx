@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import axiosInstance from "@/axios/AxiosInstance";
-import ReviewThumnail from "../../components/main/ReviewThumnail";
+import ReviewThumnail from "@/components/main/ReviewThumnail";
 
 import "@/css/review/ReviewList.css";
 

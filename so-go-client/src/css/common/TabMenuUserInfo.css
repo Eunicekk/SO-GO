@@ -1,35 +1,50 @@
 .profile-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
+	width: 100%;
+	padding: 5% 10%;
+}
+
+.user-info-container {
+	display: flex;
+	align-items: center;
+}
+
+.login-tab {
+	display: flex;
+}
+
+.login-tab .login-profile {
+	margin-right: 5%;
+}
+
+.login-info {
+	display: flex;
+	width: 100%;
+	align-items: center;
 }
 
 .profile-pic {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	border-radius: 100%;
 }
 
 .user-info {
-  flex-grow: 1;
-  text-align: center;
+	flex-grow: 1;
+	text-align: center;
 }
 
 .user-name {
-  font-size: 18px;
-  font-weight: bold;
+	font-size: 18px;
+	font-weight: bold;
 }
 
 .notification {
-  position: relative;
+	position: relative;
 }
 
 .notification-dot {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
 }

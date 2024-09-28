@@ -13,6 +13,8 @@ export default function HotPlace() {
 		speed: 500,
 		slideToShow: 1,
 		slidesToScroll: 1,
+		autoplay: true,
+		autoplaySpeed: 3000,
 	};
 
 	return (

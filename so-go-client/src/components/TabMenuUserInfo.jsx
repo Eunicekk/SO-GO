@@ -5,6 +5,8 @@ import Notification from "@/components/Notification.jsx";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../store/UseAuthStore";
 
+import "@/css/common/TabMenuUserInfo.css";
+
 export default function TabMenuUserInfo() {
 	const navigate = useNavigate();
 
@@ -53,27 +55,32 @@ export default function TabMenuUserInfo() {
 					</div>
 				</div>
 			) : (
-				<div className="login-info">
-					<UserCircle
-						size={24}
-						weight="fill"
-					/>
-					<h3 onClick={() => navigate("/login")}>로그인해주세요</h3>
+				<div className="login-tab">
+					<div className="login-info">
+						<UserCircle
+							className="login-profile"
+							size={24}
+							weight="fill"
+						/>
+						<h3 onClick={() => navigate("/login")}>로그인해주세요</h3>
+					</div>
+					<div className="notification">
+						<span
+							className="notification-dot"
+							onClick={() => setShowNotifications(!showNotifications)}
+						>
+							<BellSimple
+								onClick={() => setShowNotifications(!showNotifications)}
+								size={24}
+							/>
+						</span>
+						<Notification
+							isOpen={showNotifications}
+							onClose={() => setShowNotifications(false)}
+						/>
+					</div>
 				</div>
 			)}
-
-			<div className="notification">
-				<span
-					className="notification-dot"
-					onClick={() => setShowNotifications(!showNotifications)}
-				>
-					<BellSimple size={24} />
-				</span>
-				<Notification
-					isOpen={showNotifications}
-					onClose={() => setShowNotifications(false)}
-				/>
-			</div>
 		</div>
 	);
 }

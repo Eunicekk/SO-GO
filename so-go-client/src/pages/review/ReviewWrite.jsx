@@ -1,11 +1,14 @@
-import "@/css/review/ReviewWrite.css";
-import { ImageSquare } from "phosphor-react";
 import { useEffect, useRef, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
+import { GetObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 import axiosInstance from "@/axios/AxiosInstance";
 import { circularProgressClasses } from "@mui/material";
 import useAuthStore from "../../store/UseAuthStore";
+
+import "@/css/review/ReviewWrite.css";
+import { ImageSquare } from "phosphor-react";
 
 function ReviewWrite() {
 	const [selectedImageUrl, setSelectedImageUrl] = useState(null);
@@ -35,7 +38,8 @@ function ReviewWrite() {
 	const [placeUUID, setPlaceUUID] = useState(null); // placeUUID를 저장하는 상태 추가
 
 	//유저 UUID 찾기
-	const { userUuid } = useAuthStore.getState();
+	// const { userUuid } = useAuthStore.getState();
+	const userUuid = "1a025e0a-e177-4007-872f-b92a63256fe7";
 
 	const [review, setReview] = useState({
 		content: "",
@@ -141,12 +145,6 @@ function ReviewWrite() {
 			setSelectedImageFile(file);
 			const imageUrl = URL.createObjectURL(file);
 			setSelectedImageUrl(imageUrl);
-
-			// 리뷰 객체에 이미지 URL 저장
-			setReview((prevReview) => ({
-				...prevReview,
-				img: imageUrl,
-			}));
 		}
 	};
 
@@ -193,9 +191,10 @@ function ReviewWrite() {
 					const response = await axiosInstance.post(`/places/search`, placeInfo);
 					setPlaceUUID(response.data); // 응답에서 placeUUID 설정
 
+					console.log(response);
 					setReview((prevReview) => ({
 						...prevReview,
-						placeUuid: response.data,
+						placeUuid: placeUUID,
 					}));
 				} catch (err) {
 					console.error(err);
@@ -206,27 +205,94 @@ function ReviewWrite() {
 		}
 	}, [placeInfo]);
 
+	//S3에 올리고 imageUrl 받아오기
+	const Bucket = import.meta.env.VITE_AMPLIFY_BUCKET;
+
+	const s3 = new S3Client({
+		region: import.meta.env.VITE_AWS_REGION,
+		credentials: {
+			accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY_ID,
+			secretAccessKey: import.meta.env.VITE_AWS_SECRET_ACCESS_KEY,
+		},
+	});
+
+	// 이미지 저장
+	const uploadS3 = async (file) => {
+		try {
+			const fileName = `${Date.now()}_${file.name}`;
+
+			// 이미지 업로드
+			await s3.send(
+				new PutObjectCommand({
+					Bucket,
+					Key: fileName,
+					Body: file,
+					ContentType: file.type,
+				}),
+			);
+
+			// 업로드된 이미지의 URL 생성
+			const imgUrl = await getSignedUrl(
+				s3,
+				new GetObjectCommand({
+					Bucket,
+					Key: fileName,
+				}),
+				{ expiresIn: 3600 }, // URL 만료 시간 설정 (1시간)
+			);
+
+			return imgUrl;
+		} catch (error) {
+			console.error("Error uploading to S3:", error);
+			// error 객체의 모든 속성 출력
+			console.error("Error details:", JSON.stringify(error, Object.getOwnPropertyNames(error)));
+
+			// 에러의 스택 추적 정보 출력
+			console.error("Error stack:", error.stack);
+			return null;
+		}
+	};
+
 	//리뷰등록
 	const submitReview = async () => {
 		if (validateInputs()) {
 			try {
+				// S3에 이미지 업로드 및 URL 가져오기
+				const uploadedImageUrl = await uploadS3(selectedImageFile);
+
+				if (!uploadedImageUrl) {
+					alert("이미지 업로드 중 오류가 발생했습니다.");
+					return;
+				}
+
+				// 업로드된 이미지 URL로 review 객체 업데이트
+				setReview({
+					...review,
+					img: uploadedImageUrl, // S3에서 받은 서명된 URL 사용
+				});
+
 				const response = await axiosInstance.post("/reviews", review, {
 					timeout: 5000,
 				});
+
 				console.log("Review submitted successfully:", response.data);
+
 				alert("리뷰가 성공적으로 등록되었습니다.");
 			} catch (error) {
+				console.log(review);
 				console.error("Error submitting review:", error);
 				alert("리뷰 등록 중 오류가 발생했습니다.");
 			}
 		} else {
+			console.log();
 			alert("모든 항목을 작성해주세요");
 		}
 	};
 
 	//유효성 검사 폼
 	const validateInputs = () => {
-		return review.content && review.img && review.score > 0 && review.userUuid && review.placeUuid;
+		return true;
+		// return review.content && review.img && review.score > 0 && review.userUuid && review.placeUuid;
 	};
 
 	return (

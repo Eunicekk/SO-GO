@@ -27,6 +27,8 @@ jobs:
         working-directory: ./so-go-client
         
       - name: Build
+        env:
+          VITE_KAKAO_JAVASCRIPT_KEY: ${{ secrets.VITE_KAKAO_JAVASCRIPT_KEY }}
         run: npm run build
         working-directory: ./so-go-client
         

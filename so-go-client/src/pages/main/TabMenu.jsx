@@ -1,8 +1,9 @@
-import "@/css/main/TabMenu.css";
 import { useNavigate } from "react-router-dom";
 import { HouseLine, XCircle, Image, MapPin, MapTrifold, Bookmarks, UserCircle } from "phosphor-react";
 
 import TabMenuUserInfo from "../../components/TabMenuUserInfo";
+
+import "@/css/main/TabMenu.css";
 
 export default function TabMenu() {
 	const navigate = useNavigate();
@@ -12,15 +13,20 @@ export default function TabMenu() {
 			<div className="profile-container">
 				<TabMenuUserInfo />
 
+				<div
+					className="exit-tab"
+					onClick={() => navigate(-1)}
+				>
+					<XCircle
+						size={24}
+						color="red"
+						weight="fill"
+					/>
+				</div>
+
 				<div className="font-size-selector">
-					<div onClick={() => navigate(-1)}>
-						<XCircle
-							size={24}
-							color="red"
-							weight="fill"
-						/>
-					</div>
 					<h3 className="title">내가 원하는 글자 크기</h3>
+
 					<div className="slider">
 						<span className="slider-text">가</span>
 						<input
@@ -35,39 +41,72 @@ export default function TabMenu() {
 
 				<div className="buttons-container">
 					<button
-						className="button home-button"
+						className="button"
 						onClick={() => navigate("/")}
 					>
-						<HouseLine size={24} />첫 화면으로 돌아가기
+						<HouseLine
+							className="button-icon"
+							size={24}
+						/>
+						첫 화면으로
 					</button>
-					<button className="button highlight">
+
+					<button
+						className="button"
+						onClick={() => navigate("/create")}
+					>
 						<Image
+							className="button-icon"
 							size={24}
 							weight="fill"
 						/>
 						여행 사진 자랑하기
 					</button>
-					<button className="button">
+
+					<button
+						className="button"
+						onClick={() => navigate("/map")}
+					>
 						<MapPin
+							className="button-icon"
 							size={24}
 							weight="fill"
 						/>
 						지도에서 명소 찾기
 					</button>
-					<button className="button">
-						<MapTrifold size={24} />
-						나의 방방곡곡 지도 보기
+
+					<button
+						className="button"
+						onClick={() => navigate("/my-page")}
+					>
+						<MapTrifold
+							className="button-icon"
+							size={24}
+						/>
+						나의 방방곡곡 지도
 					</button>
-					<button className="button">
-						<Bookmarks size={24} />
-						내가 스크랩한 글 모아보기
+
+					<button
+						className="button"
+						onClick={() => navigate("/my-page")}
+					>
+						<Bookmarks
+							className="button-icon"
+							size={24}
+						/>
+						내가 스크랩한 글
 					</button>
-					<button className="button">
+
+					<button
+						className="button"
+						onClick={() => navigate("/my-page")}
+					>
 						<UserCircle
+							className="button-icon"
 							size={24}
 							weight="fill"
 						/>
-						내 프로필 꾸미기
+						내 프로필
 					</button>
 				</div>
 			</div>

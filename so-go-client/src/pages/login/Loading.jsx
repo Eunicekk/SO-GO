@@ -12,6 +12,7 @@ export default function Loading() {
 
 		const performLogin = async () => {
 			await login(navigate, setTokens);
+
 			const { accessToken } = useAuthStore.getState();
 		};
 

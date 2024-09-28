@@ -8,12 +8,11 @@
 	display: flex;
 	padding: 10px;
 	justify-content: space-around;
-	margin-bottom: 20px;
 }
 
 .tab-button {
 	padding: 10px;
-	font-size: 18px;
+	font-size: 16px;
 	border: none;
 	background: none;
 	cursor: pointer;
@@ -24,8 +23,4 @@
 	font-weight: bold;
 	color: black;
 	border-bottom: 2px solid black;
-}
-
-.tab-content {
-	padding: 20px;
 }

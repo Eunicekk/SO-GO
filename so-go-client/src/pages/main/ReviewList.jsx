@@ -13,8 +13,6 @@ export default function ReviewList() {
 			try {
 				const response = await axiosInstance.get(`/reviews`);
 				setReviewList(response.data);
-
-				console.log(response);
 			} catch (err) {
 				console.error(err);
 			}

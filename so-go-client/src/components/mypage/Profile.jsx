@@ -1,7 +1,6 @@
-import { Pencil } from "phosphor-react";
-import { useState } from "react";
-
 import "@/css/mypage/Profile.css";
+import { useState } from "react";
+import { Pencil } from "@phosphor-icons/react";
 
 function Profile() {
 	const [userInfo, setUserInfo] = useState({

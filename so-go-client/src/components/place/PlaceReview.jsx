@@ -1,4 +1,4 @@
-import { ChatCircle, Star } from "phosphor-react";
+import { ChatCircle, Star } from "@phosphor-icons/react";
 import { useState } from "react";
 
 const imageList = [

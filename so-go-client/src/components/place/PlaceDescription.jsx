@@ -1,5 +1,5 @@
 import "@/css/place/PlaceDetail.css";
-import { PencilLine, MapPin, Clock, Phone, Globe } from "phosphor-react";
+import { PencilLine, MapPin, Clock, Phone, Globe } from "@phosphor-icons/react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 
 export default function PlaceDescription({ open }) {

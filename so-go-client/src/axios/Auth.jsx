@@ -7,12 +7,11 @@ export const login = async (navigate, setTokens) => {
 	const isAuthenticated = Cookies.get("is_authenticated");
 
 	const reissue = async () => {
-		const refreshToken = Cookies.get("refresh");
-		if (isAuthenticated === "true" && refreshToken) {
+		if (isAuthenticated === "true") {
 			try {
 				const response = await axiosInstance.post(
 					`/auth/reissue`,
-					{ refreshToken },
+					{ isAuthenticated },
 					{ headers: { "Content-Type": "application/json" } },
 				);
 

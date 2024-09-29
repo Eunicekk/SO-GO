@@ -10,15 +10,15 @@ export default function Login() {
 	const setTokens = useAuthStore((state) => state.setTokens);
 	const URL = "3.36.72.205:8080";
 	const LOCAL = "192.168.219.106:8080";
-	const SERVER = `https://so-go.kr/api`;
+	const SERVER = `so-go.kr/api`;
 
 	// 카카오 로그인
 	const kakaoLogin = () => {
-		window.location.href = `http://${SERVER}/oauth2/authorization/kakao`;
+		window.location.href = `https://${SERVER}/oauth2/authorization/kakao`;
 	};
 	// 네이버 로그인
 	const naverLogin = () => {
-		window.location.href = `http://${SERVER}/oauth2/authorization/naver`;
+		window.location.href = `https://${SERVER}/oauth2/authorization/naver`;
 	};
 
 	return (

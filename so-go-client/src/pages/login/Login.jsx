@@ -2,7 +2,7 @@ import "@/css/login/Login.css";
 import logo from "@/assets/logo.png";
 import icon_kakao from "@/assets/icon_kakao.png";
 import icon_naver from "@/assets/icon_naver.png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuthStore from "../../store/UseAuthStore";
 
 export default function Login() {
@@ -60,6 +60,7 @@ export default function Login() {
 					네이버 로그인
 				</button>
 			</div>
+			<Link to="/">조금 더 둘러볼래요</Link>
 		</div>
 	);
 }

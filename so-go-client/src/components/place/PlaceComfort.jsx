@@ -1,4 +1,4 @@
-import { Car, Wheelchair, Dog, Toilet, CookingPot, X } from "phosphor-react";
+import { Car, Wheelchair, Dog, Toilet, CookingPot, X } from "@phosphor-icons/react";
 
 export default function PlaceComfort() {
 	const comfort = {

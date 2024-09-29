@@ -1,4 +1,4 @@
-import { BellSimple, UserCircle } from "phosphor-react";
+import { BellSimple, UserCircle } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 
 import Notification from "@/components/Notification.jsx";

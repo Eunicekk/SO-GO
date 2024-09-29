@@ -8,7 +8,7 @@ import { circularProgressClasses } from "@mui/material";
 import useAuthStore from "../../store/UseAuthStore";
 
 import "@/css/review/ReviewWrite.css";
-import { ImageSquare } from "phosphor-react";
+import { ImageSquare } from "@phosphor-icons/react";
 
 function ReviewWrite() {
 	const [selectedImageUrl, setSelectedImageUrl] = useState(null);

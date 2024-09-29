@@ -22,12 +22,23 @@
 
 .hotplace-title {
 	margin: 15px 10px 10px;
-	padding: 10px 30px;
+	padding: 10px 16px;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 }
 
 .hotplace-title h2 {
 	font-size: 18px;
 	font-weight: 800;
+}
+
+.hotplace-title button {
+	border: 1px solid black;
+	border-radius: 18px;
+	padding: 4px 14px;
+	background-color: #836fff;
+	color: white;
+	font-size: 14px;
+	font-weight: 300;
 }

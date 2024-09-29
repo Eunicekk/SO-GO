@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { HouseLine, XCircle, Image, MapPin, MapTrifold, Bookmarks, UserCircle } from "phosphor-react";
+import { HouseLine, XCircle, Image, MapPin, MapTrifold, Bookmarks, UserCircle } from "@phosphor-icons/react";
 
 import TabMenuUserInfo from "../../components/TabMenuUserInfo";
 
@@ -11,8 +11,6 @@ export default function TabMenu() {
 	return (
 		<>
 			<div className="profile-container">
-				<TabMenuUserInfo />
-
 				<div
 					className="exit-tab"
 					onClick={() => navigate(-1)}
@@ -24,18 +22,20 @@ export default function TabMenu() {
 					/>
 				</div>
 
+				<TabMenuUserInfo />
+
 				<div className="font-size-selector">
 					<h3 className="title">내가 원하는 글자 크기</h3>
 
 					<div className="slider">
-						<span className="slider-text">가</span>
+						<span className="slider-text-small">가</span>
 						<input
 							type="range"
 							min="1"
 							max="5"
 							className="range-slider"
 						/>
-						<span className="slider-text">가</span>
+						<span className="slider-text-big">가</span>
 					</div>
 				</div>
 

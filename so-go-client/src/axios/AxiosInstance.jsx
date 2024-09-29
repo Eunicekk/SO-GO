@@ -4,7 +4,8 @@ import { getTokenInfo } from "./get-decoding";
 import useAuthStore from "../store/UseAuthStore";
 
 const LOCAL_URL = `https://172.20.10.10:8080/api`;
-const SERVER = `http://15.164.149.250:8080/api`;
+// const SERVER = `http://15.164.149.250:8080/api`;
+const SERVER = `https://so-go.kr/api`;
 
 const axiosInstance = axios.create({
 	baseURL: SERVER,

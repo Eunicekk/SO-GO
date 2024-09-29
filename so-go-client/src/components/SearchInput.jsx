@@ -1,6 +1,6 @@
-import SearchButton from "@/assets/SearchButton.png";
-import axiosInstance from "@/axios/AxiosInstance";
 import { useState } from "react";
+import axiosInstance from "@/axios/AxiosInstance";
+import { Circle } from "@phosphor-icons/react";
 
 function SearchInput() {
 	const [searchWord, setSearchWord] = useState("");
@@ -26,8 +26,8 @@ function SearchInput() {
 
 	return (
 		<div
-			id="searchinput"
-			className="searchinput"
+			id="search-input"
+			className="search-input"
 		>
 			<input
 				type="text"
@@ -35,11 +35,23 @@ function SearchInput() {
 				value={searchWord}
 				onChange={(e) => setSearchWord(e.target.value)}
 			/>
-			<img
-				src={SearchButton}
-				alt="button"
+			<div
+				className="search-button"
 				onClick={handleSearch}
-			/>
+			>
+				<Circle
+					className="outer"
+					color="#18F5BB"
+					weight="bold"
+					size={24}
+				/>
+				<Circle
+					className="inner"
+					color="#836FFF"
+					weight="fill"
+					size={13}
+				/>
+			</div>
 		</div>
 	);
 }

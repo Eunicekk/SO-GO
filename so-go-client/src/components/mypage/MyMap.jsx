@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from "react";
-
 import "@/css/mypage/MyMap.css";
-import { Circle } from "phosphor-react";
+import { useEffect, useRef, useState } from "react";
+import { Circle } from "@phosphor-icons/react";
 
 export default function MyMap() {
 	const svgRef = useRef(null);

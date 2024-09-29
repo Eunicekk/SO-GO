@@ -1,7 +1,7 @@
 import React from "react";
 import "@/css/common/Notification.css";
 
-import { XCircle } from "phosphor-react";
+import { XCircle } from "@phosphor-icons/react";
 
 export default function Notification({ isOpen, onClose }) {
 	return (

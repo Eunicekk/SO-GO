@@ -136,7 +136,7 @@ function ReviewDetail() {
 						<h2>댓글</h2> <span>({commentList.length})</span>
 					</div>
 
-					<CommentWrite />
+					<CommentWrite reviewUUID={reviewUUID} />
 
 					{commentList.length === 0 ? <p> 댓글이 없습니다. </p> : <CommentList commentList={commentList} />}
 				</div>

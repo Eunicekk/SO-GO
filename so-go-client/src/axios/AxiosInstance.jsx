@@ -38,14 +38,13 @@ axios.interceptors.response.use(
 		if (error.response && error.response.status === 401 && !originalRequest._retry) {
 			originalRequest._retry = true;
 
-			const refreshToken = Cookies.get("refresh");
 			const isAuthenticated = Cookies.get("is_authenticated");
 
-			if (refreshTisAuthenticated === "true" && refreshToken) {
+			if (isAuthenticated === "true") {
 				try {
 					const reissue = await axiosInstance.post(
 						`/auth/reissue`,
-						{ refreshToken },
+						{ isAuthenticated },
 						{ headers: { "Content-Type": "application/json" } },
 					);
 

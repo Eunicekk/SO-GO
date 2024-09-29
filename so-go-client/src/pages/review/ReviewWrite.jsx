@@ -9,8 +9,10 @@ import useAuthStore from "../../store/UseAuthStore";
 
 import "@/css/review/ReviewWrite.css";
 import { ImageSquare } from "phosphor-react";
+import { useNavigate } from "react-router-dom";
 
 function ReviewWrite() {
+	const navigate = useNavigate();
 	const [selectedImageUrl, setSelectedImageUrl] = useState(null);
 	const [selectedImageFile, setSelectedImageFile] = useState(null);
 	const fileInputRef = useRef(null); // input 요소 참조를 위한 useRef 추가
@@ -38,8 +40,8 @@ function ReviewWrite() {
 	const [placeUUID, setPlaceUUID] = useState(null); // placeUUID를 저장하는 상태 추가
 
 	//유저 UUID 찾기
-	// const { userUuid } = useAuthStore.getState();
-	const userUuid = "1a025e0a-e177-4007-872f-b92a63256fe7";
+	const { accessToken, userUuid } = useAuthStore();
+	// const userUuid = "1a025e0a-e177-4007-872f-b92a63256fe7";
 
 	const [review, setReview] = useState({
 		content: "",
@@ -48,6 +50,14 @@ function ReviewWrite() {
 		userUuid: userUuid,
 		placeUuid: placeUUID,
 	});
+
+	//로그인 체크
+	useEffect(() => {
+		// if (!accessToken) {
+		// 	alert("로그인 후 이용해주세요");
+		// 	navigate("/login");
+		// }
+	}, []);
 
 	useEffect(() => {
 		if (!map || !submittedKeyword) return;
@@ -269,6 +279,8 @@ function ReviewWrite() {
 					...review,
 					img: uploadedImageUrl, // S3에서 받은 서명된 URL 사용
 				});
+
+				console.log(review);
 
 				const response = await axiosInstance.post("/reviews", review, {
 					timeout: 5000,

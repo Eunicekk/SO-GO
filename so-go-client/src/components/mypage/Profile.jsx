@@ -1,7 +1,11 @@
+import { useEffect, useState } from "react";
+
+import axiosInstance from "@/axios/AxiosInstance";
+
 import { Pencil } from "phosphor-react";
-import { useState } from "react";
 
 import "@/css/mypage/Profile.css";
+import useAuthStore from "../../store/UseAuthStore";
 
 function Profile() {
 	const [userInfo, setUserInfo] = useState({
@@ -10,6 +14,22 @@ function Profile() {
 		myProfileImg: null,
 		visitRate: 26,
 	});
+
+	const { userUuid } = useAuthStore();
+
+	useEffect(() => {
+		const getProfileInfo = async () => {
+			try {
+				const response = await axiosInstance.get(`/users/${userUuid}`);
+
+				console.log(response);
+			} catch (err) {
+				console.error(err);
+			}
+		};
+
+		getProfileInfo();
+	}, []);
 
 	return (
 		<>

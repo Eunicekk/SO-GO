@@ -1,5 +1,6 @@
-import { Circle } from "@phosphor-icons/react";
 import { useState } from "react";
+import axiosInstance from "@/axios/AxiosInstance";
+import { Circle } from "@phosphor-icons/react";
 
 function SearchInput() {
 	const [searchWord, setSearchWord] = useState("");

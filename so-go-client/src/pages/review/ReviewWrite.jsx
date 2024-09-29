@@ -189,9 +189,8 @@ function ReviewWrite() {
 			const fetchPlaceUUID = async () => {
 				try {
 					const response = await axiosInstance.post(`/places/search`, placeInfo);
-					setPlaceUUID(response.data); // 응답에서 placeUUID 설정
+					setPlaceUUID(response.data.placeUuid); // 응답에서 placeUUID 설정
 
-					console.log(response);
 					setReview((prevReview) => ({
 						...prevReview,
 						placeUuid: placeUUID,
@@ -291,8 +290,7 @@ function ReviewWrite() {
 
 	//유효성 검사 폼
 	const validateInputs = () => {
-		return true;
-		// return review.content && review.img && review.score > 0 && review.userUuid && review.placeUuid;
+		return review.content && review.score > 0 && review.userUuid && review.placeUuid;
 	};
 
 	return (

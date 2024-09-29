@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import axiosInstance from "@/axios/AxiosInstance";
 
-import { Pencil } from "phosphor-react";
+import { Pencil } from "@phosphor-icons/react";
 
 import "@/css/mypage/Profile.css";
 import useAuthStore from "../../store/UseAuthStore";

@@ -1,6 +1,6 @@
 import "@/css/place/PlaceDetail.css";
 import { useState } from "react";
-import { Circle, HeartStraight, CaretUp } from "phosphor-react";
+import { Circle, HeartStraight, CaretUp } from "@phosphor-icons/react";
 import PlaceImage from "@/components/place/PlaceImage";
 import PlaceDescription from "@/components/place/PlaceDescription";
 import PlaceComfort from "@/components/place/PlaceComfort";

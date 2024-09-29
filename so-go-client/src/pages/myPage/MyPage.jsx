@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Profile from "@/components/mypage/Profile.jsx";
 import MyTrip from "@/components/mypage/MyTrip";
 import MyScrap from "@/components/mypage/MyScrap";
+import MyMap from "@/components/mypage/MyMap";
 import MyAnnouncement from "@/components/mypage/MyAnnouncement";
 
 import "@/css/mypage/MyPage.css";
@@ -49,7 +50,7 @@ function MyPage() {
 				<div className="tab-content">
 					{selectedTab === "내 여행" && <MyTrip />}
 					{selectedTab === "내 스크랩" && <MyScrap />}
-					{selectedTab === "전국 지도" && <div>내 발자취 콘텐츠</div>}
+					{selectedTab === "전국 지도" && <MyMap />}
 					{selectedTab === "공지 사항" && <MyAnnouncement />}
 				</div>
 			</div>

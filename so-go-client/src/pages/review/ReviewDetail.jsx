@@ -4,7 +4,7 @@ import ReportReview from "../../components/Notification/ReportReview";
 
 import axiosInstance from "@/axios/AxiosInstance";
 
-import { DotsThreeVertical, BookmarkSimple, MapPin } from "phosphor-react";
+import { DotsThreeVertical, BookmarkSimple, MapPin } from "@phosphor-icons/react";
 import { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
 

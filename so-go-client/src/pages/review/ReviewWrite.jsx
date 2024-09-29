@@ -8,7 +8,7 @@ import { circularProgressClasses } from "@mui/material";
 import useAuthStore from "../../store/UseAuthStore";
 
 import "@/css/review/ReviewWrite.css";
-import { ImageSquare } from "phosphor-react";
+import { ImageSquare } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
 
 function ReviewWrite() {

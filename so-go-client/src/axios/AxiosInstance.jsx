@@ -39,8 +39,9 @@ axios.interceptors.response.use(
 			originalRequest._retry = true;
 
 			const refreshToken = Cookies.get("refresh");
+			const isAuthenticated = Cookies.get("is_authenticated");
 
-			if (refreshToken) {
+			if (refreshTisAuthenticated === "true" && refreshToken) {
 				try {
 					const reissue = await axiosInstance.post(
 						`/auth/reissue`,
@@ -63,6 +64,7 @@ axios.interceptors.response.use(
 				}
 			}
 		}
+		return Promise.reject(error);
 	},
 );
 

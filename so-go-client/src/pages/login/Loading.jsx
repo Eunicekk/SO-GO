@@ -8,11 +8,8 @@ export default function Loading() {
 	const setTokens = useAuthStore((state) => state.setTokens);
 
 	useEffect(() => {
-		// login(navigate, setTokens);
-
 		const performLogin = async () => {
 			await login(navigate, setTokens);
-
 			const { accessToken } = useAuthStore.getState();
 		};
 

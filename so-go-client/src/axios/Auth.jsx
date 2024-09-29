@@ -4,10 +4,11 @@ import { getTokenInfo } from "./get-decoding";
 
 // 로그인 시 토큰 발급
 export const login = async (navigate, setTokens) => {
-	const refreshToken = Cookies.get("refresh");
+	const isAuthenticated = Cookies.get("is_authenticated");
 
 	const reissue = async () => {
-		if (refreshToken) {
+		const refreshToken = Cookies.get("refresh");
+		if (isAuthenticated === "true" && refreshToken) {
 			try {
 				const response = await axiosInstance.post(
 					`/auth/reissue`,
@@ -25,7 +26,6 @@ export const login = async (navigate, setTokens) => {
 
 				setTokens(accessToken, tokenInfo.userUuid, tokenInfo.role);
 				axiosInstance.defaults.headers.common["_retry"] = true;
-
 				navigate("/");
 			} catch (error) {
 				navigate("/login");

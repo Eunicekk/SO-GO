@@ -1,9 +1,11 @@
 import { useState } from "react";
 import axiosInstance from "@/axios/AxiosInstance";
 import { Circle } from "@phosphor-icons/react";
+import { useNavigate } from "react-router-dom";
 
 function SearchInput() {
 	const [searchWord, setSearchWord] = useState("");
+	const navigate = useNavigate();
 
 	const handleSearch = async () => {
 		if (!searchWord.trim()) {
@@ -19,8 +21,15 @@ function SearchInput() {
 			});
 
 			console.log(response);
+			navigate("/search", { state: { searchResults: response.data } });
 		} catch (error) {
 			console.error("Error searching for location:", error);
+		}
+	};
+
+	const handleKeyPress = (event) => {
+		if (event.key === "Enter") {
+			handleSearch(event);
 		}
 	};
 
@@ -34,6 +43,7 @@ function SearchInput() {
 				placeholder="가고 싶은 장소를 입력해주세요"
 				value={searchWord}
 				onChange={(e) => setSearchWord(e.target.value)}
+				onKeyUp={handleKeyPress}
 			/>
 			<div
 				className="search-button"

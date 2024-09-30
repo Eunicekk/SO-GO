@@ -17,7 +17,7 @@ export default function MyMap() {
 	]);
 
 	useEffect(() => {
-		fetch("src/assets/Map_of_South_Korea.svg")
+		fetch("/Map_of_South_Korea.svg")
 			.then((response) => response.text())
 			.then((data) => {
 				if (svgRef.current) svgRef.current.innerHTML = data;

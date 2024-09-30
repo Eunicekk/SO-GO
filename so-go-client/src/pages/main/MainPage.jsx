@@ -5,7 +5,7 @@ export default function MainPage() {
 	return (
 		<>
 			<HotPlace />
-			{/* <ReviewList /> */}
+			<ReviewList />
 		</>
 	);
 }

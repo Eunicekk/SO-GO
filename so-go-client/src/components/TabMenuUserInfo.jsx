@@ -1,6 +1,8 @@
 import { BellSimple, UserCircle } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 
+import axiosInstance from "@/axios/AxiosInstance";
+
 import Notification from "@/components/Notification.jsx";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../store/UseAuthStore";

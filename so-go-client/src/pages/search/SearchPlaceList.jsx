@@ -8,6 +8,14 @@ export default function SearchPlaceList({ result }) {
 	useEffect(() => {
 		const { kakao } = window;
 		const geocoder = new kakao.maps.services.Geocoder();
+
+		const fetchAddress = async () => {
+			const addressPRomise = result.map((place) => {
+				const coords = new kakao.maps.LatLng(place.lat, place.lng);
+
+				return new Promise((resolve, reject) => {});
+			});
+		};
 	});
 
 	return (

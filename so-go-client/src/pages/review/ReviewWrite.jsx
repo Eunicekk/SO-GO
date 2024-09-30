@@ -46,6 +46,7 @@ function ReviewWrite() {
 	const [review, setReview] = useState({
 		content: "",
 		img: "",
+		address: "",
 		score: null,
 		userUuid: userUuid,
 		placeUuid: placeUUID,
@@ -146,6 +147,11 @@ function ReviewWrite() {
 			lat: marker.position.lat,
 			lng: marker.position.lng,
 		});
+
+		setReview((prevReview) => ({
+			...prevReview,
+			address: marker.address,
+		}));
 	};
 
 	//이미지 업로드

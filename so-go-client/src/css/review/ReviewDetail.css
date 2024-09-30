@@ -1,54 +1,56 @@
 .reviewer-profile {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 30px 20px 10px;
-  padding: 0 30px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin: 30px 20px 10px;
+	padding: 0 30px;
 }
 
 /* 드롭다운 메뉴 스타일 */
 .dropdown {
-  position: absolute;
-  top: 30px; /* DotsThreeVertical 아이콘 바로 아래 */
-  right: 0; /* 오른쪽 정렬 */
-  z-index: 100;
-  display: flex; /* 가로 정렬 */
-  align-items: center; /* 수직 가운데 정렬 */
-  background-color: white; /* 배경색 */
-  padding: 5px; /* 패딩 추가 */
-  border-radius: 5px; /* 모서리 둥글게 */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+	position: absolute;
+	top: 30px; /* DotsThreeVertical 아이콘 바로 아래 */
+	right: 0; /* 오른쪽 정렬 */
+	z-index: 100;
+	display: flex; /* 가로 정렬 */
+	align-items: center; /* 수직 가운데 정렬 */
+	background-color: white; /* 배경색 */
+	padding: 5px; /* 패딩 추가 */
+	border-radius: 5px; /* 모서리 둥글게 */
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
 }
 
 .reviewer-place {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 }
 
 .reviewer-content {
-  margin: 20px 20px 5px;
-  padding: 0 30px;
+	margin: 20px 20px 5px;
+	padding: 0 30px;
 }
 
 .review-place-img {
-  margin: 0px 20px;
+	margin: 0px 20px;
+	width: 80%;
+	height: 80%;
 }
 
 .reviewer-info {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .review-comment-list {
-  margin: 20px 20px 5px;
-  padding: 0 30px;
+	margin: 20px 20px 5px;
+	padding: 0 30px;
 }
 
 .review-comment-title {
-  display: flex;
-  margin-bottom: 10px;
+	display: flex;
+	margin-bottom: 10px;
 }

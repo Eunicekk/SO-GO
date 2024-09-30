@@ -1,9 +1,11 @@
-import SearchButton from "@/assets/SearchButton.png";
-import axiosInstance from "@/axios/AxiosInstance";
 import { useState } from "react";
+import axiosInstance from "@/axios/AxiosInstance";
+import { Circle } from "@phosphor-icons/react";
+import { useNavigate } from "react-router-dom";
 
 function SearchInput() {
 	const [searchWord, setSearchWord] = useState("");
+	const navigate = useNavigate();
 
 	const handleSearch = async () => {
 		if (!searchWord.trim()) {
@@ -19,27 +21,47 @@ function SearchInput() {
 			});
 
 			console.log(response);
+			navigate("/search", { state: { searchResults: response.data } });
 		} catch (error) {
 			console.error("Error searching for location:", error);
 		}
 	};
 
+	const handleKeyPress = (event) => {
+		if (event.key === "Enter") {
+			handleSearch(event);
+		}
+	};
+
 	return (
 		<div
-			id="searchinput"
-			className="searchinput"
+			id="search-input"
+			className="search-input"
 		>
 			<input
 				type="text"
 				placeholder="가고 싶은 장소를 입력해주세요"
 				value={searchWord}
 				onChange={(e) => setSearchWord(e.target.value)}
+				onKeyUp={handleKeyPress}
 			/>
-			<img
-				src={SearchButton}
-				alt="button"
+			<div
+				className="search-button"
 				onClick={handleSearch}
-			/>
+			>
+				<Circle
+					className="outer"
+					color="#18F5BB"
+					weight="bold"
+					size={24}
+				/>
+				<Circle
+					className="inner"
+					color="#836FFF"
+					weight="fill"
+					size={13}
+				/>
+			</div>
 		</div>
 	);
 }

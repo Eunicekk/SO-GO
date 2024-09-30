@@ -1,11 +1,11 @@
 import "@/css/search/SearchPlaceList.css";
 import SearchPlaceListItem from "@/components/searchList/SearchPlaceListItem";
 
-export default function SearchPlaceList() {
+export default function SearchMarketList() {
 	return (
 		<div id="place-list">
 			<div id="place-title">
-				<h1>추천 관광지</h1>
+				<h1>추천 전통시장</h1>
 				<button>전체 보기</button>
 			</div>
 

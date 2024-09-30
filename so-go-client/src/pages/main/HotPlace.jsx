@@ -20,7 +20,7 @@ export default function HotPlace() {
 	return (
 		<div className="hotplace">
 			<div className="hotplace-title">
-				<h2>요즘 뜨는 관광지</h2>
+				<h2>✨ 요즘 뜨는 관광지</h2>
 				<button>전체 보기</button>
 			</div>
 			<Slider {...settings}>

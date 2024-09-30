@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
-import { MapPin } from "phosphor-react";
+import { Circle, MapPin } from "@phosphor-icons/react";
 import SearchButton from "@/assets/SearchButton.png";
 
 import "@/css/map/Map.css";
@@ -76,21 +76,34 @@ function MyMap() {
 	return (
 		<div className="my-map-like">
 			<form
-				className="searchbar"
+				id="search-input"
+				className="search-input"
 				onSubmit={handleSearch}
 			>
 				<input
 					type="text"
 					value={keyword}
 					onChange={(e) => setKeyword(e.target.value)}
-					placeholder="검색할 장소를 입력하세요"
-					onKeyUp={handleKeyPress} // 엔터 키 이벤트 핸들러 연결
+					placeholder="찾고 싶은 장소를 입력해주세요"
+					onKeyUp={handleKeyPress}
 				/>
-				<img
+				<div
+					className="search-button"
 					onClick={handleSearch}
-					src={SearchButton}
-					alt="button"
-				/>
+				>
+					<Circle
+						className="outer"
+						color="#18F5BB"
+						weight="bold"
+						size={24}
+					/>
+					<Circle
+						className="inner"
+						color="#836FFF"
+						weight="fill"
+						size={13}
+					/>
+				</div>
 			</form>
 
 			<div className="map-container">

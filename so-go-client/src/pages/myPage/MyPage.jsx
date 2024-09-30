@@ -1,19 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Profile from "@/components/mypage/Profile.jsx";
 import MyTrip from "@/components/mypage/MyTrip";
 import MyScrap from "@/components/mypage/MyScrap";
+import MyMap from "@/components/mypage/MyMap";
 import MyAnnouncement from "@/components/mypage/MyAnnouncement";
 
 import "@/css/mypage/MyPage.css";
+import useAuthStore from "../../store/UseAuthStore";
+import { useNavigate } from "react-router-dom";
 
 function MyPage() {
+	const navigate = useNavigate();
 	const [selectedTab, setSelectedTab] = useState("내 여행");
 
 	// 탭 선택을 변경하는 함수
 	const handleTabClick = (tab) => {
 		setSelectedTab(tab);
 	};
+
+	const { accessToken, userUuid } = useAuthStore();
+
+	useEffect(() => {
+		// if (!accessToken) {
+		// 	alert("로그인 후 이용해주세요");
+		// 	navigate("/login");
+		// 	return;
+		// }
+	}, []);
 
 	return (
 		<div>
@@ -36,7 +50,7 @@ function MyPage() {
 				<div className="tab-content">
 					{selectedTab === "내 여행" && <MyTrip />}
 					{selectedTab === "내 스크랩" && <MyScrap />}
-					{selectedTab === "전국 지도" && <div>내 발자취 콘텐츠</div>}
+					{selectedTab === "전국 지도" && <MyMap />}
 					{selectedTab === "공지 사항" && <MyAnnouncement />}
 				</div>
 			</div>

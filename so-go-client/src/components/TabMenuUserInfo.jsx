@@ -43,6 +43,16 @@ export default function TabMenuUserInfo() {
 		}
 	}, [accessToken, userUuid]);
 
+	const openNotification = () => {
+		if (!accessToken) {
+			alert("로그인 후 이용해주세요");
+			navigate("/login");
+			return;
+		}
+
+		setShowNotifications(true);
+	};
+
 	return (
 		<div className="profile-header">
 			{isLogin ? (
@@ -67,12 +77,9 @@ export default function TabMenuUserInfo() {
 						<h3 onClick={() => navigate("/login")}>로그인해주세요</h3>
 					</div>
 					<div className="notification">
-						<span
-							className="notification-dot"
-							onClick={() => setShowNotifications(!showNotifications)}
-						>
+						<span className="notification-dot">
 							<BellSimple
-								onClick={() => setShowNotifications(!showNotifications)}
+								onClick={openNotification}
 								size={24}
 							/>
 						</span>

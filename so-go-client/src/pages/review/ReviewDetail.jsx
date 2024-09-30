@@ -42,20 +42,18 @@ function ReviewDetail() {
 
 	const reviewUUID = location.state; //리뷰UUID
 
-	const getReviewInfo = () => {
+	const getReviewInfo = async () => {
 		try {
-			const response = axiosInstance.get(`reviews/detail/${reviewUUID}`);
-
+			const response = await axiosInstance.get(`reviews/detail/${reviewUUID}`);
 			setReview(response.data);
 		} catch (err) {
 			console.error(err);
 		}
 	};
 
-	const getCommentList = () => {
+	const getCommentList = async () => {
 		try {
-			const response = axiosInstance.get(`/${reviewUUID}/comments`);
-
+			const response = await axiosInstance.get(`/${reviewUUID}/comments`);
 			setCommentList(response.data);
 		} catch (err) {
 			console.error(err);
@@ -63,20 +61,20 @@ function ReviewDetail() {
 	};
 
 	useEffect(() => {
-		// getReviewInfo();
-		// getCommentList();
+		getReviewInfo();
+		getCommentList();
 	}, []);
 
 	const { accessToken, userUuid } = useAuthStore();
 
-	const scrapReview = () => {
+	const scrapReview = async () => {
 		if (!accessToken) {
 			alert("로그인 후 이용해주세요");
 			return;
 		}
 
 		try {
-			axiosInstance.post(`/review/${reviewUUID}`, userUuid);
+			await axiosInstance.post(`/review/${reviewUUID}`, userUuid);
 		} catch (err) {
 			console.error(err);
 		}

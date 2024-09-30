@@ -45,6 +45,11 @@ jobs:
           VITE_KAKAO_API_KEY: ${{ secrets.VITE_KAKAO_API_KEY }}
           VITE_NAVER_API_KEY: ${{ secrets.VITE_NAVER_API_KEY }}
           VITE_NAVER_SECRET_KEY: ${{ secrets.VITE_NAVER_SECRET_KEY }}
+          VITE_AWS_REGION: ${{ secrets.VITE_AWS_REGION }}
+          VITE_AMPLIFY_BUCKET: ${{ secrets.VITE_AMPLIFY_BUCKET }}
+          VITE_AWS_ACCESS_KEY_ID: ${{ secrets.VITE_AWS_ACCESS_KEY_ID }}
+          VITE_AWS_SECRET_ACCESS_KEY: ${{ secrets.VITE_AWS_SECRET_ACCESS_KEY }}
+          
         run: |
           aws s3 sync \
             --region ap-northeast-2 \

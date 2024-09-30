@@ -243,19 +243,12 @@ function ReviewWrite() {
 					Key: fileName,
 					Body: file,
 					ContentType: file.type,
+					ACL: "public-read", // 퍼블릭으로 설정
 				}),
 			);
 
 			// 업로드된 이미지의 URL 생성
-			const imgUrl = await getSignedUrl(
-				s3,
-				new GetObjectCommand({
-					Bucket,
-					Key: fileName,
-				}),
-				{ expiresIn: 3600 }, // URL 만료 시간 설정 (1시간)
-			);
-
+			const imgUrl = `https://${Bucket}.s3.amazonaws.com/${fileName}`;
 			return imgUrl;
 		} catch (error) {
 			console.error("Error uploading to S3:", error);

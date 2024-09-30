@@ -11,6 +11,8 @@ import { useLocation } from "react-router-dom";
 import "@/css/review/ReviewDetail.css";
 import useAuthStore from "../../store/UseAuthStore";
 
+import DefaultProfile from "@/assets/profile.png";
+
 function ReviewDetail() {
 	const location = useLocation(); //state 객체로 넘겨오는 reviewUUID
 
@@ -88,10 +90,11 @@ function ReviewDetail() {
 					className="reviewer-profile"
 					style={{ position: "relative" }}
 				>
-					<div>
+					<div className="profileimg-name-info">
 						<img
-							src={review.userImg}
+							src={review.userImg || DefaultProfile}
 							alt="프로필사진"
+							className="profile-img"
 						/>
 						<span className="nickname">{review.userNickname}</span>
 					</div>

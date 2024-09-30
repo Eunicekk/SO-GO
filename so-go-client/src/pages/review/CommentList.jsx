@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 
 import "@/css/review/CommentList.css";
 import ReportComment from "../../components/Notification/ReportComment";
+import DefaultProfile from "@/assets/profile.png";
 
 function CommentList({ commentList }) {
 	const [showReport, setShowReport] = useState(false);
@@ -23,10 +24,11 @@ function CommentList({ commentList }) {
 							className={`comment-container ${index > 0 ? "reply-comment" : ""}`} // 대댓글일 때 클래스 추가
 						>
 							<div className="commenter-profile">
-								<div>
+								<div className="profileimg-name-info">
 									<img
-										src={comment.userImg || "default-profile.png"} // 이미지가 없을 때 기본 이미지
+										src={comment.userImg || DefaultProfile} // 이미지가 없을 때 기본 이미지
 										alt="댓글프로필사진"
+										className="profile-img"
 									/>
 									<span>{comment.userNickname}</span>
 								</div>

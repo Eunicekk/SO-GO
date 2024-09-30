@@ -4,8 +4,10 @@ import axiosInstance from "@/axios/AxiosInstance";
 import ReviewThumnail from "@/components/main/ReviewThumnail";
 
 import "@/css/review/ReviewList.css";
+import { useNavigate } from "react-router-dom";
 
 export default function ReviewList() {
+	const navigate = useNavigate();
 	const [reviewList, setReviewList] = useState([]);
 
 	useEffect(() => {
@@ -21,6 +23,10 @@ export default function ReviewList() {
 		getReviewList();
 	}, []);
 
+	const goReviewDetail = (reviewUuid) => {
+		navigate("/review", { state: reviewUuid });
+	};
+
 	return (
 		<div className="main-reviewlist">
 			{reviewList.length === 0 ? (
@@ -30,6 +36,7 @@ export default function ReviewList() {
 					<ReviewThumnail
 						key={index}
 						review={review}
+						onClick={() => goReviewDetail(review.reviewUuid)}
 					/>
 				))
 			)}

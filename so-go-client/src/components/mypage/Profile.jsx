@@ -15,14 +15,15 @@ function Profile() {
 		visitRate: 26,
 	});
 
-	const { userUuid } = useAuthStore();
+	const { userUuid } = useAuthStore.getState();
 
 	useEffect(() => {
 		const getProfileInfo = async () => {
+			console.log(userUuid);
 			try {
 				const response = await axiosInstance.get(`/users/${userUuid}`);
 
-				console.log(response);
+				setUserInfo(response.data);
 			} catch (err) {
 				console.error(err);
 			}

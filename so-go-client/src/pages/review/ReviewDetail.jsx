@@ -42,27 +42,27 @@ function ReviewDetail() {
 
 	const reviewUUID = location.state; //리뷰UUID
 
+	const getReviewInfo = () => {
+		try {
+			const response = axiosInstance.get(`reviews/detail/${reviewUUID}`);
+
+			setReview(response.data);
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
+	const getCommentList = () => {
+		try {
+			const response = axiosInstance.get(`/${reviewUUID}/comments`);
+
+			setCommentList(response.data);
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
 	useEffect(() => {
-		const getReviewInfo = () => {
-			try {
-				const response = axiosInstance.get(`reviews/detail/${reviewUUID}`);
-
-				setReview(response.data);
-			} catch (err) {
-				console.error(err);
-			}
-		};
-
-		const getCommentList = () => {
-			try {
-				const response = axiosInstance.get(`/${reviewUUID}/comments`);
-
-				setCommentList(response.data);
-			} catch (err) {
-				console.error(err);
-			}
-		};
-
 		// getReviewInfo();
 		// getCommentList();
 	}, []);
@@ -136,7 +136,10 @@ function ReviewDetail() {
 						<h2>댓글</h2> <span>({commentList.length})</span>
 					</div>
 
-					<CommentWrite reviewUUID={reviewUUID} />
+					<CommentWrite
+						reviewUUID={reviewUUID}
+						onCommentAdded={getCommentList}
+					/>
 
 					{commentList.length === 0 ? <p> 댓글이 없습니다. </p> : <CommentList commentList={commentList} />}
 				</div>

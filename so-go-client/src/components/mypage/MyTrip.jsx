@@ -13,7 +13,8 @@ const MyTrip = () => {
 		const getMyReviewList = async () => {
 			try {
 				const response = await axiosInstance.get(`/reviews/my-reviews/${userUuid}`);
-				setMyTrips(response.data);
+				// setMyTrips(response.data);
+				console.log(response);
 			} catch (err) {
 				console.error(err);
 			}

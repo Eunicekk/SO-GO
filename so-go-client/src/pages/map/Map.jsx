@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { Circle, MapPin } from "@phosphor-icons/react";
-import SearchButton from "@/assets/SearchButton.png";
 
 import "@/css/map/Map.css";
 

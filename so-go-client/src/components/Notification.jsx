@@ -17,7 +17,8 @@ export default function Notification({ isOpen, onClose }) {
 		const getMyNotification = async () => {
 			try {
 				const response = await axiosInstance.get(`/notifications/${userUuid}`);
-				setNotifications(response.data);
+				console.log(response);
+				// setNotifications(response.data);
 			} catch (err) {
 				console.error(err);
 			}

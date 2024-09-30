@@ -5,11 +5,13 @@ import axiosInstance from "@/axios/AxiosInstance";
 
 import { XCircle } from "@phosphor-icons/react";
 import useAuthStore from "../store/UseAuthStore";
+import { useNavigate } from "react-router-dom";
 
 export default function Notification({ isOpen, onClose }) {
+	const navigate = useNavigate();
 	const [notifications, setNotifications] = useState([]);
 
-	const { userUuid } = useAuthStore();
+	const { accessToken, userUuid } = useAuthStore();
 
 	useEffect(() => {
 		const getMyNotification = async () => {

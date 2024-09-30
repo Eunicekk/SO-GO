@@ -34,8 +34,8 @@ axios.interceptors.response.use(
 	(response) => response,
 	async (error) => {
 		const originalRequest = error.config;
-		console.log(originalRequest);
-		console.log("오리지널리퀘스트");
+		console.log(error);
+		console.log("에러임");
 
 		if (error.response && error.response.status === 401 && !originalRequest._retry) {
 			originalRequest._retry = true;

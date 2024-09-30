@@ -44,7 +44,7 @@ function ReviewDetail() {
 
 	const getReviewInfo = async () => {
 		try {
-			const response = await axiosInstance.get(`reviews/detail/${reviewUUID}`);
+			const response = await axiosInstance.get(`reviews/${reviewUUID}`);
 			setReview(response.data);
 		} catch (err) {
 			console.error(err);
@@ -56,7 +56,7 @@ function ReviewDetail() {
 			const response = await axiosInstance.get(`/${reviewUUID}/comments`);
 			setCommentList(response.data);
 		} catch (err) {
-			console.error(err);
+			console.log(err);
 		}
 	};
 
@@ -65,6 +65,7 @@ function ReviewDetail() {
 		getCommentList();
 	}, []);
 
+	//스크랩
 	const { accessToken, userUuid } = useAuthStore();
 
 	const scrapReview = async () => {
@@ -115,7 +116,7 @@ function ReviewDetail() {
 
 				<div className="reviewer-content">
 					<img
-						src={review.placeImg}
+						src={review.img}
 						alt="관광지사진"
 						className="reviewer-place-img"
 					/>

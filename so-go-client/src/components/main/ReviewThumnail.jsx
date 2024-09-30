@@ -1,9 +1,12 @@
 import "@/css/review/ReviewThumnail.css";
 
-function ReviewThumnail({ review }) {
+function ReviewThumnail({ review, onClick }) {
 	return (
 		<div>
-			<div className="review-thumbnail">
+			<div
+				className="review-thumbnail"
+				onClick={onClick}
+			>
 				<div className="thumbnail">
 					<img
 						src={review.img}

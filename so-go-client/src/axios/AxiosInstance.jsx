@@ -30,7 +30,7 @@ axiosInstance.interceptors.request.use(
 );
 
 // 응답 인터셉터 설정
-axios.interceptors.response.use(
+axiosInstance.interceptors.response.use(
 	(response) => response,
 	async (error) => {
 		const originalRequest = error.config;

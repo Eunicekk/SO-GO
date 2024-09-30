@@ -280,8 +280,6 @@ function ReviewWrite() {
 					img: uploadedImageUrl, // S3에서 받은 서명된 URL 사용
 				});
 
-				console.log(review);
-
 				const response = await axiosInstance.post("/reviews", review, {
 					timeout: 5000,
 				});
@@ -295,7 +293,6 @@ function ReviewWrite() {
 				alert("리뷰 등록 중 오류가 발생했습니다.");
 			}
 		} else {
-			console.log();
 			alert("모든 항목을 작성해주세요");
 		}
 	};

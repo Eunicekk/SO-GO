@@ -20,7 +20,6 @@ function SearchInput() {
 				},
 			});
 
-			console.log(response);
 			navigate("/search", { state: { searchResults: response.data } });
 		} catch (error) {
 			console.error("Error searching for location:", error);

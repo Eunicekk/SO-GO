@@ -9,17 +9,17 @@ import useAuthStore from "../../store/UseAuthStore";
 
 function Profile() {
 	const [userInfo, setUserInfo] = useState({
-		nickname: "닉네임",
-		mySentence: "@>-- 꽃 한송이",
+		nickname: "",
+		mySentence: "",
 		myProfileImg: null,
-		visitRate: 26,
+		visitRate: 0,
 	});
 
-	const { userUuid } = useAuthStore.getState();
+	// const { userUuid } = useAuthStore.getState();
+	const userUuid = "";
 
 	useEffect(() => {
 		const getProfileInfo = async () => {
-			console.log(userUuid);
 			try {
 				const response = await axiosInstance.get(`/users/${userUuid}`);
 

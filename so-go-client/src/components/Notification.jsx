@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "@/css/common/Notification.css";
 
+import axiosInstance from "@/axios/AxiosInstance";
+
 import { XCircle } from "@phosphor-icons/react";
+import useAuthStore from "../store/UseAuthStore";
+import { useNavigate } from "react-router-dom";
 
 export default function Notification({ isOpen, onClose }) {
+	const navigate = useNavigate();
+	const [notifications, setNotifications] = useState([]);
+
+	const { accessToken, userUuid } = useAuthStore();
+
+	useEffect(() => {
+		const getMyNotification = async () => {
+			try {
+				const response = await axiosInstance.get(`/notifications/${userUuid}`);
+				setNotifications(response.data);
+			} catch (err) {
+				console.error(err);
+			}
+		};
+
+		getMyNotification();
+	}, []);
+
 	return (
 		<div className={`notifications-container ${isOpen ? "open" : ""}`}>
 			<div className="notification-header">
@@ -15,24 +37,16 @@ export default function Notification({ isOpen, onClose }) {
 					weight="fill"
 				/>
 			</div>
-			<div className="notification-item">
-				<p>
-					김도은 님의 담양 죽녹원 글이 <span className="highlight">스크랩 100개</span> 돌파!
-				</p>
-				<div className="notification-image"></div>
-			</div>
-			<div className="notification-item">
-				<p>
-					김도은 님의 담양 죽녹원 글에 <span className="highlight">댓글이 달렸어요!</span>
-				</p>
-				<div className="notification-image"></div>
-			</div>
-			<div className="notification-item">
-				<p>
-					<span className="warning">경고 1회입니다.</span> (사유: 광고)
-				</p>
-				<div className="notification-image"></div>
-			</div>
+
+			{notifications.length === 0 ? (
+				<p>알람이 없습니다</p>
+			) : (
+				notifications.map((notification) => (
+					<div className="notification-item">
+						<span className="highlight">{notification.content}</span>
+					</div>
+				))
+			)}
 		</div>
 	);
 }

@@ -75,7 +75,7 @@ function ReviewDetail() {
 		}
 
 		try {
-			await axiosInstance.post(`/review/${reviewUUID}`, userUuid);
+			await axiosInstance.post(`/reviews/${reviewUUID}`, userUuid);
 		} catch (err) {
 			console.error(err);
 		}

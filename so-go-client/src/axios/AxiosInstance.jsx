@@ -34,11 +34,15 @@ axiosInstance.interceptors.response.use(
 	(response) => response,
 	async (error) => {
 		const originalRequest = error.config;
+		console.log(originalRequest);
+		console.log("오리지널리퀘스트");
 
 		if (error.response && error.response.status === 401 && !originalRequest._retry) {
 			originalRequest._retry = true;
 
 			const isAuthenticated = Cookies.get("is_authenticated");
+
+			console.log(isAuthenticated + "여기 인증인가확인");
 
 			if (isAuthenticated === "true") {
 				try {

@@ -1,14 +1,32 @@
 import "@/css/common/TheMenu.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useAuthStore from "../../store/UseAuthStore";
 import { House, MapPinArea, PlusSquare, UserCircle } from "@phosphor-icons/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Menu() {
 	const navigate = useNavigate();
 	const [click, setClick] = useState("home");
-
 	const { accesstoken } = useAuthStore();
+
+	useEffect(() => {
+		switch (location.pathname) {
+			case "/":
+				setClick("home");
+				break;
+			case "/create":
+				setClick("review");
+				break;
+			case "/map":
+				setClick("map");
+				break;
+			case "/my-page":
+				setClick("mypage");
+				break;
+			default:
+				setClick("");
+		}
+	}, [location.pathname]);
 
 	const handleHome = () => {
 		navigate("/");

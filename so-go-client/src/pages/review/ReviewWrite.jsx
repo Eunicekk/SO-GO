@@ -8,9 +8,11 @@ import { circularProgressClasses } from "@mui/material";
 import useAuthStore from "../../store/UseAuthStore";
 
 import "@/css/review/ReviewWrite.css";
-import { ImageSquare } from "@phosphor-icons/react";
+import { Circle, ImageSquare, Star } from "@phosphor-icons/react";
+import { useNavigate } from "react-router-dom";
 
 function ReviewWrite() {
+	const navigate = useNavigate();
 	const [selectedImageUrl, setSelectedImageUrl] = useState(null);
 	const [selectedImageFile, setSelectedImageFile] = useState(null);
 	const fileInputRef = useRef(null); // input 요소 참조를 위한 useRef 추가
@@ -38,8 +40,8 @@ function ReviewWrite() {
 	const [placeUUID, setPlaceUUID] = useState(null); // placeUUID를 저장하는 상태 추가
 
 	//유저 UUID 찾기
-	// const { userUuid } = useAuthStore.getState();
-	const userUuid = "1a025e0a-e177-4007-872f-b92a63256fe7";
+	// const { accessToken, userUuid } = useAuthStore();
+	const userUuid = "ab28fed0-4059-452e-973e-0bbd3b8addc3";
 
 	const [review, setReview] = useState({
 		content: "",
@@ -48,6 +50,14 @@ function ReviewWrite() {
 		userUuid: userUuid,
 		placeUuid: placeUUID,
 	});
+
+	//로그인 체크
+	useEffect(() => {
+		// if (!accessToken) {
+		// 	alert("로그인 후 이용해주세요");
+		// 	navigate("/login");
+		// }
+	}, []);
 
 	useEffect(() => {
 		if (!map || !submittedKeyword) return;
@@ -270,15 +280,17 @@ function ReviewWrite() {
 					img: uploadedImageUrl, // S3에서 받은 서명된 URL 사용
 				});
 
+				console.log(review);
+
 				const response = await axiosInstance.post("/reviews", review, {
 					timeout: 5000,
 				});
 
-				console.log("Review submitted successfully:", response.data);
+				const reviewUUID = response.data;
 
 				alert("리뷰가 성공적으로 등록되었습니다.");
+				navigate("/review", { state: reviewUUID });
 			} catch (error) {
-				console.log(review);
 				console.error("Error submitting review:", error);
 				alert("리뷰 등록 중 오류가 발생했습니다.");
 			}
@@ -294,9 +306,10 @@ function ReviewWrite() {
 	};
 
 	return (
-		<>
+		<div id="review-write">
 			<form
-				className="search-bar"
+				id="search-input"
+				className="search-input"
 				onSubmit={handleSearch}
 			>
 				<input
@@ -306,21 +319,38 @@ function ReviewWrite() {
 					placeholder="검색할 장소를 입력하세요"
 					onKeyUp={handleKeyPress} // 엔터 키 이벤트 핸들러 연결
 				/>
-				<button type="submit">검색</button>
+				<div
+					className="search-button"
+					onClick={handleSearch}
+				>
+					<Circle
+						className="outer"
+						color="#18F5BB"
+						weight="bold"
+						size={24}
+					/>
+					<Circle
+						className="inner"
+						color="#836FFF"
+						weight="fill"
+						size={13}
+					/>
+				</div>
 			</form>
 
-			<div style={{ display: "flex" }}>
-				<div style={{ width: "30%", overflowY: "scroll", maxHeight: "250px" }}>
+			<div>
+				<div
+					className="search-list"
+					style={{ display: markers.length > 0 ? "block" : "none" }}
+				>
 					<ul>
 						{markers.map((marker, index) => (
 							<li
 								key={index}
 								onClick={() => handleListClick(marker)}
-								style={{ cursor: "pointer", marginBottom: "10px" }}
 							>
-								<strong>{marker.content}</strong>
-								<br />
-								{marker.address}
+								<p className="review-content">{marker.content}</p>
+								<p className="review-address">{marker.address}</p>
 							</li>
 						))}
 					</ul>
@@ -332,8 +362,8 @@ function ReviewWrite() {
 						lng: 126.9786567,
 					}}
 					style={{
-						width: "70%",
-						height: "250px",
+						width: "100vw",
+						height: "200px",
 					}}
 					level={3}
 					onCreate={setMap}
@@ -375,21 +405,23 @@ function ReviewWrite() {
 						<label
 							htmlFor="upload-input"
 							className="upload-label"
-							onClick={handleImageClick} // 이미지 클릭 핸들러 연결
 						>
 							<ImageSquare size={32} />
-							<p>자랑하고 싶은 사진을 올려주세요</p>
+							<p>
+								자랑하고 싶은 <br />
+								사진을 올려주세요
+							</p>
 						</label>
 					) : (
 						<img
 							src={selectedImageUrl}
 							alt="Uploaded"
 							className="uploaded-image"
-							onClick={handleImageClick} // 이미지 클릭 핸들러 연결
+							onClick={() => fileInputRef.current?.click()} // 이미지 클릭 핸들러 연결
 						/>
 					)}
 				</div>
-				<div>
+				<div className="stars">
 					<p>나의 점수는</p>
 					<div className="star-rating">
 						<input
@@ -403,7 +435,10 @@ function ReviewWrite() {
 							htmlFor="star1"
 							className="star"
 						>
-							&#9733;
+							<Star
+								size={24}
+								weight="fill"
+							/>
 						</label>
 						<input
 							type="radio"
@@ -416,7 +451,10 @@ function ReviewWrite() {
 							htmlFor="star2"
 							className="star"
 						>
-							&#9733;
+							<Star
+								size={24}
+								weight="fill"
+							/>
 						</label>
 						<input
 							type="radio"
@@ -429,7 +467,10 @@ function ReviewWrite() {
 							htmlFor="star3"
 							className="star"
 						>
-							&#9733;
+							<Star
+								size={24}
+								weight="fill"
+							/>
 						</label>
 						<input
 							type="radio"
@@ -442,7 +483,10 @@ function ReviewWrite() {
 							htmlFor="star4"
 							className="star"
 						>
-							&#9733;
+							<Star
+								size={24}
+								weight="fill"
+							/>
 						</label>
 						<input
 							type="radio"
@@ -455,7 +499,10 @@ function ReviewWrite() {
 							htmlFor="star5"
 							className="star"
 						>
-							&#9733;
+							<Star
+								size={24}
+								weight="fill"
+							/>
 						</label>
 					</div>
 				</div>
@@ -463,14 +510,19 @@ function ReviewWrite() {
 					<textarea
 						placeholder="방문한 장소가 어땠는지 자랑해주세요!"
 						onChange={handleContentChange}
+						rows={4}
 					/>
 				</div>
 				<div>
-					<button>취소</button>
-					<button onClick={submitReview}>등록</button>
+					<button
+						className="submit-button"
+						onClick={submitReview}
+					>
+						등록
+					</button>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }
 

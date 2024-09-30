@@ -4,18 +4,6 @@
 	align-items: center;
 }
 
-/* 검색창 */
-.searchbar {
-	display: flex;
-	width: 60vw;
-	justify-content: center;
-	align-items: center;
-	margin: 15px;
-	padding: 5px;
-	border: 0.2px solid gray;
-	border-radius: 50px;
-}
-
 /* 지도 컨테이너 스타일 추가 */
 .map-container {
 	position: relative; /* 위치를 상대적으로 설정하여 내부 요소의 배치를 조절 */

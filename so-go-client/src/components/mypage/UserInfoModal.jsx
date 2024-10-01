@@ -94,9 +94,11 @@ const UserInfoModal = ({ onClose, userInfo }) => {
 
 			const newUserInfo = {
 				nickname: nickname,
-				mySentence: mySentence,
-				myProfileImg: updatedProfileImg,
+				sentence: mySentence,
+				img: updatedProfileImg,
 			};
+
+			console.log(newUserInfo);
 
 			try {
 				const response = await axiosInstance.patch(`/users/${userUuid}`, newUserInfo);

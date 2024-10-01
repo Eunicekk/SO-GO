@@ -76,3 +76,9 @@
 	display: flex;
 	margin-bottom: 10px;
 }
+
+.scrap-info {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}

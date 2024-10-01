@@ -49,7 +49,10 @@ function ReviewDetail() {
 		try {
 			const response = await axiosInstance.get(`reviews/${reviewUUID}`);
 			setReview(response.data);
-			console.log(review);
+			setReview((prevReview) => ({
+				...prevReview,
+				createdAt: review.createdAt.split("T")[0],
+			}));
 		} catch (err) {
 			console.error(err);
 		}
@@ -80,7 +83,7 @@ function ReviewDetail() {
 		}
 
 		try {
-			await axiosInstance.post(`/reviews/${reviewUUID}`, userUuid);
+			await axiosInstance.post(`/reviews/${reviewUUID}`, { userUuid: userUuid });
 			setIsScrapped(!isScrapped); // 스크랩 상태 토글
 		} catch (err) {
 			console.error(err);

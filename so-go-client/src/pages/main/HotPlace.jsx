@@ -21,7 +21,6 @@ export default function HotPlace() {
 		<div className="hotplace">
 			<div className="hotplace-title">
 				<h2>✨ 요즘 뜨는 관광지</h2>
-				<button>전체 보기</button>
 			</div>
 			<Slider {...settings}>
 				{hotPlaces.map((place, index) => (

@@ -1,4 +1,5 @@
 import "@/css/review/ReviewThumnail.css";
+import DefaultProfile from "@/assets/profile.png";
 
 function ReviewThumnail({ review, onClick }) {
 	return (
@@ -15,7 +16,7 @@ function ReviewThumnail({ review, onClick }) {
 				</div>
 				<div className="content">
 					<img
-						src={review.userImg}
+						src={review.userImg || DefaultProfile}
 						alt="유저프사"
 					/>
 					<span>{review.userNickname}</span>

@@ -21,6 +21,7 @@ function ReviewDetail() {
 		userNickname: "",
 		userUuid: "",
 		scrap: 0,
+		checkScrap: false,
 		score: 0,
 		report: 0,
 		secret: false,
@@ -48,11 +49,11 @@ function ReviewDetail() {
 	const getReviewInfo = async () => {
 		try {
 			const response = await axiosInstance.get(`reviews/${reviewUUID}`);
-			setReview(response.data);
-			setReview((prevReview) => ({
-				...prevReview,
-				createdAt: review.createdAt.split("T")[0],
-			}));
+			const data = response.data;
+
+			// createdAt 포맷팅
+			data.createdAt = data.createdAt.split("T")[0];
+			setReview(data);
 		} catch (err) {
 			console.error(err);
 		}
@@ -84,7 +85,7 @@ function ReviewDetail() {
 
 		try {
 			await axiosInstance.post(`/reviews/${reviewUUID}`, { userUuid: userUuid });
-			setIsScrapped(!isScrapped); // 스크랩 상태 토글
+			setIsScrapped(review.checkScrap);
 		} catch (err) {
 			console.error(err);
 		}

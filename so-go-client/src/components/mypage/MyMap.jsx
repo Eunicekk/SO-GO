@@ -1,20 +1,27 @@
 import "@/css/mypage/MyMap.css";
 import { useEffect, useRef, useState } from "react";
 import { Circle } from "@phosphor-icons/react";
+import axiosInstance from "@/axios/AxiosInstance";
+import useAuthStore from "@/store/UseAuthStore";
 
 export default function MyMap() {
 	const svgRef = useRef(null);
+	const [locations, setLocations] = useState([]);
+	const userUuid = useAuthStore.getState();
 
-	const [locations] = useState([
-		"서울 중구 명동10길 29",
-		"경남 창원시 진해구 천자로 5 2-3층",
-		"경기 안성시 아양로 20",
-		"강원특별자치도 속초시 해오름로188번길 11 1~3층",
-		"전북특별자치도 전주시 덕진구 송천중앙로 33",
-		"부산 해운대구 구남로24번길 8 1층",
-		"부산 해운대구 중동2로10번길 21 1층",
-		"부산 해운대구 구남로 14",
-	]);
+	useEffect(() => {
+		const fetchLocations = async () => {
+			try {
+				const response = await axiosInstance.get(`/users/${userUuid}/collections`);
+				const addresses = response.data.map((item) => item.address);
+				setLocations(addresses);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+
+		fetchLocations();
+	}, [userUuid]);
 
 	useEffect(() => {
 		fetch("/Map_of_South_Korea.svg")

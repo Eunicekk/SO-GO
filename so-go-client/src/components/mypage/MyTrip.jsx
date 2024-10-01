@@ -22,9 +22,7 @@ const MyTrip = () => {
 		getMyReviewList();
 	}, [userUuid]);
 
-	const goReviewDetail = () => {
-		const reviewUuid = myTrips.reviewUuid;
-
+	const goReviewDetail = (reviewUuid) => {
 		navigate("/review", { state: reviewUuid });
 	};
 
@@ -38,7 +36,7 @@ const MyTrip = () => {
 						key={myTrip.id} // 각 아이템에 고유한 키 추가
 						src={myTrip.img}
 						alt="여행사진"
-						onClick={goReviewDetail}
+						onClick={() => goReviewDetail(myTrip.reviewUuid)}
 					/>
 				))
 			)}

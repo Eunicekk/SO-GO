@@ -21,6 +21,7 @@ function ReviewDetail() {
 		userNickname: "",
 		userUuid: "",
 		scrap: 0,
+		checkScrap: false,
 		score: 0,
 		report: 0,
 		secret: false,
@@ -38,6 +39,8 @@ function ReviewDetail() {
 	const [showReport, setShowReport] = useState(false);
 	const dotsRef = useRef(null); // DotsThreeVertical 아이콘 위치를 참조하기 위한 ref
 
+	const [isScrapped, setIsScrapped] = useState(false); // 스크랩 여부 상태 추가
+
 	// 신고하기 탭
 	const onOpenReport = () => {
 		setShowReport(!showReport);
@@ -48,11 +51,13 @@ function ReviewDetail() {
 	const getReviewInfo = async () => {
 		try {
 			const response = await axiosInstance.get(`reviews/${reviewUUID}`);
-			setReview(response.data);
-			setReview((prevReview) => ({
-				...prevReview,
-				createdAt: review.createdAt.split("T")[0],
-			}));
+			const data = response.data;
+
+			// createdAt 포맷팅
+			data.createdAt = data.createdAt.split("T")[0];
+			setReview(data);
+
+			setIsScrapped(data.checkScrap);
 		} catch (err) {
 			console.error(err);
 		}
@@ -73,7 +78,6 @@ function ReviewDetail() {
 	}, []);
 
 	//스크랩
-	const [isScrapped, setIsScrapped] = useState(false); // 스크랩 여부 상태 추가
 	const { accessToken, userUuid } = useAuthStore();
 
 	const scrapReview = async () => {
@@ -84,7 +88,7 @@ function ReviewDetail() {
 
 		try {
 			await axiosInstance.post(`/reviews/${reviewUUID}`, { userUuid: userUuid });
-			setIsScrapped(!isScrapped); // 스크랩 상태 토글
+			setIsScrapped((prev) => !prev);
 		} catch (err) {
 			console.error(err);
 		}
@@ -134,11 +138,14 @@ function ReviewDetail() {
 					/>
 					<div className="reviewer-info">
 						<p>{review.createdAt}</p>
-						<BookmarkSimple
-							onClick={scrapReview}
-							size={24}
-							weight={isScrapped ? "fill" : "regular"}
-						/>
+						<div className="scrap-info">
+							<span>{review.scrap}</span>
+							<BookmarkSimple
+								onClick={scrapReview}
+								size={24}
+								weight={isScrapped ? "fill" : "regular"}
+							/>
+						</div>
 					</div>
 					<p>{review.content}</p>
 				</div>

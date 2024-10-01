@@ -11,8 +11,8 @@ import UserInfoModal from "./UserInfoModal";
 function Profile() {
 	const [userInfo, setUserInfo] = useState({
 		nickname: "",
-		mySentence: "",
-		myProfileImg: null,
+		sentence: "",
+		img: null,
 		visitRate: 0,
 	});
 
@@ -48,7 +48,7 @@ function Profile() {
 			<div className="profile-box">
 				<div className="profile-img">
 					<img
-						src={userInfo.myProfileImg || DefaultProfile}
+						src={userInfo.img || DefaultProfile}
 						alt="프로필사진"
 					/>
 					<div
@@ -66,7 +66,7 @@ function Profile() {
 				<div className="profile-my-info">
 					<div className="profile-my-info-container">
 						<h3>{userInfo.nickname} 님</h3>
-						<span>{userInfo.mySentence}</span>
+						<span>{userInfo.sentence}</span>
 					</div>
 					<div>
 						<span>전국 방문률</span>

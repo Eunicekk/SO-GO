@@ -1,7 +1,14 @@
 import "@/css/search/SearchPlaceList.css";
 import SearchEtcListItem from "@/components/searchList/SearchEtcListItem";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchEtcList({ result }) {
+	const navigate = useNavigate();
+
+	const handleItemClick = (place) => {
+		navigate("/place", { state: { placeUuid: place.placeUuid } });
+	};
+
 	return (
 		<div id="place-list">
 			<div id="place-title">
@@ -18,6 +25,7 @@ export default function SearchEtcList({ result }) {
 							name={etc.placeName}
 							address={etc.address}
 							tag={etc.tag}
+							onClick={() => handleItemClick(etc)}
 						/>
 					))
 				) : (

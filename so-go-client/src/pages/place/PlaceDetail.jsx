@@ -1,5 +1,6 @@
 import "@/css/place/PlaceDetail.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Circle, HeartStraight, CaretUp } from "@phosphor-icons/react";
 import PlaceImage from "@/components/place/PlaceImage";
 import PlaceDescription from "@/components/place/PlaceDescription";
@@ -8,6 +9,8 @@ import PlaceReview from "@/components/place/PlaceReview";
 import CustomModal from "@/components/CustomModal";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import axiosInstance from "@/axios/AxiosInstance";
+import useAuthStore from "@/store/UseAuthStore";
 
 const theme = createTheme({
 	typography: {
@@ -16,13 +19,44 @@ const theme = createTheme({
 });
 
 export default function PlaceDetail() {
-	const [isLiked, setIsLiked] = useState(false);
+	const location = useLocation();
+	const { userUuid } = useAuthStore.getState();
+	const { placeUuid } = location.state || {};
+	const [placeData, setPlaceData] = useState(null);
+
+	const [isLiked, setIsLiked] = useState(placeData?.userHeart);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isAskFinish, setIsAskFinish] = useState(false);
 
+	const getDetail = async () => {
+		try {
+			console.log(placeUuid);
+			console.log(userUuid);
+			const response = await axiosInstance.get(`/places/${placeUuid}`, {
+				params: {
+					userUuid: userUuid ? userUuid : "",
+				},
+			});
+
+			console.log(response.data);
+			setPlaceData(response.data);
+		} catch (error) {
+			console.error("Error searching for location:", error);
+		}
+	};
+
+	useEffect(() => {
+		if (placeUuid) getDetail();
+	}, [placeUuid, userUuid]);
+
 	// 좋아요 설정
-	const handleLikeButton = () => {
-		setIsLiked(!isLiked);
+	const handleLikeButton = async () => {
+		try {
+			await axiosInstance.post(`/places/${placeUuid}/hearts/${userUuid}`);
+			setIsLiked((prev) => !prev);
+		} catch (error) {
+			alert("로그인 후 이용해주세요.");
+		}
 	};
 
 	// 스크롤 상단으로 이동
@@ -54,9 +88,25 @@ export default function PlaceDetail() {
 
 	return (
 		<div id="place-detail">
-			<PlaceImage />
-			<PlaceDescription open={handleModalOpen} />
-			<PlaceComfort />
+			<PlaceImage images={placeData?.placeImgs} />
+			<PlaceDescription
+				placeName={placeData?.placeName}
+				summary={placeData?.summary}
+				lat={placeData?.lat}
+				lng={placeData?.lng}
+				address={placeData?.address}
+				date={placeData?.date}
+				time={placeData?.time}
+				number={placeData?.number}
+				wesite={placeData?.website}
+				open={handleModalOpen}
+			/>
+			<PlaceComfort
+				parking={placeData?.parking}
+				wheelchair={placeData?.wheelchair}
+				pet={placeData?.pet}
+				elevator={placeData?.elevator}
+			/>
 			<div className="gap"></div>
 			<PlaceReview />
 			<CustomModal

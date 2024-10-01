@@ -74,8 +74,8 @@ const UserInfoModal = ({ onClose, userInfo }) => {
 		}
 	};
 
-	// const {userUuid} = useAuthStore();
-	const userUuid = "ab28fed0-4059-452e-973e-0bbd3b8addc3";
+	const { userUuid } = useAuthStore();
+	// const userUuid = "ab28fed0-4059-452e-973e-0bbd3b8addc3";
 
 	// 수정하기 버튼 클릭 시
 	const handleUpdate = async () => {
@@ -99,9 +99,9 @@ const UserInfoModal = ({ onClose, userInfo }) => {
 			};
 
 			try {
-				console.log("수정된 정보:", newUserInfo);
 				const response = await axiosInstance.patch(`/users/${userUuid}`, newUserInfo);
 				console.log(response);
+
 				alert("회원정보가 수정되었습니다!");
 				onClose();
 			} catch (err) {
@@ -119,16 +119,10 @@ const UserInfoModal = ({ onClose, userInfo }) => {
 	const checkNickname = async () => {
 		try {
 			const response = await axiosInstance.get(`/users`, {
-				params: { n: nickname },
+				params: { nickname: nickname },
 			});
 
 			console.log(response);
-
-			if (response.data) {
-				alert("data 가능");
-			} else {
-				alert("데이터 불가능");
-			}
 		} catch (err) {
 			console.error(err);
 		}

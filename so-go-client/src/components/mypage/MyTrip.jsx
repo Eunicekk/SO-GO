@@ -7,15 +7,13 @@ const MyTrip = () => {
 	const navigate = useNavigate();
 
 	const [myTrips, setMyTrips] = useState([]);
-	// const { userUuid } = useAuthStore();
-	const userUuid = "ab28fed0-4059-452e-973e-0bbd3b8addc3";
+	const { userUuid } = useAuthStore();
 
 	useEffect(() => {
 		const getMyReviewList = async () => {
 			try {
 				const response = await axiosInstance.get(`/reviews/my-reviews/${userUuid}`);
-				// setMyTrips(response.data);
-				console.log(response);
+				setMyTrips(response.data);
 			} catch (err) {
 				console.error(err);
 			}

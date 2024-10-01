@@ -6,6 +6,7 @@ import { Pencil } from "@phosphor-icons/react";
 
 import "@/css/mypage/Profile.css";
 import useAuthStore from "../../store/UseAuthStore";
+import UserInfoModal from "./UserInfoModal";
 
 function Profile() {
 	const [userInfo, setUserInfo] = useState({
@@ -16,6 +17,8 @@ function Profile() {
 	});
 
 	const { userUuid } = useAuthStore.getState();
+
+	const [isModalOpen, setModalOpen] = useState(false);
 
 	useEffect(() => {
 		const getProfileInfo = async () => {
@@ -31,7 +34,14 @@ function Profile() {
 		getProfileInfo();
 	}, []);
 
-	const modifyMyInfo = () => {};
+	const modifyMyInfo = () => {
+		setModalOpen(!isModalOpen);
+	};
+
+	// 모달 닫기
+	const onClose = () => {
+		setModalOpen(false);
+	};
 
 	return (
 		<>
@@ -64,6 +74,21 @@ function Profile() {
 					</div>
 				</div>
 			</div>
+
+			{isModalOpen ? (
+				<>
+					<div className="modal-overlay">
+						<div className="modal-content">
+							<UserInfoModal
+								onClose={onClose}
+								userInfo={userInfo}
+							/>
+						</div>
+					</div>
+				</>
+			) : (
+				<></>
+			)}
 		</>
 	);
 }

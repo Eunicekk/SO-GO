@@ -27,6 +27,7 @@ function ReviewDetail() {
 		reviewUuid: "",
 		content: "",
 		img: "",
+		placeName: "",
 		placeUuid: "",
 		placeImg: "",
 		createdAt: "",
@@ -48,6 +49,7 @@ function ReviewDetail() {
 		try {
 			const response = await axiosInstance.get(`reviews/${reviewUUID}`);
 			setReview(response.data);
+			console.log(review);
 		} catch (err) {
 			console.error(err);
 		}
@@ -68,6 +70,7 @@ function ReviewDetail() {
 	}, []);
 
 	//스크랩
+	const [isScrapped, setIsScrapped] = useState(false); // 스크랩 여부 상태 추가
 	const { accessToken, userUuid } = useAuthStore();
 
 	const scrapReview = async () => {
@@ -78,6 +81,7 @@ function ReviewDetail() {
 
 		try {
 			await axiosInstance.post(`/reviews/${reviewUUID}`, userUuid);
+			setIsScrapped(!isScrapped); // 스크랩 상태 토글
 		} catch (err) {
 			console.error(err);
 		}
@@ -115,7 +119,7 @@ function ReviewDetail() {
 				</div>
 
 				<div className="reviewer-place">
-					<p>장소이름?</p>
+					<p>{review.placeName}</p>
 					<MapPin size={24} />
 				</div>
 
@@ -130,6 +134,7 @@ function ReviewDetail() {
 						<BookmarkSimple
 							onClick={scrapReview}
 							size={24}
+							weight={isScrapped ? "fill" : "regular"}
 						/>
 					</div>
 					<p>{review.content}</p>

@@ -37,6 +37,12 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
+	gap: 10px;
+	width: 75%; /* 너비를 80%로 설정 */
+	margin: 0 auto; /* 가운데 정렬 */
+	border: 1.5px solid #836fff;
+	border-radius: 20px;
+	padding: 5px;
 }
 
 .reviewer-content {

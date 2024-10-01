@@ -40,8 +40,8 @@ function ReviewWrite() {
 	const [placeUUID, setPlaceUUID] = useState(null); // placeUUID를 저장하는 상태 추가
 
 	//유저 UUID 찾기
-	// const { accessToken, userUuid } = useAuthStore();
-	const userUuid = "ab28fed0-4059-452e-973e-0bbd3b8addc3";
+	const { accessToken, userUuid } = useAuthStore();
+	// const userUuid = "ab28fed0-4059-452e-973e-0bbd3b8addc3";
 
 	const [review, setReview] = useState({
 		content: "",
@@ -54,10 +54,10 @@ function ReviewWrite() {
 
 	//로그인 체크
 	useEffect(() => {
-		// if (!accessToken) {
-		// 	alert("로그인 후 이용해주세요");
-		// 	navigate("/login");
-		// }
+		if (!accessToken) {
+			alert("로그인 후 이용해주세요");
+			navigate("/login");
+		}
 	}, []);
 
 	useEffect(() => {

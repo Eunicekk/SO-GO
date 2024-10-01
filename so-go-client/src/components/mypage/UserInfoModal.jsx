@@ -4,6 +4,7 @@ import DefaultProfile from "@/assets/profile.png";
 import axiosInstance from "@/axios/AxiosInstance";
 
 import { GetObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import useAuthStore from "../../store/UseAuthStore";
 
 const UserInfoModal = ({ onClose, userInfo }) => {
 	const [nickname, setNickname] = useState(userInfo.nickname);
@@ -73,23 +74,32 @@ const UserInfoModal = ({ onClose, userInfo }) => {
 		}
 	};
 
+	// const {userUuid} = useAuthStore();
+	const userUuid = "ab28fed0-4059-452e-973e-0bbd3b8addc3";
+
 	// 수정하기 버튼 클릭 시
 	const handleUpdate = async () => {
 		if (validateInputs) {
-			if (myProfileImg === DefaultProfile) {
-				setMyProfileImg(null);
-			} else {
-				uploadS3();
+			let updatedProfileImg = myProfileImg;
+
+			// 선택된 이미지가 있는 경우 업로드하고 URL 업데이트
+			if (selectedImage) {
+				const uploadedImageUrl = await uploadS3(selectedImage);
+				if (uploadedImageUrl) {
+					updatedProfileImg = uploadedImageUrl;
+				}
+			} else if (myProfileImg === DefaultProfile) {
+				updatedProfileImg = null;
 			}
 
 			const newUserInfo = {
 				nickname: nickname,
 				mySentence: mySentence,
-				myProfileImg: myProfileImg,
+				myProfileImg: updatedProfileImg,
 			};
 
 			try {
-				console.log("수정된 정보:", { nickname, mySentence, myProfileImg });
+				console.log("수정된 정보:", newUserInfo);
 				const response = await axiosInstance.patch(`/users/${userUuid}`, newUserInfo);
 				console.log(response);
 				alert("회원정보가 수정되었습니다!");
@@ -98,7 +108,6 @@ const UserInfoModal = ({ onClose, userInfo }) => {
 				console.error(err);
 			}
 		}
-		// 업데이트 로직을 추가 (예: 서버에 변경된 정보 전송)
 	};
 
 	//유효성 검사 폼
@@ -108,16 +117,20 @@ const UserInfoModal = ({ onClose, userInfo }) => {
 
 	//중복확인
 	const checkNickname = async () => {
-		const response = await axiosInstance.get(`/users`, {
-			params: { n: nickname },
-		});
+		try {
+			const response = await axiosInstance.get(`/users`, {
+				params: { n: nickname },
+			});
 
-		console.log(response);
+			console.log(response);
 
-		if (response.data) {
-			alert("data 가능");
-		} else {
-			alert("데이터 불가능");
+			if (response.data) {
+				alert("data 가능");
+			} else {
+				alert("데이터 불가능");
+			}
+		} catch (err) {
+			console.error(err);
 		}
 	};
 
@@ -127,7 +140,7 @@ const UserInfoModal = ({ onClose, userInfo }) => {
 			<div className="profile-img-container">
 				<h3>프로필 사진</h3>
 				<img
-					src={myProfileImg}
+					src={myProfileImg || DefaultProfile}
 					alt="프로필사진"
 					className="profile-img-now"
 					onClick={() => document.getElementById("profile-img-input").click()}
@@ -168,6 +181,8 @@ const UserInfoModal = ({ onClose, userInfo }) => {
 				>
 					닫기
 				</button>
+
+				<button onClick={handleUpdate}>수정하기</button>
 
 				<div>
 					<p>로그아웃</p>

@@ -1,22 +1,23 @@
 .comment-write {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px 20px;
-  border: 0.2px solid gray;
-  border-radius: 50px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border: 1px solid #aaa;
+	border-radius: 8px;
+	overflow: hidden;
 }
 
 .comment-write input {
-  padding: 5px;
-  border: none;
-  outline: none;
-  width: 210px;
+	width: 100%;
+	padding: 12px 16px;
+	border: none;
+	outline: none;
 }
 
 .comment-write button {
-  background-color: transparent;
-  border: 1px solid black;
-  border-radius: 10px;
-  padding: 7px;
+	width: 20%;
+	background-color: transparent;
+	border: 1px solid black;
+	border-radius: 8px;
+	padding: 12px;
 }

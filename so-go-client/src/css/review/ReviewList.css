@@ -1,8 +1,9 @@
 .main-reviewlist {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-	gap: 12px;
-	padding: 24px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+	margin: 16px 0 32px;
+	justify-content: center;
 }
 
 .review-none {

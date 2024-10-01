@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import axiosInstance from "@/axios/AxiosInstance";
 
+import DefaultProfile from "@/assets/profile.png";
 import Notification from "@/components/Notification.jsx";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../store/UseAuthStore";
@@ -58,23 +59,12 @@ export default function TabMenuUserInfo() {
 			{isLogin ? (
 				<div className="user-info-container">
 					<img
-						src={userInfo.img}
+						src={userInfo.img || DefaultProfile}
 						alt="Profile"
 						className="profile-pic"
 					/>
 					<div className="user-info">
 						<p className="user-name"> {userInfo.nickname} 님</p>
-					</div>
-				</div>
-			) : (
-				<div className="login-tab">
-					<div className="login-info">
-						<UserCircle
-							className="login-profile"
-							size={24}
-							weight="fill"
-						/>
-						<h3 onClick={() => navigate("/login")}>로그인해주세요</h3>
 					</div>
 					<div className="notification">
 						<span className="notification-dot">
@@ -87,6 +77,17 @@ export default function TabMenuUserInfo() {
 							isOpen={showNotifications}
 							onClose={() => setShowNotifications(false)}
 						/>
+					</div>
+				</div>
+			) : (
+				<div className="login-tab">
+					<div className="login-info">
+						<UserCircle
+							className="login-profile"
+							size={24}
+							weight="fill"
+						/>
+						<h3 onClick={() => navigate("/login")}>로그인해주세요</h3>
 					</div>
 				</div>
 			)}

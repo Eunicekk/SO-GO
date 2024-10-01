@@ -13,8 +13,9 @@
 	gap: 5px;
 }
 
-.profile-img {
-	width: 20px;
+.info-profile-img {
+	width: 10vw;
+	object-fit: cover;
 }
 
 /* 드롭다운 메뉴 스타일 */

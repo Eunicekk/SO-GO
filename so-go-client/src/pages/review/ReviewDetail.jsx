@@ -91,11 +91,13 @@ function ReviewDetail() {
 					style={{ position: "relative" }}
 				>
 					<div className="profileimg-name-info">
-						<img
-							src={review.userImg || DefaultProfile}
-							alt="프로필사진"
-							className="profile-img"
-						/>
+						<div>
+							<img
+								src={review.userImg || DefaultProfile}
+								alt="프로필사진"
+								className="info-profile-img"
+							/>
+						</div>
 						<span className="nickname">{review.userNickname}</span>
 					</div>
 					<p>⭐ {review.score}</p>

@@ -211,6 +211,8 @@ function ReviewWrite() {
 						...prevReview,
 						placeUuid: placeUUID,
 					}));
+
+					console.log(placeUUID);
 				} catch (err) {
 					console.error(err);
 				}

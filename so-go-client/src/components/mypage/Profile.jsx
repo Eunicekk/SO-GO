@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import axiosInstance from "@/axios/AxiosInstance";
-
+import DefaultProfile from "@/assets/profile.png";
 import { Pencil } from "@phosphor-icons/react";
 
 import "@/css/mypage/Profile.css";
@@ -15,8 +15,7 @@ function Profile() {
 		visitRate: 0,
 	});
 
-	// const { userUuid } = useAuthStore.getState();
-	const userUuid = "";
+	const { userUuid } = useAuthStore.getState();
 
 	useEffect(() => {
 		const getProfileInfo = async () => {
@@ -32,16 +31,24 @@ function Profile() {
 		getProfileInfo();
 	}, []);
 
+	const modifyMyInfo = () => {};
+
 	return (
 		<>
 			<div className="profile-box">
 				<div className="profile-img">
 					<img
-						src={userInfo.myProfileImg}
+						src={userInfo.myProfileImg || DefaultProfile}
 						alt="프로필사진"
 					/>
-					<div className="profile-modify">
-						<Pencil size={16} />
+					<div
+						className="profile-modify"
+						onClick={modifyMyInfo}
+					>
+						<Pencil
+							className="profile-modify-icon"
+							size={16}
+						/>
 						<span>내 정보 수정</span>
 					</div>
 				</div>

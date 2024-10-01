@@ -28,7 +28,7 @@ function CommentList({ commentList }) {
 									<img
 										src={comment.userImg || DefaultProfile} // 이미지가 없을 때 기본 이미지
 										alt="댓글프로필사진"
-										className="profile-img"
+										className="info-profile-img"
 									/>
 									<span>{comment.userNickname}</span>
 								</div>

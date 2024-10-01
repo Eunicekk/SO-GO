@@ -8,7 +8,7 @@ import useAuthStore from "../../store/UseAuthStore";
 
 const UserInfoModal = ({ onClose, userInfo }) => {
 	const [nickname, setNickname] = useState(userInfo.nickname);
-	const [mySentence, setMySentence] = useState(userInfo.mySentence);
+	const [mySentence, setMySentence] = useState(userInfo.sentence);
 	const [myProfileImg, setMyProfileImg] = useState(userInfo.myProfileImg || DefaultProfile);
 	const [selectedImage, setSelectedImage] = useState(null);
 
@@ -65,17 +65,13 @@ const UserInfoModal = ({ onClose, userInfo }) => {
 			return imgUrl;
 		} catch (error) {
 			console.error("Error uploading to S3:", error);
-			// error 객체의 모든 속성 출력
 			console.error("Error details:", JSON.stringify(error, Object.getOwnPropertyNames(error)));
-
-			// 에러의 스택 추적 정보 출력
 			console.error("Error stack:", error.stack);
 			return null;
 		}
 	};
 
 	const { userUuid } = useAuthStore();
-	// const userUuid = "ab28fed0-4059-452e-973e-0bbd3b8addc3";
 
 	// 수정하기 버튼 클릭 시
 	const handleUpdate = async () => {
@@ -85,6 +81,7 @@ const UserInfoModal = ({ onClose, userInfo }) => {
 			// 선택된 이미지가 있는 경우 업로드하고 URL 업데이트
 			if (selectedImage) {
 				const uploadedImageUrl = await uploadS3(selectedImage);
+
 				if (uploadedImageUrl) {
 					updatedProfileImg = uploadedImageUrl;
 				}

@@ -88,6 +88,7 @@
 
 /* 지도 */
 #place-description .map-section {
+	height: 160px;
 	margin: 24px 0 32px;
 	border: 1px solid black;
 	border-radius: 16px;

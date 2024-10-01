@@ -1,7 +1,14 @@
 import "@/css/search/SearchPlaceList.css";
 import SearchMarketListItem from "@/components/searchList/SearchMarketListItem";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchMarketList({ result }) {
+	const navigate = useNavigate();
+
+	const handleItemClick = (place) => {
+		navigate("/place", { state: { placeUuid: place.placeUuid } });
+	};
+
 	return (
 		<div id="place-list">
 			<div id="place-title">
@@ -18,6 +25,7 @@ export default function SearchMarketList({ result }) {
 							name={market.placeName}
 							address={market.address}
 							tag={market.tag}
+							onClick={() => handleItemClick(market)}
 						/>
 					))
 				) : (

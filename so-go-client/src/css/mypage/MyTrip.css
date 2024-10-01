@@ -1,0 +1,17 @@
+.no-info-title {
+	display: flex;
+	margin: 10vw;
+	justify-content: center;
+}
+
+.my-trip-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr); /* 3 columns */
+	gap: 10px; /* Adjust the gap between images */
+}
+
+.my-trip-review-img {
+	width: 100%;
+	cursor: pointer;
+	object-fit: cover;
+}

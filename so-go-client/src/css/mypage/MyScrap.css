@@ -1,0 +1,36 @@
+.my-scrap-container {
+	display: flex;
+	flex-direction: row;
+	margin: 3vw;
+	align-items: center;
+	justify-content: center;
+	gap: 10vw;
+	padding-bottom: 20px;
+	border-bottom: 0.2px solid lightgray;
+}
+
+.my-scrap-img {
+	width: 35vw;
+	height: 35vw;
+	object-fit: cover;
+}
+
+.my-scrap-info {
+	display: flex;
+	flex-direction: column;
+	width: 60vw;
+}
+
+.my-scrap-content {
+	margin-bottom: 2vh;
+}
+
+.my-scrap-writer-info {
+	display: flex;
+	align-items: center;
+}
+
+.my-scrap-writer {
+	width: 5vw;
+	margin-right: 10px;
+}

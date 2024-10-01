@@ -7,7 +7,8 @@ const MyTrip = () => {
 	const navigate = useNavigate();
 
 	const [myTrips, setMyTrips] = useState([]);
-	const { userUuid } = useAuthStore();
+	// const { userUuid } = useAuthStore();
+	const userUuid = "ab28fed0-4059-452e-973e-0bbd3b8addc3";
 
 	useEffect(() => {
 		const getMyReviewList = async () => {

@@ -3,6 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { useState } from "react";
+import defaultPlace from "@/assets/place.png";
 
 export default function PlaceImage(images) {
 	const [slideIndex, setSlideIndex] = useState(0);
@@ -32,7 +33,7 @@ export default function PlaceImage(images) {
 						key={index}
 					>
 						<img
-							src={image.images}
+							src={image.images || defaultPlace}
 							alt={`장소 이미지 ${index + 1}`}
 						/>
 					</div>

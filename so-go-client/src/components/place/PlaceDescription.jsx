@@ -1,8 +1,17 @@
 import "@/css/place/PlaceDetail.css";
 import { PencilLine, MapPin, Clock, Phone, Globe } from "@phosphor-icons/react";
+import { useEffect, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 
 export default function PlaceDescription({ placeName, summary, lat, lng, address, date, time, number, website, open }) {
+	const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
+
+	useEffect(() => {
+		if (lat && lng) {
+			setCoordinates({ lat, lng });
+		}
+	}, [lat, lng]);
+
 	return (
 		<div id="place-description">
 			<div className="title-section">
@@ -21,15 +30,13 @@ export default function PlaceDescription({ placeName, summary, lat, lng, address
 			</div>
 			<div className="title-description">{summary}</div>
 
-			<div className="map-section">
-				<Map
-					center={{ lat: lat, lng: lng }}
-					style={{ width: `100%`, height: 200, borderRadius: 16 }}
-					level={2}
-				>
-					<MapMarker position={{ lat: lat, lng: lng }}></MapMarker>
-				</Map>
-			</div>
+			<Map
+				className="map-section"
+				center={coordinates}
+				level={3}
+			>
+				<MapMarker position={coordinates}></MapMarker>
+			</Map>
 
 			<div className="info-section">
 				<div className="address">
@@ -47,8 +54,17 @@ export default function PlaceDescription({ placeName, summary, lat, lng, address
 						weight="fill"
 					/>
 					<p className="time-text">
-						{date} <br />
-						{time}
+						{date && time ? (
+							<>
+								{date} <br /> {time}
+							</>
+						) : date ? (
+							date
+						) : time ? (
+							time
+						) : (
+							"-"
+						)}
 					</p>
 				</div>
 				<div className="phone-number">

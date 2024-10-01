@@ -1,8 +1,14 @@
 import "@/css/search/SearchRestaurantList.css";
 import SearchRestaurantListItem from "@/components/searchList/SearchRestaurantListItem";
-import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchRestaurantList({ result }) {
+	const navigate = useNavigate();
+
+	const handleItemClick = (place) => {
+		navigate("/place", { state: { placeUuid: place.placeUuid } });
+	};
+
 	return (
 		<div id="restaurant-list">
 			<div id="restaurant-title">
@@ -19,6 +25,7 @@ export default function SearchRestaurantList({ result }) {
 							name={restaurant.placeName}
 							address={restaurant.address}
 							tag={restaurant.tag}
+							onClick={() => handleItemClick(restaurant)}
 						/>
 					))
 				) : (

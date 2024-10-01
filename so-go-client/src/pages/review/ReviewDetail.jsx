@@ -89,6 +89,12 @@ function ReviewDetail() {
 		try {
 			await axiosInstance.post(`/reviews/${reviewUUID}`, { userUuid: userUuid });
 			setIsScrapped((prev) => !prev);
+
+			// Update the scrap count based on the new scrap state
+			setReview((prevReview) => ({
+				...prevReview,
+				scrap: prevReview.scrap + (isScrapped ? -1 : 1),
+			}));
 		} catch (err) {
 			console.error(err);
 		}
@@ -120,7 +126,10 @@ function ReviewDetail() {
 					/>
 					{showReport && (
 						<div className="dropdown">
-							<ReportReview />
+							<ReportReview
+								reviewUserUuid={review.userUuid}
+								reviewUuid={reviewUUID}
+							/>
 						</div>
 					)}
 				</div>
@@ -160,7 +169,14 @@ function ReviewDetail() {
 						onCommentAdded={getCommentList}
 					/>
 
-					{commentList.length === 0 ? <p> 댓글이 없습니다. </p> : <CommentList commentList={commentList} />}
+					{commentList.length === 0 ? (
+						<p> 댓글이 없습니다. </p>
+					) : (
+						<CommentList
+							reviewUuid={reviewUUID}
+							commentList={commentList}
+						/>
+					)}
 				</div>
 			</div>
 		</>

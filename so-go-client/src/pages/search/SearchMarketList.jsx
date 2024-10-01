@@ -9,11 +9,15 @@ export default function SearchMarketList({ result }) {
 		navigate("/place", { state: { placeUuid: place.placeUuid } });
 	};
 
+	const handleWholeClick = () => {
+		navigate("/list", { state: { title: "추천 전통시장", result } });
+	};
+
 	return (
 		<div id="place-list">
 			<div id="place-title">
 				<h1>추천 전통시장</h1>
-				<button>전체 보기</button>
+				{result.length > 0 ? <button onClick={handleWholeClick}>전체 보기</button> : ""}
 			</div>
 
 			<div className="place-content">

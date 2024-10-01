@@ -3,82 +3,117 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
-	margin: 30px 20px 10px;
-	padding: 0 30px;
+	margin: 16px 0;
+	padding: 0 24px;
 }
 
-.profileimg-name-info {
+.reviewer-profile .profile-info {
 	display: flex;
 	align-items: center;
-	gap: 5px;
+	gap: 8px;
+	font-size: 14px;
 }
 
-.info-profile-img {
-	width: 10vw;
+.reviewer-profile .profile-wrap {
+	width: 32px;
+	height: 32px;
+}
+
+.reviewer-profile .profile-wrap img {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
 	object-fit: cover;
 }
 
 /* 드롭다운 메뉴 스타일 */
 .dropdown {
 	position: absolute;
-	top: 30px; /* DotsThreeVertical 아이콘 바로 아래 */
-	right: 0; /* 오른쪽 정렬 */
+	top: 112px; /* DotsThreeVertical 아이콘 바로 아래 */
+	right: 28px; /* 오른쪽 정렬 */
 	z-index: 100;
 	display: flex; /* 가로 정렬 */
 	align-items: center; /* 수직 가운데 정렬 */
 	background-color: white; /* 배경색 */
-	padding: 5px; /* 패딩 추가 */
-	border-radius: 5px; /* 모서리 둥글게 */
+	padding: 4px; /* 패딩 추가 */
+	border-radius: 4px; /* 모서리 둥글게 */
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	font-size: 14px;
 }
 
-.reviewer-place {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	gap: 10px;
-	width: 75%; /* 너비를 80%로 설정 */
-	margin: 0 auto; /* 가운데 정렬 */
-	border: 1.5px solid #836fff;
-	border-radius: 20px;
-	padding: 5px;
+.reviewer-place-img {
+	width: 100%;
+	aspect-ratio: 1;
+	object-fit: cover;
 }
 
 .reviewer-content {
 	display: flex;
-	flex-direction: column;
-	padding: 20px;
-	margin: 0px 20px 20px;
-	gap: 15px;
-}
-
-.reviewer-place-img {
-	width: 80vw; /* 가로를 부모 요소에 맞추기 */
-	height: 300px; /* 원하는 높이로 지정 */
-	object-fit: cover; /* 이미지의 비율을 유지하면서 영역에 맞춰 자르기 */
+	justify-content: space-between;
+	padding: 0 16px;
+	border-bottom: 1px solid #aaa;
 }
 
 .reviewer-info {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
+	gap: 8px;
+	margin: 16px 0;
+}
+
+.reviewer-place,
+.reviewer-date {
+	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	gap: 4px;
+	font-size: 14px;
+}
+
+.scrap-info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 2px;
+	font-size: 14px;
+}
+
+.reviewer-content-wrap {
+	margin: 24px 0;
+	padding: 0 16px;
+	border-bottom: 1px solid #aaa;
+}
+
+.reviewer-score {
+	width: 48px;
+	background-color: #ffbf01;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 2px;
+	padding: 8px 8px 6px;
+	border-radius: 4px;
+	margin-bottom: 12px;
+}
+
+.reviewer-write-content {
+	line-height: 1.3;
+	margin-bottom: 24px;
 }
 
 .review-comment-list {
-	margin: 20px 20px 5px;
-	padding: 0 30px;
+	margin: 16px 0;
+	padding: 0 16px;
 	box-shadow: rgba(0, 0, 0, 0.2);
 }
 
 .review-comment-title {
 	display: flex;
-	margin-bottom: 10px;
+	margin-bottom: 24px;
 }
 
-.scrap-info {
-	display: flex;
-	align-items: center;
-	gap: 4px;
+.no-commentList {
+	margin: 64px 0;
+	text-align: center;
 }

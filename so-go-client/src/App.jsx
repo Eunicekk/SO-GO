@@ -15,7 +15,8 @@ import Map from "@/pages/map/Map";
 import MyPage from "@/pages/myPage/MyPage";
 
 import PlaceDetail from "@/pages/place/PlaceDetail";
-import SearchResultList from "./pages/search/SearchResultList";
+import SearchResultList from "@/pages/search/SearchResultList";
+import SearchWholeList from "@/pages/search/SearchWholeList";
 
 import "./App.css";
 
@@ -91,6 +92,14 @@ function App() {
 						element={
 							<Layout>
 								<SearchResultList />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/list"
+						element={
+							<Layout>
+								<SearchWholeList />
 							</Layout>
 						}
 					/>

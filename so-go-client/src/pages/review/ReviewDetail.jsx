@@ -4,7 +4,7 @@ import ReportReview from "../../components/Notification/ReportReview";
 
 import axiosInstance from "@/axios/AxiosInstance";
 
-import { DotsThreeVertical, BookmarkSimple, MapPin } from "@phosphor-icons/react";
+import { DotsThreeVertical, BookmarkSimple, MapPin, Star, CalendarCheck } from "@phosphor-icons/react";
 import { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -102,82 +102,87 @@ function ReviewDetail() {
 
 	return (
 		<>
-			<div>
-				<div
-					className="reviewer-profile"
-					style={{ position: "relative" }}
-				>
-					<div className="profileimg-name-info">
-						<div>
-							<img
-								src={review.userImg || DefaultProfile}
-								alt="프로필사진"
-								className="info-profile-img"
-							/>
-						</div>
-						<span className="nickname">{review.userNickname}</span>
-					</div>
-					<p>⭐ {review.score}</p>
-					<DotsThreeVertical
-						ref={dotsRef}
-						size={24}
-						onClick={onOpenReport}
-						style={{ cursor: "pointer" }}
-					/>
-					{showReport && (
-						<div className="dropdown">
-							<ReportReview
-								reviewUserUuid={review.userUuid}
-								reviewUuid={reviewUUID}
-							/>
-						</div>
-					)}
-				</div>
-
-				<div className="reviewer-place">
-					<p>{review.placeName}</p>
-					<MapPin size={24} />
-				</div>
-
-				<div className="reviewer-content">
-					<img
-						src={review.img}
-						alt="관광지사진"
-						className="reviewer-place-img"
-					/>
-					<div className="reviewer-info">
-						<p>{review.createdAt}</p>
-						<div className="scrap-info">
-							<span>{review.scrap}</span>
-							<BookmarkSimple
-								onClick={scrapReview}
-								size={24}
-								weight={isScrapped ? "fill" : "regular"}
-							/>
-						</div>
-					</div>
-					<p>{review.content}</p>
-				</div>
-
-				<div className="review-comment-list">
-					<div className="review-comment-title">
-						<h2>댓글</h2> <span>({commentList.length})</span>
-					</div>
-
-					<CommentWrite
-						reviewUUID={reviewUUID}
-						onCommentAdded={getCommentList}
-					/>
-
-					{commentList.length === 0 ? (
-						<p> 댓글이 없습니다. </p>
-					) : (
-						<CommentList
-							reviewUuid={reviewUUID}
-							commentList={commentList}
+			<div className="reviewer-profile">
+				<div className="profile-info">
+					<div className="profile-wrap">
+						<img
+							src={review.userImg || DefaultProfile}
+							alt="프로필사진"
 						/>
-					)}
+					</div>
+					<span className="nickname">{review.userNickname}</span>
 				</div>
+				<DotsThreeVertical
+					ref={dotsRef}
+					size={24}
+					onClick={onOpenReport}
+					style={{ cursor: "pointer" }}
+				/>
+				{showReport && (
+					<div className="dropdown">
+						<ReportReview
+							reviewUserUuid={review.userUuid}
+							reviewUuid={reviewUUID}
+						/>
+					</div>
+				)}
+			</div>
+
+			<img
+				src={review.img}
+				alt="관광지사진"
+				className="reviewer-place-img"
+			/>
+
+			<div className="reviewer-content">
+				<div className="reviewer-info">
+					<div className="reviewer-place">
+						<MapPin size={18} />
+						<p>{review.placeName}</p>
+					</div>
+					<div className="reviewer-date">
+						<CalendarCheck size={18} />
+						<p>{review.createdAt}</p>
+					</div>
+				</div>
+				<div className="scrap-info">
+					<BookmarkSimple
+						onClick={scrapReview}
+						size={24}
+						weight={isScrapped ? "fill" : "regular"}
+					/>
+					<span>{review.scrap}</span>
+				</div>
+			</div>
+			<div className="reviewer-content-wrap">
+				<span className="reviewer-score">
+					<Star
+						fill="black"
+						weight="fill"
+					/>
+					<span>{review.score}</span>
+				</span>
+				<div className="reviewer-write-content">{review.content}</div>
+			</div>
+
+			<div className="review-comment-list">
+				<div className="review-comment-title">
+					<h2>댓글 ({commentList.length})</h2>
+				</div>
+
+				<CommentWrite
+					reviewUUID={reviewUUID}
+					onCommentAdded={getCommentList}
+				/>
+
+				{commentList.length === 0 ? (
+					<p className="no-commentList"> 댓글이 없습니다. </p>
+				) : (
+					<CommentList
+						reviewUuid={reviewUUID}
+						commentList={commentList}
+					/>
+				)}
 			</div>
 		</>
 	);

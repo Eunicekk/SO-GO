@@ -8,17 +8,15 @@ import useAuthStore from "../store/UseAuthStore";
 import { useNavigate } from "react-router-dom";
 
 export default function Notification({ isOpen, onClose }) {
-	const navigate = useNavigate();
 	const [notifications, setNotifications] = useState([]);
 
-	const { accessToken, userUuid } = useAuthStore();
+	const { userUuid } = useAuthStore();
 
 	useEffect(() => {
 		const getMyNotification = async () => {
 			try {
 				const response = await axiosInstance.get(`/notifications/${userUuid}`);
-				console.log(response);
-				// setNotifications(response.data);
+				setNotifications(response.data);
 			} catch (err) {
 				console.error(err);
 			}

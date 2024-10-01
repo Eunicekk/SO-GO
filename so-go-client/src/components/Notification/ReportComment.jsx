@@ -4,13 +4,13 @@ import useAuthStore from "../../store/UseAuthStore";
 import axiosInstance from "@/axios/AxiosInstance";
 import { useNavigate } from "react-router-dom";
 
-function ReportComment({ reviewUuid, commentUuid }) {
+function ReportComment({ reviewUuid, userUUID }) {
 	const [isWriter, setIsWriter] = useState(false);
 
 	const { userUuid } = useAuthStore();
 
 	useEffect(() => {
-		if (userUuid === commentUuid) {
+		if (userUuid === userUUID) {
 			setIsWriter(true);
 		} else {
 			setIsWriter(false);

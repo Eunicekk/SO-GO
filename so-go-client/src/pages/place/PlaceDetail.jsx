@@ -1,6 +1,6 @@
 import "@/css/place/PlaceDetail.css";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Circle, HeartStraight, CaretUp } from "@phosphor-icons/react";
 import PlaceImage from "@/components/place/PlaceImage";
 import PlaceDescription from "@/components/place/PlaceDescription";
@@ -19,6 +19,7 @@ const theme = createTheme({
 });
 
 export default function PlaceDetail() {
+	const navigate = useNavigate();
 	const location = useLocation();
 	const { userUuid } = useAuthStore.getState();
 	const { placeUuid } = location.state || {};
@@ -30,18 +31,15 @@ export default function PlaceDetail() {
 
 	const getDetail = async () => {
 		try {
-			console.log(placeUuid);
-			console.log(userUuid);
 			const response = await axiosInstance.get(`/places/${placeUuid}`, {
 				params: {
 					userUuid: userUuid ? userUuid : "",
 				},
 			});
 
-			console.log(response.data);
 			setPlaceData(response.data);
 		} catch (error) {
-			console.error("Error searching for location:", error);
+			console.error(error);
 		}
 	};
 
@@ -51,11 +49,19 @@ export default function PlaceDetail() {
 
 	// 좋아요 설정
 	const handleLikeButton = async () => {
+		const { accessToken } = useAuthStore.getState();
+
+		if (!accessToken) {
+			alert("로그인 후 이용 가능합니다.");
+			navigate("/login");
+			return;
+		}
+
 		try {
 			await axiosInstance.post(`/places/${placeUuid}/hearts/${userUuid}`);
 			setIsLiked((prev) => !prev);
 		} catch (error) {
-			alert("로그인 후 이용해주세요.");
+			console.error(error);
 		}
 	};
 

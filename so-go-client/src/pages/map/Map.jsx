@@ -31,7 +31,6 @@ function MyMap() {
 	const getMyPlaces = async () => {
 		try {
 			const response = await axiosInstance.get(`/places/my-places/${userUuid}`);
-			console.log(response);
 			setMyPlaces(response.data);
 		} catch (err) {
 			console.error(err);
@@ -137,7 +136,7 @@ function MyMap() {
 						width: "100%",
 						height: "100%",
 					}}
-					level={3}
+					level={13}
 					onCreate={setMap}
 				>
 					{/* 사용자의 현재 위치에 마커 표시 */}

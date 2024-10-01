@@ -1,13 +1,17 @@
 import "@/css/search/SearchRestaurantList.css";
+import defaultPlace from "@/assets/place.png";
 
-export default function SearchRestaurantListItem({ thumbnail, name, address, tag }) {
+export default function SearchRestaurantListItem({ thumbnail, name, address, tag, onClick }) {
 	const tagArray = tag ? tag.split(",").map((tag) => tag.trim()) : [];
 
 	return (
-		<div id="restaurant-item">
+		<div
+			id="restaurant-item"
+			onClick={onClick}
+		>
 			<div className="thumbnail">
 				<img
-					src={thumbnail}
+					src={thumbnail || defaultPlace}
 					alt={`${name} 이미지`}
 				/>
 			</div>

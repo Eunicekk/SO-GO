@@ -1,4 +1,5 @@
 import "@/css/search/SearchPlaceList.css";
+import defaultPlace from "@/assets/place.png";
 
 export default function SearchPlaceListItem({ thumbnail, name, address, tag, onClick }) {
 	const tagArray = tag ? tag.split(",").map((tag) => tag.trim()) : [];
@@ -10,7 +11,7 @@ export default function SearchPlaceListItem({ thumbnail, name, address, tag, onC
 		>
 			<div className="thumbnail">
 				<img
-					src={thumbnail}
+					src={thumbnail || defaultPlace}
 					alt={`${name} 이미지`}
 				/>
 			</div>

@@ -3,6 +3,10 @@ import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { Circle, MapPin } from "@phosphor-icons/react";
 
 import "@/css/map/Map.css";
+import axiosInstance from "@/axios/AxiosInstance";
+import useAuthStore from "../../store/UseAuthStore";
+
+import MyPlace from "@/assets/MyPlace.png";
 
 function MyMap() {
 	const [map, setMap] = useState();
@@ -14,23 +18,25 @@ function MyMap() {
 	}); // 기본 위치는 서울 시청으로 설정
 
 	// 추가 위치 데이터 배열 예시
-	const locations = [
-		{
-			placeUuid: "a79460b4-6859-409f-9fc4-d25b075e461d",
-			placeName: "역삼역",
-			score: 0.0,
-			tag: "#태그,#태그2",
-			summary: "요약",
-			placeImgs: null,
-			lat: 24.3,
-			lng: 254.3,
-		},
-	];
+	const [myPlaces, setMyPlaces] = useState([]);
 
-	// 사용자의 현재 위치를 가져오는 함수
+	const { userUuid } = useAuthStore();
+
 	useEffect(() => {
 		handleMyLocation();
+		getMyPlaces();
 	}, []);
+
+	//찜한 장소 가져오기
+	const getMyPlaces = async () => {
+		try {
+			const response = await axiosInstance.get(`/places/my-places/${userUuid}`);
+			console.log(response);
+			setMyPlaces(response.data);
+		} catch (err) {
+			console.error(err);
+		}
+	};
 
 	//내 위치로 이동
 	const handleMyLocation = () => {
@@ -71,6 +77,25 @@ function MyMap() {
 			handleSearch(event);
 		}
 	};
+
+	// 검색 후 카카오 지도 및 Axios로 마커 데이터 가져오기
+	useEffect(() => {
+		if (!map || !submittedKeyword) return;
+
+		const ps = new kakao.maps.services.Places();
+		ps.keywordSearch(submittedKeyword, (data, status) => {
+			if (status === kakao.maps.services.Status.OK) {
+				const bounds = new kakao.maps.LatLngBounds();
+				const newCenter = {
+					lat: data[0].y,
+					lng: data[0].x,
+				};
+
+				// 지도 중심을 검색 결과로 이동
+				map.setCenter(new kakao.maps.LatLng(newCenter.lat, newCenter.lng));
+			}
+		});
+	}, [map, submittedKeyword]);
 
 	return (
 		<div className="my-map-like">
@@ -122,11 +147,18 @@ function MyMap() {
 					/>
 
 					{/* 추가 위치들에 대한 마커 표시 */}
-					{locations.map((location) => (
+					{myPlaces.map((myPlace) => (
 						<MapMarker
-							key={location.placeUuid}
-							position={{ lat: location.lat, lng: location.lng }}
-							title={location.placeName}
+							key={myPlace.placeUuid}
+							position={{ lat: myPlace.lat, lng: myPlace.lng }}
+							title={myPlace.placeName}
+							image={{
+								src: MyPlace, // 이미지의 경로
+								size: {
+									width: 40, // 마커 이미지의 너비
+									height: 40, // 마커 이미지의 높이
+								},
+							}}
 						/>
 					))}
 				</Map>

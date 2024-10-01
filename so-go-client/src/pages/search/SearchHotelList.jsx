@@ -9,11 +9,15 @@ export default function SearchHotelList({ result }) {
 		navigate("/place", { state: { placeUuid: place.placeUuid } });
 	};
 
+	const handleWholeClick = () => {
+		navigate("/list", { state: { title: "추천 숙소", result } });
+	};
+
 	return (
 		<div id="hotel-list">
 			<div id="hotel-title">
 				<h1>추천 숙소</h1>
-				<button>전체 보기</button>
+				{result.length > 0 ? <button onClick={handleWholeClick}>전체 보기</button> : ""}
 			</div>
 
 			<div className="hotel-content">

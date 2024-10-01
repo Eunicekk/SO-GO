@@ -9,11 +9,15 @@ export default function SearchRestaurantList({ result }) {
 		navigate("/place", { state: { placeUuid: place.placeUuid } });
 	};
 
+	const handleWholeClick = () => {
+		navigate("/list", { state: { title: "추천 맛집", result } });
+	};
+
 	return (
 		<div id="restaurant-list">
 			<div id="restaurant-title">
 				<h1>추천 맛집</h1>
-				<button>전체 보기</button>
+				{result.length > 0 ? <button onClick={handleWholeClick}>전체 보기</button> : ""}
 			</div>
 
 			<div className="restaurant-content">

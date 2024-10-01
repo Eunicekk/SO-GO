@@ -1,22 +1,13 @@
 import "@/css/search/SearchPlaceList.css";
 import SearchPlaceListItem from "@/components/searchList/SearchPlaceListItem";
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchPlaceList({ result }) {
-	cosnt[(address, setAddress)] = useState([]);
+	const navigate = useNavigate();
 
-	useEffect(() => {
-		const { kakao } = window;
-		const geocoder = new kakao.maps.services.Geocoder();
-
-		const fetchAddress = async () => {
-			const addressPRomise = result.map((place) => {
-				const coords = new kakao.maps.LatLng(place.lat, place.lng);
-
-				return new Promise((resolve, reject) => {});
-			});
-		};
-	});
+	const handleItemClick = (place) => {
+		navigate("/place", { state: { placeUuid: place.placeUuid } });
+	};
 
 	return (
 		<div id="place-list">
@@ -26,15 +17,20 @@ export default function SearchPlaceList({ result }) {
 			</div>
 
 			<div className="place-content">
-				{result.from({ length: 5 }).map((place, index) => (
-					<SearchPlaceListItem
-						key={index}
-						thumbnail={place.placeImgs}
-						name={place.placeName}
-						address={place.address}
-						detail={place.tag}
-					/>
-				))}
+				{result.length > 0 ? (
+					result.slice(0, 5).map((place) => (
+						<SearchPlaceListItem
+							key={place.placeUuid}
+							thumbnail={place.placeImgs}
+							name={place.placeName}
+							address={place.address}
+							tag={place.tag}
+							onClick={() => handleItemClick(place)}
+						/>
+					))
+				) : (
+					<p>관련 장소가 없습니다.</p>
+				)}
 			</div>
 		</div>
 	);

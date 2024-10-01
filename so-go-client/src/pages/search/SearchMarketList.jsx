@@ -1,7 +1,7 @@
 import "@/css/search/SearchPlaceList.css";
-import SearchPlaceListItem from "@/components/searchList/SearchPlaceListItem";
+import SearchMarketListItem from "@/components/searchList/SearchMarketListItem";
 
-export default function SearchMarketList() {
+export default function SearchMarketList({ result }) {
 	return (
 		<div id="place-list">
 			<div id="place-title">
@@ -10,9 +10,19 @@ export default function SearchMarketList() {
 			</div>
 
 			<div className="place-content">
-				{Array.from({ length: 5 }).map((_, index) => (
-					<SearchPlaceListItem />
-				))}
+				{result.length > 0 ? (
+					result.slice(0, 5).map((market) => (
+						<SearchMarketListItem
+							key={market.placeUuid}
+							thumbnail={market.placeImgs}
+							name={market.placeName}
+							address={market.address}
+							tag={market.tag}
+						/>
+					))
+				) : (
+					<p>관련 장소가 없습니다.</p>
+				)}
 			</div>
 		</div>
 	);

@@ -25,7 +25,7 @@ export default function PlaceDetail() {
 	const { placeUuid } = location.state || {};
 	const [placeData, setPlaceData] = useState(null);
 
-	const [isLiked, setIsLiked] = useState(placeData?.userHeart);
+	const [isLiked, setIsLiked] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isAskFinish, setIsAskFinish] = useState(false);
 
@@ -38,6 +38,7 @@ export default function PlaceDetail() {
 			});
 
 			setPlaceData(response.data);
+			setIsLiked(placeData?.userHeart);
 		} catch (error) {
 			console.error(error);
 		}

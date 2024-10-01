@@ -7,12 +7,12 @@ import useAuthStore from "@/store/UseAuthStore";
 export default function MyMap() {
 	const svgRef = useRef(null);
 	const [locations, setLocations] = useState([]);
-	const userUuid = useAuthStore.getState();
+	const { userUuid } = useAuthStore.getState();
 
 	useEffect(() => {
 		const fetchLocations = async () => {
 			try {
-				const response = await axiosInstance.get(`/users/${userUuid}/collections`);
+				const response = await axiosInstance.get(`/users/${userUuid}/maps`);
 				const addresses = response.data.map((item) => item.address);
 				setLocations(addresses);
 			} catch (error) {

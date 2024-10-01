@@ -1,10 +1,10 @@
-import "@/css/search/SearchRestaurantList.css";
+import "@/css/search/SearchPlaceList.css";
 
-export default function SearchRestaurantListItem({ thumbnail, name, address, tag }) {
+export default function SearchMarketListItem({ thumbnail, name, address, tag }) {
 	const tagArray = tag ? tag.split(",").map((tag) => tag.trim()) : [];
 
 	return (
-		<div id="restaurant-item">
+		<div id="place-item">
 			<div className="thumbnail">
 				<img
 					src={thumbnail}

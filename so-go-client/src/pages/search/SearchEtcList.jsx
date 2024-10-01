@@ -1,7 +1,7 @@
 import "@/css/search/SearchPlaceList.css";
-import SearchPlaceListItem from "@/components/searchList/SearchPlaceListItem";
+import SearchEtcListItem from "@/components/searchList/SearchEtcListItem";
 
-export default function SearchEtcList() {
+export default function SearchEtcList({ result }) {
 	return (
 		<div id="place-list">
 			<div id="place-title">
@@ -10,9 +10,19 @@ export default function SearchEtcList() {
 			</div>
 
 			<div className="place-content">
-				{Array.from({ length: 5 }).map((_, index) => (
-					<SearchPlaceListItem />
-				))}
+				{result.length > 0 ? (
+					result.slice(0, 5).map((etc) => (
+						<SearchEtcListItem
+							key={etc.placeUuid}
+							thumbnail={etc.placeImgs}
+							name={etc.placeName}
+							address={etc.address}
+							tag={etc.tag}
+						/>
+					))
+				) : (
+					<p>관련 장소가 없습니다.</p>
+				)}
 			</div>
 		</div>
 	);

@@ -112,3 +112,8 @@
 	display: flex;
 	margin-bottom: 24px;
 }
+
+.no-commentList {
+	margin: 64px 0;
+	text-align: center;
+}

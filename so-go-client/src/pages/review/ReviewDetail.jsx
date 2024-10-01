@@ -176,7 +176,7 @@ function ReviewDetail() {
 				/>
 
 				{commentList.length === 0 ? (
-					<p> 댓글이 없습니다. </p>
+					<p className="no-commentList"> 댓글이 없습니다. </p>
 				) : (
 					<CommentList
 						reviewUuid={reviewUUID}

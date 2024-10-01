@@ -13,7 +13,7 @@ function Header() {
 			<div className="menu">
 				<Link to="/menu">
 					<List
-						size={24}
+						size={32}
 						color="black"
 						className="menu"
 					/>

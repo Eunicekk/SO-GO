@@ -1,0 +1,18 @@
+#loading {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh; /* Full viewport height */
+	width: 100vw; /* Full viewport width */
+	background-color: #f0f0f0; /* Optional background color */
+}
+
+#loading h1 {
+	margin-bottom: 20px; /* Space between the text and the GIF */
+}
+
+#loading img {
+	width: 100px; /* Adjust size as needed */
+	height: 100px; /* Adjust size as needed */
+}

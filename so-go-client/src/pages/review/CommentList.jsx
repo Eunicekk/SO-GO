@@ -42,7 +42,7 @@ function CommentList({ commentList, reviewUuid }) {
 									<div className="dropdown">
 										<ReportComment
 											reviewUuid={reviewUuid}
-											commentUuid={comment.commentUuid}
+											userUUID={comment.userUuid}
 										/>
 									</div>
 								)}

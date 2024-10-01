@@ -2,11 +2,11 @@ import "@/css/place/PlaceDetail.css";
 import { PencilLine, MapPin, Clock, Phone, Globe } from "@phosphor-icons/react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 
-export default function PlaceDescription({ open }) {
+export default function PlaceDescription({ placeName, summary, lat, lng, address, date, time, number, website, open }) {
 	return (
 		<div id="place-description">
 			<div className="title-section">
-				<div className="title">해목 해운대점</div>
+				<div className="title">{placeName}</div>
 				<div
 					className="ask-modify"
 					onClick={open}
@@ -19,15 +19,15 @@ export default function PlaceDescription({ open }) {
 					수정 문의
 				</div>
 			</div>
-			<div className="title-description">미쉐린 가이드에 선정된 장어덮밥 & 해산물덮밥 맛집</div>
+			<div className="title-description">{summary}</div>
 
 			<div className="map-section">
 				<Map
-					center={{ lat: 35.161807717246035, lng: 129.15966171346824 }}
+					center={{ lat: lat, lng: lng }}
 					style={{ width: `100%`, height: 200, borderRadius: 16 }}
 					level={2}
 				>
-					<MapMarker position={{ lat: 35.161807717246035, lng: 129.15966171346824 }}></MapMarker>
+					<MapMarker position={{ lat: lat, lng: lng }}></MapMarker>
 				</Map>
 			</div>
 
@@ -38,7 +38,7 @@ export default function PlaceDescription({ open }) {
 						color="#000"
 						weight="fill"
 					/>
-					<p>부산 해운대구 구남로24번길 8 1층</p>
+					<p>{address}</p>
 				</div>
 				<div className="running-time">
 					<Clock
@@ -47,8 +47,8 @@ export default function PlaceDescription({ open }) {
 						weight="fill"
 					/>
 					<p className="time-text">
-						매일 11:00 ~ 22:00 <br />
-						월~목 휴게시간 15:00 ~ 17:00
+						{date} <br />
+						{time}
 					</p>
 				</div>
 				<div className="phone-number">
@@ -57,7 +57,7 @@ export default function PlaceDescription({ open }) {
 						color="#000"
 						weight="fill"
 					/>
-					<p>0507-1385-3730</p>
+					<p>{number ? number : "-"}</p>
 				</div>
 				<div className="web-link">
 					<Globe
@@ -65,7 +65,7 @@ export default function PlaceDescription({ open }) {
 						color="#000"
 						weight="fill"
 					/>
-					<p>-</p>
+					<p>{website ? website : "-"}</p>
 				</div>
 			</div>
 		</div>

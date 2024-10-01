@@ -1,49 +1,70 @@
-.review-thumbnail {
-	width: 182px;
-	border: 1px solid #aaa;
-	border-radius: 16px;
-	padding: 16px;
-	box-sizing: border-box;
-	box-shadow: 4px 4px 8px 0 rgba(174, 174, 174, 0.5);
-	background-color: white;
+@media (max-width: 480px) {
+	.review-items {
+		width: calc(50vw - 32px);
+		border: 1px solid #aaa;
+		border-radius: 8px;
+		padding: 16px;
+		display: flex;
+		flex-direction: column;
+	}
 }
 
-.special {
-	border: 1px solid black !important;
+@media (min-width: 481px) {
+	.review-items {
+		width: calc(240px - 32px);
+		border: 1px solid #aaa;
+		border-radius: 8px;
+		padding: 20px;
+		display: flex;
+		flex-direction: column;
+	}
 }
 
-.thumbnail {
-	width: 150px;
-	height: 150px;
+.review-items .thumbnail {
+	width: 100%;
+	height: 100%;
+	aspect-ratio: 1;
 	overflow: hidden;
-	position: relative;
-	margin-bottom: 8px;
+	margin-bottom: 16px;
 }
 
-.thumbnail img {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	min-width: 150px;
-	max-height: 150px;
+.review-items .thumbnail img {
+	width: 100%;
 	object-fit: cover;
+	aspect-ratio: 1;
 }
 
-.name {
-	font-weight: 700;
-	margin-bottom: 6px;
-}
-
-.content {
+.review-items .content {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
 }
 
-.content img {
-	width: 30px;
-	height: 30px;
+.review-items .content .img-wrap {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	aspect-ratio: 1;
+	margin-right: 8px;
+}
+
+.review-items .content .img-wrap img {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
 	object-fit: cover;
+}
+
+.review-items .content span {
+	font-size: 0.9rem;
+	font-weight: 500;
+	width: calc(100% - 40px);
+	text-align: right;
+
+	overflow: hidden; /* 내용이 넘칠 경우 숨김 */
+	display: -webkit-box; /* Flexbox 사용 */
+	-webkit-box-orient: vertical; /* 세로 방향 설정 */
+	-webkit-line-clamp: 2; /* 최대 2줄 표시 */
+	line-clamp: 2;
 }

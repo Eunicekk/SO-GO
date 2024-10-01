@@ -11,6 +11,8 @@ import { useLocation } from "react-router-dom";
 import "@/css/review/ReviewDetail.css";
 import useAuthStore from "../../store/UseAuthStore";
 
+import DefaultProfile from "@/assets/profile.png";
+
 function ReviewDetail() {
 	const location = useLocation(); //state 객체로 넘겨오는 reviewUUID
 
@@ -25,6 +27,7 @@ function ReviewDetail() {
 		reviewUuid: "",
 		content: "",
 		img: "",
+		placeName: "",
 		placeUuid: "",
 		placeImg: "",
 		createdAt: "",
@@ -46,6 +49,7 @@ function ReviewDetail() {
 		try {
 			const response = await axiosInstance.get(`reviews/${reviewUUID}`);
 			setReview(response.data);
+			console.log(review);
 		} catch (err) {
 			console.error(err);
 		}
@@ -66,6 +70,7 @@ function ReviewDetail() {
 	}, []);
 
 	//스크랩
+	const [isScrapped, setIsScrapped] = useState(false); // 스크랩 여부 상태 추가
 	const { accessToken, userUuid } = useAuthStore();
 
 	const scrapReview = async () => {
@@ -75,7 +80,8 @@ function ReviewDetail() {
 		}
 
 		try {
-			await axiosInstance.post(`/review/${reviewUUID}`, userUuid);
+			await axiosInstance.post(`/reviews/${reviewUUID}`, userUuid);
+			setIsScrapped(!isScrapped); // 스크랩 상태 토글
 		} catch (err) {
 			console.error(err);
 		}
@@ -88,11 +94,14 @@ function ReviewDetail() {
 					className="reviewer-profile"
 					style={{ position: "relative" }}
 				>
-					<div>
-						<img
-							src={review.userImg}
-							alt="프로필사진"
-						/>
+					<div className="profileimg-name-info">
+						<div>
+							<img
+								src={review.userImg || DefaultProfile}
+								alt="프로필사진"
+								className="info-profile-img"
+							/>
+						</div>
 						<span className="nickname">{review.userNickname}</span>
 					</div>
 					<p>⭐ {review.score}</p>
@@ -110,7 +119,7 @@ function ReviewDetail() {
 				</div>
 
 				<div className="reviewer-place">
-					<p>장소이름?</p>
+					<p>{review.placeName}</p>
 					<MapPin size={24} />
 				</div>
 
@@ -125,6 +134,7 @@ function ReviewDetail() {
 						<BookmarkSimple
 							onClick={scrapReview}
 							size={24}
+							weight={isScrapped ? "fill" : "regular"}
 						/>
 					</div>
 					<p>{review.content}</p>

@@ -12,18 +12,29 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	width: 25vw;
 }
 
 .profile-img img {
+	height: 5vh;
 	border-radius: 20px;
 	object-fit: cover;
-	margin: 5px;
-	padding: 5px;
 }
 
 .profile-modify {
 	margin: 5px;
 	padding: 5px;
+	display: flex;
+	align-items: center;
+	gap: 3px;
+}
+
+.profile-modify span {
+	font-size: 12px;
+}
+
+.profile-modify-icon {
+	font-size: 14px;
 }
 
 .profile-my-info {

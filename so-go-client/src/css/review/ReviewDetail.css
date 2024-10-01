@@ -1,54 +1,84 @@
 .reviewer-profile {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 30px 20px 10px;
-  padding: 0 30px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin: 30px 20px 10px;
+	padding: 0 30px;
+}
+
+.profileimg-name-info {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.info-profile-img {
+	width: 10vw;
+	object-fit: cover;
 }
 
 /* 드롭다운 메뉴 스타일 */
 .dropdown {
-  position: absolute;
-  top: 30px; /* DotsThreeVertical 아이콘 바로 아래 */
-  right: 0; /* 오른쪽 정렬 */
-  z-index: 100;
-  display: flex; /* 가로 정렬 */
-  align-items: center; /* 수직 가운데 정렬 */
-  background-color: white; /* 배경색 */
-  padding: 5px; /* 패딩 추가 */
-  border-radius: 5px; /* 모서리 둥글게 */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+	position: absolute;
+	top: 30px; /* DotsThreeVertical 아이콘 바로 아래 */
+	right: 0; /* 오른쪽 정렬 */
+	z-index: 100;
+	display: flex; /* 가로 정렬 */
+	align-items: center; /* 수직 가운데 정렬 */
+	background-color: white; /* 배경색 */
+	padding: 5px; /* 패딩 추가 */
+	border-radius: 5px; /* 모서리 둥글게 */
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
 }
 
 .reviewer-place {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	width: 75%; /* 너비를 80%로 설정 */
+	margin: 0 auto; /* 가운데 정렬 */
+	border: 1.5px solid #836fff;
+	border-radius: 20px;
+	padding: 5px;
 }
 
 .reviewer-content {
-  margin: 20px 20px 5px;
-  padding: 0 30px;
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	margin: 0px 20px 20px;
+	gap: 15px;
 }
 
-.review-place-img {
-  margin: 0px 20px;
+.reviewer-place-img {
+	width: 80vw; /* 가로를 부모 요소에 맞추기 */
+	height: 300px; /* 원하는 높이로 지정 */
+	object-fit: cover; /* 이미지의 비율을 유지하면서 영역에 맞춰 자르기 */
 }
 
 .reviewer-info {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .review-comment-list {
-  margin: 20px 20px 5px;
-  padding: 0 30px;
+	margin: 20px 20px 5px;
+	padding: 0 30px;
+	box-shadow: rgba(0, 0, 0, 0.2);
 }
 
 .review-comment-title {
-  display: flex;
-  margin-bottom: 10px;
+	display: flex;
+	margin-bottom: 10px;
+}
+
+.scrap-info {
+	display: flex;
+	align-items: center;
+	gap: 4px;
 }

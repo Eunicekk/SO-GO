@@ -11,6 +11,8 @@ import { useLocation } from "react-router-dom";
 import "@/css/review/ReviewDetail.css";
 import useAuthStore from "../../store/UseAuthStore";
 
+import DefaultProfile from "@/assets/profile.png";
+
 function ReviewDetail() {
 	const location = useLocation(); //state 객체로 넘겨오는 reviewUUID
 
@@ -19,12 +21,14 @@ function ReviewDetail() {
 		userNickname: "",
 		userUuid: "",
 		scrap: 0,
+		checkScrap: false,
 		score: 0,
 		report: 0,
 		secret: false,
 		reviewUuid: "",
 		content: "",
 		img: "",
+		placeName: "",
 		placeUuid: "",
 		placeImg: "",
 		createdAt: "",
@@ -35,6 +39,8 @@ function ReviewDetail() {
 	const [showReport, setShowReport] = useState(false);
 	const dotsRef = useRef(null); // DotsThreeVertical 아이콘 위치를 참조하기 위한 ref
 
+	const [isScrapped, setIsScrapped] = useState(false); // 스크랩 여부 상태 추가
+
 	// 신고하기 탭
 	const onOpenReport = () => {
 		setShowReport(!showReport);
@@ -44,8 +50,14 @@ function ReviewDetail() {
 
 	const getReviewInfo = async () => {
 		try {
-			const response = await axiosInstance.get(`reviews/detail/${reviewUUID}`);
-			setReview(response.data);
+			const response = await axiosInstance.get(`reviews/${reviewUUID}`);
+			const data = response.data;
+
+			// createdAt 포맷팅
+			data.createdAt = data.createdAt.split("T")[0];
+			setReview(data);
+
+			setIsScrapped(data.checkScrap);
 		} catch (err) {
 			console.error(err);
 		}
@@ -56,7 +68,7 @@ function ReviewDetail() {
 			const response = await axiosInstance.get(`/${reviewUUID}/comments`);
 			setCommentList(response.data);
 		} catch (err) {
-			console.error(err);
+			console.log(err);
 		}
 	};
 
@@ -65,6 +77,7 @@ function ReviewDetail() {
 		getCommentList();
 	}, []);
 
+	//스크랩
 	const { accessToken, userUuid } = useAuthStore();
 
 	const scrapReview = async () => {
@@ -74,7 +87,8 @@ function ReviewDetail() {
 		}
 
 		try {
-			await axiosInstance.post(`/review/${reviewUUID}`, userUuid);
+			await axiosInstance.post(`/reviews/${reviewUUID}`, { userUuid: userUuid });
+			setIsScrapped((prev) => !prev);
 		} catch (err) {
 			console.error(err);
 		}
@@ -87,11 +101,14 @@ function ReviewDetail() {
 					className="reviewer-profile"
 					style={{ position: "relative" }}
 				>
-					<div>
-						<img
-							src={review.userImg}
-							alt="프로필사진"
-						/>
+					<div className="profileimg-name-info">
+						<div>
+							<img
+								src={review.userImg || DefaultProfile}
+								alt="프로필사진"
+								className="info-profile-img"
+							/>
+						</div>
 						<span className="nickname">{review.userNickname}</span>
 					</div>
 					<p>⭐ {review.score}</p>
@@ -109,22 +126,26 @@ function ReviewDetail() {
 				</div>
 
 				<div className="reviewer-place">
-					<p>장소이름?</p>
+					<p>{review.placeName}</p>
 					<MapPin size={24} />
 				</div>
 
 				<div className="reviewer-content">
 					<img
-						src={review.placeImg}
+						src={review.img}
 						alt="관광지사진"
 						className="reviewer-place-img"
 					/>
 					<div className="reviewer-info">
 						<p>{review.createdAt}</p>
-						<BookmarkSimple
-							onClick={scrapReview}
-							size={24}
-						/>
+						<div className="scrap-info">
+							<span>{review.scrap}</span>
+							<BookmarkSimple
+								onClick={scrapReview}
+								size={24}
+								weight={isScrapped ? "fill" : "regular"}
+							/>
+						</div>
 					</div>
 					<p>{review.content}</p>
 				</div>

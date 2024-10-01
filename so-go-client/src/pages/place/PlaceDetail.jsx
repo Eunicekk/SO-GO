@@ -50,6 +50,7 @@ export default function PlaceDetail() {
 	// 좋아요 설정
 	const handleLikeButton = async () => {
 		const { accessToken } = useAuthStore.getState();
+		console.log(accessToken);
 
 		if (!accessToken) {
 			alert("로그인 후 이용 가능합니다.");

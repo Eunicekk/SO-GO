@@ -5,7 +5,7 @@ import "@/css/review/CommentList.css";
 import ReportComment from "../../components/Notification/ReportComment";
 import DefaultProfile from "@/assets/profile.png";
 
-function CommentList({ commentList }) {
+function CommentList({ commentList, reviewUuid }) {
 	const [showReport, setShowReport] = useState(false);
 	const dotsRef = useRef(null); // DotsThreeVertical 아이콘 위치를 참조하기 위한 ref
 
@@ -40,7 +40,10 @@ function CommentList({ commentList }) {
 								/>
 								{showReport && (
 									<div className="dropdown">
-										<ReportComment />
+										<ReportComment
+											reviewUuid={reviewUuid}
+											commentUuid={comment.commentUuid}
+										/>
 									</div>
 								)}
 							</div>

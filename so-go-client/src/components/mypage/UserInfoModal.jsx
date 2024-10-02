@@ -142,8 +142,7 @@ const UserInfoModal = ({ onClose, userInfo }) => {
 				<h3>프로필 사진</h3>
 				<div className="profile-img-container">
 					<img
-						// src={myProfileImg || DefaultProfile}
-						src="https://www.harpersbazaar.co.kr/resources_old/online/org_online_image/0a2f4e2d-b577-4af7-99a9-3817a837387e.jpg"
+						src={myProfileImg || DefaultProfile}
 						alt="프로필 사진"
 						className="profile-img-now"
 						onClick={() => document.getElementById("profile-img-input").click()}

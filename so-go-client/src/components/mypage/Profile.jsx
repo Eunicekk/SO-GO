@@ -46,11 +46,13 @@ function Profile() {
 	return (
 		<>
 			<div className="profile-box">
-				<div className="profile-img">
-					<img
-						src={userInfo.img || DefaultProfile}
-						alt="프로필사진"
-					/>
+				<div className="profile-image-info">
+					<div className="profile-img">
+						<img
+							src={userInfo.img || DefaultProfile}
+							alt="프로필사진"
+						/>
+					</div>
 					<div
 						className="profile-modify"
 						onClick={modifyMyInfo}
@@ -66,12 +68,9 @@ function Profile() {
 				<div className="profile-my-info">
 					<div className="profile-my-info-container">
 						<h3>{userInfo.nickname} 님</h3>
-						<span>{userInfo.sentence}</span>
+						<p>{userInfo.sentence}</p>
 					</div>
-					<div>
-						<span>전국 방문률</span>
-						<span>{userInfo.visitRate}%</span>
-					</div>
+					<div className="profile-visit">전국 방문율 {userInfo.visitRate}%</div>
 				</div>
 			</div>
 

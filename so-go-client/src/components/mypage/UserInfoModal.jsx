@@ -3,12 +3,13 @@ import { useState } from "react";
 import DefaultProfile from "@/assets/profile.png";
 import axiosInstance from "@/axios/AxiosInstance";
 
-import { GetObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import useAuthStore from "../../store/UseAuthStore";
+import { X, XCircle } from "@phosphor-icons/react";
 
 const UserInfoModal = ({ onClose, userInfo }) => {
 	const [nickname, setNickname] = useState(userInfo.nickname);
-	const [mySentence, setMySentence] = useState(userInfo.mySentence);
+	const [mySentence, setMySentence] = useState(userInfo.sentence);
 	const [myProfileImg, setMyProfileImg] = useState(userInfo.myProfileImg || DefaultProfile);
 	const [selectedImage, setSelectedImage] = useState(null);
 
@@ -65,17 +66,13 @@ const UserInfoModal = ({ onClose, userInfo }) => {
 			return imgUrl;
 		} catch (error) {
 			console.error("Error uploading to S3:", error);
-			// error 객체의 모든 속성 출력
 			console.error("Error details:", JSON.stringify(error, Object.getOwnPropertyNames(error)));
-
-			// 에러의 스택 추적 정보 출력
 			console.error("Error stack:", error.stack);
 			return null;
 		}
 	};
 
 	const { userUuid } = useAuthStore();
-	// const userUuid = "ab28fed0-4059-452e-973e-0bbd3b8addc3";
 
 	// 수정하기 버튼 클릭 시
 	const handleUpdate = async () => {
@@ -85,6 +82,7 @@ const UserInfoModal = ({ onClose, userInfo }) => {
 			// 선택된 이미지가 있는 경우 업로드하고 URL 업데이트
 			if (selectedImage) {
 				const uploadedImageUrl = await uploadS3(selectedImage);
+
 				if (uploadedImageUrl) {
 					updatedProfileImg = uploadedImageUrl;
 				}
@@ -132,26 +130,35 @@ const UserInfoModal = ({ onClose, userInfo }) => {
 
 	return (
 		<div className="modal">
+			<XCircle
+				fill="red"
+				weight="fill"
+				size={32}
+				onClick={onClose}
+				className="modal-close-btn"
+			/>
 			<h1>회원 정보 수정</h1>
-			<div className="profile-img-container">
-				<h3>프로필 사진</h3>
-				<img
-					src={myProfileImg || DefaultProfile}
-					alt="프로필사진"
-					className="profile-img-now"
-					onClick={() => document.getElementById("profile-img-input").click()}
-				/>
-				<input
-					type="file"
-					id="profile-img-input"
-					accept="image/*"
-					style={{ display: "none" }}
-					onChange={handleImageChange}
-				/>
-			</div>
 			<div>
+				<h3>프로필 사진</h3>
+				<div className="profile-img-container">
+					<img
+						// src={myProfileImg || DefaultProfile}
+						src="https://www.harpersbazaar.co.kr/resources_old/online/org_online_image/0a2f4e2d-b577-4af7-99a9-3817a837387e.jpg"
+						alt="프로필 사진"
+						className="profile-img-now"
+						onClick={() => document.getElementById("profile-img-input").click()}
+					/>
+					<input
+						type="file"
+						id="profile-img-input"
+						accept="image/*"
+						style={{ display: "none" }}
+						onChange={handleImageChange}
+					/>
+				</div>
+			</div>
+			<div className="profile-info-text">
 				<h3>내 정보</h3>
-
 				<div>
 					<input
 						type="text"
@@ -159,30 +166,22 @@ const UserInfoModal = ({ onClose, userInfo }) => {
 						placeholder={"닉네임"}
 						onChange={handleNicknameChange}
 					/>
-					<button onClick={checkNickname}>중복 확인</button>
+					<button onClick={checkNickname}>중복확인</button>
 				</div>
 
 				<div>
 					<input
 						type="text"
 						value={mySentence}
-						placeholder="내 한마디"
+						placeholder="나의 한마디"
 						onChange={handleMySentenceChange}
 					/>
+					<button onClick={handleUpdate}>수정하기</button>
 				</div>
 
-				<button
-					onClick={onClose}
-					className="modal-close-btn"
-				>
-					닫기
-				</button>
-
-				<button onClick={handleUpdate}>수정하기</button>
-
-				<div>
-					<p>로그아웃</p>
-					<p>회원탈퇴</p>
+				<div className="profile-info-buttons">
+					<button>로그아웃</button>
+					<button>회원탈퇴</button>
 				</div>
 			</div>
 		</div>

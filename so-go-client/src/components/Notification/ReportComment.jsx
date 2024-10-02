@@ -4,7 +4,7 @@ import useAuthStore from "../../store/UseAuthStore";
 import axiosInstance from "@/axios/AxiosInstance";
 import { useNavigate } from "react-router-dom";
 
-function ReportComment({ reviewUuid, userUUID }) {
+function ReportComment({ reviewUuid, commentUuid, userUUID }) {
 	const [isWriter, setIsWriter] = useState(false);
 
 	const { userUuid } = useAuthStore();
@@ -22,7 +22,7 @@ function ReportComment({ reviewUuid, userUUID }) {
 			axiosInstance.delete(`/${reviewUuid}/comments/${commentUuid}`);
 
 			alert("삭제되었습니다");
-			navigate("/review", { state: reviewUuid });
+			// navigate("/review", { state: reviewUuid });
 		} catch (err) {
 			console.error(err);
 		}

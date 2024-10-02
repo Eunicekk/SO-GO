@@ -22,11 +22,11 @@ function MyPage() {
 	const { accessToken, userUuid } = useAuthStore();
 
 	useEffect(() => {
-		// if (!accessToken) {
-		// 	alert("로그인 후 이용해주세요");
-		// 	navigate("/login");
-		// 	return;
-		// }
+		if (!accessToken) {
+			alert("로그인 후 이용해주세요");
+			navigate("/login");
+			return;
+		}
 	}, []);
 
 	return (

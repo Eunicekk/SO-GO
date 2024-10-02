@@ -70,7 +70,7 @@ function Profile() {
 						<h3>{userInfo.nickname} 님</h3>
 						<p>{userInfo.sentence}</p>
 					</div>
-					<div className="profile-visit">전국 방문율 {userInfo.visitRate}%</div>
+					<div className="profile-visit">전국 방문율 0%</div>
 				</div>
 			</div>
 
